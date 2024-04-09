@@ -1,0 +1,85 @@
+{
+	"name": "pulse",
+	"version": "0.1.0",
+	"description": "The modern MongoDB-powered scheduling library for Node.js",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"publishConfig": {
+		"access": "public"
+	},
+	"files": [
+		"dist"
+	],
+	"engines": {
+		"node": ">=14.0.0"
+	},
+	"scripts": {
+		"release": "npm run build && standard-version",
+		"prepublishOnly": "npm run build",
+		"build": "tsc",
+		"test": "npm run mocha",
+		"lint": "eslint src",
+		"lint-fix": "eslint src --fix",
+		"mocha": "mocha --reporter spec -b",
+		"mocha-coverage": "nyc mocha --reporter spec -b",
+		"mocha-debug": "DEBUG=agenda:**,-agenda:internal:** mocha --reporter spec -b",
+		"mocha-debug-internal": "DEBUG=agenda:internal:** mocha --reporter spec -b",
+		"mocha-debug-all": "DEBUG=agenda:** mocha --reporter spec -b",
+		"docs": "typedoc --out docs/agenda/6.x src/index.ts"
+	},
+	"config": {
+		"blanket": {
+			"pattern": "lib",
+			"data-cover-never": "node_modules"
+		}
+	},
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/Pulsecron/pulse.git"
+	},
+	"keywords": [
+		"pulse",
+		"job",
+		"jobs",
+		"cron",
+		"mongodb",
+		"scheduling",
+		"delayed",
+		"scheduler"
+	],
+	"author": "code-xhyun <shh6155@gmail.com>",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/Pulsecron/pulse/issues"
+	},
+	"dependencies": {
+		"cron-parser": "^4.9.0",
+		"date.js": "~0.3.3",
+		"debug": "~4.3.4",
+		"human-interval": "~2.0.1",
+		"luxon": "^3.4.4",
+		"mongodb": "^6.5.0"
+	},
+	"devDependencies": {
+		"@istanbuljs/nyc-config-typescript": "^1.0.2",
+		"@types/chai": "^4.3.14",
+		"@types/debug": "^4.1.12",
+		"@types/human-interval": "^1.0.2",
+		"@types/luxon": "^3.4.2",
+		"@types/mocha": "^10.0.6",
+		"@types/node": "^20.12.6",
+		"@types/sinon": "^17.0.3",
+		"chai": "^5.1.0",
+		"delay": "6.0.0",
+		"eslint": "^9.0.0",
+		"mocha": "10.4.0",
+		"mongodb-memory-server": "^9.1.8",
+		"nyc": "^15.1.0",
+		"prettier": "^3.2.5",
+		"sinon": "17.0.1",
+		"standard-version": "^9.5.0",
+		"ts-node": "^10.9.2",
+		"typedoc": "^0.25.13",
+		"typescript": "^5.4.4"
+	}
+}
