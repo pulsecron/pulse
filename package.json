@@ -35,7 +35,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git://github.com/Pulsecron/pulse.git"
+		"url": "git://github.com/pulsecron/pulse.git"
 	},
 	"keywords": [
 		"pulse",
@@ -50,7 +50,7 @@
 	"author": "code-xhyun <shh6155@gmail.com>",
 	"license": "MIT",
 	"bugs": {
-		"url": "https://github.com/Pulsecron/pulse/issues"
+		"url": "https://github.com/pulsecron/pulse/issues"
 	},
 	"dependencies": {
 		"cron-parser": "^4.9.0",
