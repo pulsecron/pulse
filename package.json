@@ -12,6 +12,7 @@
   ],
   "scripts": {
     "release": "npm run build && semantic-release",
+    "semantic-release": "semantic-release",
     "prepublishOnly": "npm run build",
     "dry-run": "npm publish --dry-run",
     "build": "tsc",
@@ -33,7 +34,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/pulsecron/pulse.git"
+    "url": "https://github.com/pulsecron/pulse.git"
   },
   "keywords": [
     "job",
