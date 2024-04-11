@@ -1,13 +1,12 @@
 {
   "name": "@pulsecron/pulse",
-  "version": "0.1.0",
+  "version": "0.0.0-development",
   "description": "The modern MongoDB-powered scheduling library for Node.js",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "publishConfig": {
     "access": "public"
   },
-  "release": { "branches": [ "main" ] },
   "files": [
     "dist"
   ],
@@ -85,13 +84,14 @@
     "@typescript-eslint/eslint-plugin": "^7.6.0",
     "@typescript-eslint/parser": "^7.6.0",
     "chai": "^5.1.0",
+    "conventional-changelog-conventionalcommits": "^7.0.2",
     "delay": "6.0.0",
     "eslint": "^8.56.0",
     "mocha": "10.4.0",
     "mongodb-memory-server": "^9.1.8",
     "nyc": "^15.1.0",
     "prettier": "^3.2.5",
-    "semantic-release": "^23.0.7",
+    "semantic-release": "^23.0.8",
     "sinon": "17.0.1",
     "ts-node": "^10.9.2",
     "tsx": "^4.7.2",

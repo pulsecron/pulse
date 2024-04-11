@@ -1,8 +1,86 @@
 {
-	"plugins": [
-		"@semantic-release/commit-analyzer",
-		"@semantic-release/release-notes-generator",
-		"@semantic-release/npm",
-		"@semantic-release/github"
-	]
+  "branches": ["main"],
+  "plugins": [
+    [
+      "@semantic-release/commit-analyzer",
+      {
+        "preset": "conventionalcommits",
+        "releaseRules": [
+          { "scope": "breaking", "release": "major" },
+          { "scope": "no-release", "release": false },
+          { "type": "build", "release": false },
+          { "type": "chore", "release": false },
+          { "type": "ci", "release": false },
+          { "type": "docs", "release": "patch" },
+          { "type": "feat", "release": "minor" },
+          { "type": "fix", "release": "patch" },
+          { "type": "perf", "release": "patch" },
+          { "type": "refactor", "release": "patch" },
+          { "type": "revert", "release": "patch" },
+          { "type": "style", "release": "patch" },
+          { "type": "test", "release": false }
+        ],
+        "parserOpts": {
+          "noteKeywords": [
+            "BREAKING CHANGE",
+            "BREAKING CHANGES"
+          ]
+        }
+      }
+    ],
+    ["@semantic-release/release-notes-generator",
+      {
+        "preset": "conventionalcommits",
+        "presetConfig": {
+          "types": [
+            { "type": "build", "section": "⚙️ SYSTEM BUILD & EXTERNAL PACKAGES", "hidden": true },
+            { "type": "chore", "section": "\uD83D\uDCE6 CHORES", "hidden": true },
+            { "type": "ci", "section": "\uD83E\uDE9C CI/CD", "hidden": true },
+            { "type": "docs", "section": "\uD83D\uDCDD DOCS", "hidden": false },
+            { "type": "feat", "section": "\uD83D\uDE80 FEATURES", "hidden": false },
+            { "type": "fix", "section": "\uD83D\uDC1B BUG FIXES", "hidden": false },
+            { "type": "perf", "section": "♻\uFE0F PERFORMANCE", "hidden": false },
+            { "type": "refactor", "section": "♻\uFE0F REFACTOR", "hidden": false },
+            { "type": "revert", "section": "↩\uFE0F REVERTS", "hidden": false },
+            { "type": "style", "section": "\uD83D\uDC69\u200D\uD83C\uDFA4 STYLES", "hidden": false },
+            { "type": "test", "section": "✅ TESTS", "hidden": true }
+          ]
+        },
+        "parserOpts": {
+          "noteKeywords": [
+            "BREAKING CHANGE",
+            "BREAKING CHANGES"
+          ]
+        },
+        "writerOpts": {
+          "commitsSort": ["subject", "scope"]
+        }
+      }
+    ],
+    [
+      "@semantic-release/changelog",
+      {
+        "changelogFile": "CHANGELOG.md",
+        "changelogTitle": "# CHANGELOG"
+      }
+    ],
+    ["@semantic-release/npm",
+      {
+        "pkgRoot": ".",
+        "tarball": "dist"
+      }
+    ],
+    "@semantic-release/github",
+    [
+      "@semantic-release/git",
+      {
+        "assets": [
+          "package.json",
+          "package-lock.json",
+          "CHANGELOG.md"
+        ],
+        "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+      }
+    ]
+  ]
 }
