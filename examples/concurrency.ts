@@ -16,7 +16,6 @@ function sleep(ms) {
 const pulse = new Pulse({
   db: {
     address: 'mongodb://localhost:27017/pulse-concurrency',
-    // options: { useNewUrlParser: true },
     collection: `pulseJobs-${Math.random()}`,
   },
 });
@@ -36,13 +35,7 @@ pulse.define(
     await sleep(30 * 1000);
     // Comment the job processing statement above, and uncomment one of the blocks below
 
-    /*
-  // Imagine a job that takes 8 seconds. That is longer than the lockLifetime, so
-  // we'll break it into smaller chunks (or set its lockLifetime to a higher value).
-  await sleep(4 * 1000);  // 4000 < lockLifetime of 5000, so the job still has time to finish
-  await job.touch();      // tell Pulse the job is still running, which resets the lock timeout
-  await sleep(4 * 1000);  // do another chunk of work that takes less than the lockLifetime
-  */
+
 
     // Only one job will run at a time because 3000 < lockLifetime
     // await sleep(3 * 1000);
