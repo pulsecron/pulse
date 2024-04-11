@@ -128,3 +128,6 @@ dist
 dist
 .nyc_output
 coverage
+
+
+_README.md
