@@ -33,6 +33,7 @@
 - [Project Roadmap](#project-roadmap)
 - [Contributing](#contributing)
 - [License](#license)
+- [Acknowledgments](#acknowledgments)
 </details>
 <hr>
 
@@ -41,6 +42,8 @@
 Pulse is a new fork of the [Agenda](https://github.com/agenda/agenda) project, created as the original project is no longer actively maintained. Positioned as a vital solution in the Node.js ecosystem for job scheduling, the hiatus of Agenda prompted the creation of Pulse. Utilizing MongoDB, Pulse introduces advanced functionalities, improved scalability, and contemporary features to address today’s complex scheduling challenges.
 
 ---
+<br/>
+<br/>
 
 
 
@@ -55,6 +58,8 @@ Pulse is a new fork of the [Agenda](https://github.com/agenda/agenda) project, c
 - **Extensive Documentation**: Provides detailed guides and examples for a quick and easy start.
 
 ---
+<br/>
+<br/>
 
 ##  Repository Structure
 
@@ -78,6 +83,8 @@ Pulse is a new fork of the [Agenda](https://github.com/agenda/agenda) project, c
 ```
 
 ---
+<br/>
+<br/>
 
 ##  Modules
 
@@ -154,6 +161,8 @@ Pulse is a new fork of the [Agenda](https://github.com/agenda/agenda) project, c
 </details>
 
 ---
+<br/>
+<br/>
 
 ##  Getting Started
 
@@ -161,7 +170,6 @@ Pulse is a new fork of the [Agenda](https://github.com/agenda/agenda) project, c
 
 ####  Installation
 
->
  ```console
  $ npm install --save @pulsecron/pulse
 ```
@@ -170,8 +178,6 @@ Pulse is a new fork of the [Agenda](https://github.com/agenda/agenda) project, c
 
 ####  Example
 
->
->
 ```typescript
 /**
  * @file Illustrate concurrency and locking
@@ -242,6 +248,8 @@ pulse.define(
 
 
 ---
+<br/>
+<br/>
 
 ##  Project Roadmap
 
@@ -251,6 +259,8 @@ pulse.define(
 - [ ] **Rewrite Test Code**: Revamp our testing suite to increase coverage and ensure tests are up-to-date with modern testing practices. This rewrite aims to enhance test reliability and efficiency, facilitating smoother development and deployment cycles.
 - [ ] **Rewrite Documentation**: Completely revise and update the documentation to reflect all new changes and features, ensure clarity of information, and improve navigation and readability for developers. This effort will include new getting started guides, API documentation, and use case examples to facilitate easier adoption and implementation by users.
 ---
+<br/>
+<br/>
 
 ##  Contributing
 
@@ -296,11 +306,17 @@ Contributions are welcome! Here are several ways you can contribute:
 </details>
 
 ---
+<br/>
+<br/>
 
 ##  License
 
 This project is protected under the [MIT](https://github.com/pulsecron/pulse?tab=MIT-1-ov-file#readme) License. For more details, refer to the [LICENSE](https://github.com/pulsecron/pulse?tab=MIT-1-ov-file#readme) file.
 
 ---
+<br/>
+<br/>
 
 
+##  Acknowledgments
+- Pulse was forked from [Agenda](https://github.com/agenda/agenda) by [@pulsecron](https://github.com/pulsecron).

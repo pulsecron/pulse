@@ -33,7 +33,7 @@ export interface DefineOptions {
    * (lowest|low|normal|high|highest|number) specifies the priority of the job. Higher priority jobs will run
    * first.
    */
-  priority?: JobPriority;
+  priority?: keyof typeof JobPriority;
 
   /**
    * Should the return value of the job be persisted
@@ -41,9 +41,7 @@ export interface DefineOptions {
   shouldSaveResult?: boolean;
 }
 
-export type Processor<T extends JobAttributes> =
-  | ((job: Job<T>) => Promise<void>)
-  | ((job: Job<T>, done: () => void) => void);
+export type Processor<T extends JobAttributes> = (job: Job<T>, done?: () => void) => void;
 
 /**
  * Setup definition for job
@@ -51,29 +49,24 @@ export type Processor<T extends JobAttributes> =
  * @name Pulse#define
  * @function
  * @param name name of job
- * @param options options for job to run
  * @param [processor] function to be called to run actual job
+ * @param options options for job to run
  */
 export const define = function <T extends JobAttributes>(
   this: Pulse,
   name: string,
-  options: DefineOptions | Processor<T>,
-  processor?: Processor<T>
+  processor: Processor<T>,
+  options?: DefineOptions
 ): void {
-  if (processor === undefined) {
-    processor = options as Processor<T>;
-    options = {};
-  }
-
   this._definitions[name] = {
     fn: processor,
-    concurrency: (options as DefineOptions).concurrency || this._defaultConcurrency, // `null` is per interface definition of DefineOptions not valid
-    lockLimit: (options as DefineOptions).lockLimit || this._defaultLockLimit,
-    priority: (options as DefineOptions).priority || JobPriority.normal,
-    lockLifetime: (options as DefineOptions).lockLifetime || this._defaultLockLifetime,
+    concurrency: (options as DefineOptions)?.concurrency || this._defaultConcurrency, // `null` is per interface definition of DefineOptions not valid
+    lockLimit: (options as DefineOptions)?.lockLimit || this._defaultLockLimit,
+    priority: (options as DefineOptions)?.priority || JobPriority.normal,
+    lockLifetime: (options as DefineOptions)?.lockLifetime || this._defaultLockLifetime,
     running: 0,
     locked: 0,
-    shouldSaveResult: (options as DefineOptions).shouldSaveResult || false,
+    shouldSaveResult: (options as DefineOptions)?.shouldSaveResult || false,
   };
   debug('job [%s] defined with following options: \n%O', name, this._definitions[name]);
 };
