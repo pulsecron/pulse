@@ -36,13 +36,15 @@
     "url": "git://github.com/pulsecron/pulse.git"
   },
   "keywords": [
-    "pulse",
     "job",
     "jobs",
     "cron",
     "cronjob",
     "mongodb",
     "scheduling",
+    "mongodb",
+    "mongodb-scheduler",
+    "queue",
     "delayed",
     "scheduler",
     "pulse",
