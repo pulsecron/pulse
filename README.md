@@ -159,7 +159,7 @@ Pulse is a new fork of the [Agenda](https://github.com/agenda/agenda) project, c
 
 >
 > ```console
-> $ npm install --save pulse
+> $ npm install --save @pulsecron/pulse
 > ```
 
 

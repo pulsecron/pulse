@@ -2,7 +2,6 @@
 .idea
 .jsdoc.json
 .travis.yml
-pulse.svg
 docs
 .nyc_output
 coverage
@@ -22,3 +21,8 @@ example
 # compiled output
 /dist
 /node_modules
+
+
+src/**/*
+pulse.svg
+pulse.png

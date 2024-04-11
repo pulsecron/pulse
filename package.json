@@ -1,5 +1,5 @@
 {
-  "name": "pulse",
+  "name": "@pulsecron/pulse",
   "version": "0.1.0",
   "description": "The modern MongoDB-powered scheduling library for Node.js",
   "main": "dist/index.js",
@@ -95,5 +95,10 @@
     "tsx": "^4.7.2",
     "typedoc": "^0.25.13",
     "typescript": "^5.4.4"
+  },
+  "homepage": "https://github.com/pulsecron/pulse#readme",
+  "directories": {
+    "doc": "docs",
+    "example": "examples"
   }
 }
