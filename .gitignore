@@ -2,13 +2,7 @@ node_modules
 coverage.html
 .idea
 .DS_Store
-docs/agenda/*
-!docs/agenda/1.0.3/
-!docs/agenda/2.0.0/
-!docs/agenda/2.2.0/
-!docs/agenda/3.1.0/
-!docs/agenda/4.0.1/
-!docs/agenda/4.2.0/
+docs/pulse/*
 dist
 .ultra.cache.json
 .vscode
@@ -129,8 +123,8 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
-!docs/agenda/4.x/
-!docs/agenda/6.x/
+!docs/pulse/4.x/
+!docs/pulse/6.x/
 dist
 .nyc_output
 coverage

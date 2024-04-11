@@ -1,0 +1,44 @@
+{
+	"env": {
+	  "es6": true,
+	  "node": true
+	},
+  "parserOptions": {
+		"project": "./tsconfig.eslint.json"
+	},
+	"extends": [
+	  "eslint:recommended",
+	  "plugin:@typescript-eslint/eslint-recommended"
+	],
+	"globals": {
+	  "CustomError": true
+	},
+	"parser": "@typescript-eslint/parser",
+
+	"plugins": [
+	  "prettier",
+	  "@typescript-eslint"
+	],
+	"rules": {
+	  "@typescript-eslint/no-unused-vars": [
+		"error",
+		{
+		  "argsIgnorePattern": "^_",
+		  "varsIgnorePattern": "^_",
+		  "caughtErrorsIgnorePattern": "^_"
+		}
+	  ]
+	},
+  "overrides": [
+    {
+      "files": ["*.test.ts"],
+      "env": {
+        "mocha": true
+      },
+      "rules": {
+        "@typescript-eslint/no-unused-expressions": "off",
+        "import/no-relative-packages": "off"
+      }
+    }
+  ]
+  }

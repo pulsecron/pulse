@@ -1,4 +1,4 @@
-import { Agenda } from '../../src';
+import { Pulse } from '../../src';
 
 process.on('message', message => {
 	if (message === 'cancel') {
@@ -18,7 +18,7 @@ process.on('message', message => {
 	process.title = `${process.title} (sub worker: ${name}/${jobId})`;
 
 	// initialize Agenda in "forkedWorker" mode
-	const agenda = new Agenda({ name: `subworker-${name}`, forkedWorker: true });
+	const agenda = new Pulse({ name: `subworker-${name}`, forkedWorker: true });
 	// connect agenda (but do not start it)
 	await agenda.database(process.env.DB_CONNECTION!);
 

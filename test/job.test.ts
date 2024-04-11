@@ -10,12 +10,12 @@ import * as delay from 'delay';
 import * as sinon from 'sinon';
 import { fail } from 'assert';
 import { Job } from '../src/Job';
-import { Agenda } from '../src';
+import { Pulse } from '../src';
 import { mockMongo } from './helpers/mock-mongodb';
 import someJobDefinition from './fixtures/someJobDefinition';
 
 // Create agenda instances
-let agenda: Agenda;
+let agenda: Pulse;
 // connection string to mongodb
 let mongoCfg: string;
 // mongo db connection db instance
@@ -41,7 +41,7 @@ describe('Job', () => {
 		}
 
 		return new Promise(resolve => {
-			agenda = new Agenda(
+			agenda = new Pulse(
 				{
 					mongo: mongoDb
 				},
@@ -1285,7 +1285,7 @@ describe('Job', () => {
 
 		it('should support custom sort option', () => {
 			const sort = { foo: 1 } as const;
-			const agendaSort = new Agenda({ sort });
+			const agendaSort = new Pulse({ sort });
 			expect(agendaSort.attrs.sort).to.eql(sort);
 		});
 	});
@@ -1658,7 +1658,7 @@ describe('Job', () => {
 
 	describe('job fork mode', () => {
 		it('runs a job in fork mode', async () => {
-			const agendaFork = new Agenda({
+			const agendaFork = new Pulse({
 				mongo: mongoDb,
 				forkHelper: {
 					path: './test/helpers/forkHelper.ts',
@@ -1701,7 +1701,7 @@ describe('Job', () => {
 		});
 
 		it('runs a job in fork mode, but let it fail', async () => {
-			const agendaFork = new Agenda({
+			const agendaFork = new Pulse({
 				mongo: mongoDb,
 				forkHelper: {
 					path: './test/helpers/forkHelper.ts',
@@ -1744,7 +1744,7 @@ describe('Job', () => {
 		});
 
 		it('runs a job in fork mode, but let it die', async () => {
-			const agendaFork = new Agenda({
+			const agendaFork = new Pulse({
 				mongo: mongoDb,
 				forkHelper: {
 					path: './test/helpers/forkHelper.ts',

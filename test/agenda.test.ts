@@ -5,12 +5,12 @@ import { Db } from 'mongodb';
 import { expect } from 'chai';
 import { mockMongo } from './helpers/mock-mongodb';
 
-import { Agenda } from '../src';
+import { Pulse } from '../src';
 import { hasMongoProtocol } from '../src/utils/hasMongoProtocol';
 import { Job } from '../src/Job';
 
 // agenda instances
-let globalAgenda: Agenda;
+let globalAgenda: Pulse;
 // connection string to mongodb
 let mongoCfg: string;
 // mongo db connection db instance
@@ -36,7 +36,7 @@ describe('Agenda', () => {
 		}
 
 		return new Promise(resolve => {
-			globalAgenda = new Agenda(
+			globalAgenda = new Pulse(
 				{
 					mongo: mongoDb
 				},
@@ -69,7 +69,7 @@ describe('Agenda', () => {
 
 	describe('configuration methods', () => {
 		it('sets the _db directly when passed as an option', () => {
-			const agendaDb = new Agenda({ mongo: mongoDb });
+			const agendaDb = new Pulse({ mongo: mongoDb });
 			expect(agendaDb.db).to.not.equal(undefined);
 		});
 	});
@@ -90,13 +90,13 @@ describe('Agenda', () => {
 		});
 		describe('mongo', () => {
 			it('sets the _db directly', () => {
-				const agenda = new Agenda();
+				const agenda = new Pulse();
 				agenda.mongo(mongoDb);
 				expect(agenda.db).to.not.equal(undefined);
 			});
 
 			it('returns itself', async () => {
-				const agenda = new Agenda();
+				const agenda = new Pulse();
 				expect(await agenda.mongo(mongoDb)).to.equal(agenda);
 			});
 		});
@@ -604,7 +604,7 @@ describe('Agenda', () => {
 
 	describe('ensureIndex findAndLockNextJobIndex', () => {
 		it('ensureIndex-Option false does not create index findAndLockNextJobIndex', async () => {
-			const agenda = new Agenda({
+			const agenda = new Pulse({
 				mongo: mongoDb,
 				ensureIndex: false
 			});
@@ -618,7 +618,7 @@ describe('Agenda', () => {
 		});
 
 		it('ensureIndex-Option true does create index findAndLockNextJobIndex', async () => {
-			const agenda = new Agenda({
+			const agenda = new Pulse({
 				mongo: mongoDb,
 				ensureIndex: true
 			});
@@ -633,7 +633,7 @@ describe('Agenda', () => {
 		});
 
 		it('creating two agenda-instances with ensureIndex-Option true does not throw an error', async () => {
-			const agenda = new Agenda({
+			const agenda = new Pulse({
 				mongo: mongoDb,
 				ensureIndex: true
 			});
@@ -641,7 +641,7 @@ describe('Agenda', () => {
 			agenda.define('someJob', jobProcessor);
 			await agenda.create('someJob', 1).save();
 
-			const secondAgenda = new Agenda({
+			const secondAgenda = new Pulse({
 				mongo: mongoDb,
 				ensureIndex: true
 			});

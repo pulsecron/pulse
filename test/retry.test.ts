@@ -3,16 +3,16 @@ import { Db } from 'mongodb';
 import delay from 'delay';
 import { mockMongo } from './helpers/mock-mongodb';
 
-import { Agenda } from '../src';
+import { Pulse } from '../src';
 
-// agenda instances
-let agenda: Agenda;
+// pulse instances
+let pulse: Pulse;
 // mongo db connection db instance
 let mongoDb: Db;
 
 const clearJobs = async (): Promise<void> => {
 	if (mongoDb) {
-		await mongoDb.collection('agendaJobs').deleteMany({});
+		await mongoDb.collection('pulseJobs').deleteMany({});
 	}
 };
 
@@ -27,17 +27,17 @@ describe('Retry', () => {
 		}
 
 		return new Promise(resolve => {
-			agenda = new Agenda(
+			pulse = new Pulse(
 				{
 					mongo: mongoDb
 				},
 				async () => {
 					await delay(50);
 					await clearJobs();
-					agenda.define('someJob', jobProcessor);
-					agenda.define('send email', jobProcessor);
-					agenda.define('some job', jobProcessor);
-					agenda.define(jobType, jobProcessor);
+					pulse.define('someJob', jobProcessor);
+					pulse.define('send email', jobProcessor);
+					pulse.define('some job', jobProcessor);
+					pulse.define(jobType, jobProcessor);
 					return resolve();
 				}
 			);
@@ -46,7 +46,7 @@ describe('Retry', () => {
 
 	afterEach(async () => {
 		await delay(50);
-		await agenda.stop();
+		await pulse.stop();
 		await clearJobs();
 		// await mongoClient.disconnect();
 		// await jobs._db.close();
@@ -55,8 +55,8 @@ describe('Retry', () => {
 	it('should retry a job', async () => {
 		let shouldFail = true;
 
-		agenda.processEvery(100); // Shave 5s off test runtime :grin:
-		agenda.define('a job', (_job, done) => {
+		pulse.processEvery(100); // Shave 5s off test runtime :grin:
+		pulse.define('a job', (_job, done) => {
 			if (shouldFail) {
 				shouldFail = false;
 				return done(new Error('test failure'));
@@ -66,7 +66,7 @@ describe('Retry', () => {
 			return undefined;
 		});
 
-		agenda.on('fail:a job', (err, job) => {
+		pulse.on('fail:a job', (err, job) => {
 			if (err) {
 				// Do nothing as this is expected to fail.
 			}
@@ -75,12 +75,12 @@ describe('Retry', () => {
 		});
 
 		const successPromise = new Promise(resolve => {
-			agenda.on('success:a job', resolve);
+			pulse.on('success:a job', resolve);
 		});
 
-		await agenda.now('a job');
+		await pulse.now('a job');
 
-		await agenda.start();
+		await pulse.start();
 		await successPromise;
 	}).timeout(100000);
 });

@@ -3,11 +3,11 @@ import { fail } from 'assert';
 import { expect } from 'chai';
 
 import { Db } from 'mongodb';
-import { Agenda } from '../src';
+import { Pulse } from '../src';
 import { mockMongo } from './helpers/mock-mongodb';
 
 // Create agenda instances
-let agenda: Agenda;
+let agenda: Pulse;
 // mongo db connection db instance
 let mongoDb: Db;
 
@@ -28,7 +28,7 @@ describe('JobProcessor', () => {
 		}
 
 		return new Promise(resolve => {
-			agenda = new Agenda(
+			agenda = new Pulse(
 				{
 					mongo: mongoDb,
 					maxConcurrency: 4,

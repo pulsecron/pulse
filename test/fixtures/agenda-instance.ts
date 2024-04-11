@@ -1,10 +1,10 @@
-import { Agenda } from '../../src';
+import { Pulse } from '../../src';
 import addTests from './add-tests';
 
 const connStr = process.argv[2];
 const tests = process.argv.slice(3);
 
-const agenda = new Agenda(
+const agenda = new Pulse(
 	{
 		db: {
 			address: connStr

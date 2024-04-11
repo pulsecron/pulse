@@ -1,6 +1,6 @@
-import { Agenda } from '../../src';
+import { Pulse } from '../../src';
 
-export default (agenda: Agenda, _definitionOnly = false) => {
+export default (agenda: Pulse, _definitionOnly = false) => {
 	agenda.define('some job', async job => {
 		console.log('HELLO from a sub worker');
 		if (job.attrs.data?.failIt === 'error') {
