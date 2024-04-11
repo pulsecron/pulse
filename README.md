@@ -58,7 +58,6 @@ Pulse is a new fork of the [Agenda](https://github.com/agenda/agenda) project, c
 └── pulse/
     ├── LICENSE
     ├── README.md
-    ├── agendats.png
     ├── es.js
     ├── examples
     │   └── concurrency.ts
@@ -180,7 +179,7 @@ Pulse is a new fork of the [Agenda](https://github.com/agenda/agenda) project, c
 Contributions are welcome! Here are several ways you can contribute:
 
 - **[Report Issues](https://github.com/pulsecron/pulse/issues)**: Submit bugs found or log feature requests for the `pulse` project.
-- **[Submit Pull Requests](https://github.com/pulsecron/pulse/blob/main/CONTRIBUTING.md)**: Review open PRs, and submit your own PRs.
+- **[Submit Pull Requests](https://github.com/pulsecron/pulse/pulls)**: Review open PRs, and submit your own PRs.
 - **[Join the Discussions](https://github.com/pulsecron/pulse/discussions)**: Share your insights, provide feedback, or ask questions.
 
 <details closed>
