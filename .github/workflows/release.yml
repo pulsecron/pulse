@@ -1,0 +1,32 @@
+name: Semantic-release
+
+on:
+  push:
+    branches: ["main"]
+
+permissions:
+  contents: read # for checkout
+
+jobs:
+  release:
+    name: release
+    runs-on: ubuntu-latest
+    permissions:
+     contents: write
+     issues: write
+     pull-requests: write
+     id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          cache: npm
+          node-version: "lts/*"
+          registry-url: "https://npm.pkg.github.com/"
+          scope: '@github-id'
+      - run: npm ci
+      - run: npm run build
+      - run: npx semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }} # npm에 업로드 하시지 않으실 경우 작성하지 않아도 됩니다.
