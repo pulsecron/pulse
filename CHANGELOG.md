@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## [1.1.0](https://github.com/pulsecron/pulse/compare/v1.0.2...v1.1.0) (2024-04-11)
+
+
+### 🚀 FEATURES
+
+* define function change from 2nd position to 3rd ([#8](https://github.com/pulsecron/pulse/issues/8)) ([7fc238d](https://github.com/pulsecron/pulse/commit/7fc238d8f839a59e528d25083e478acada06d85c))
+
 ## [1.0.2](https://github.com/pulsecron/pulse/compare/v1.0.1...v1.0.2) (2024-04-11)
 
 
