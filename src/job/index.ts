@@ -65,7 +65,7 @@ export interface JobAttributes<T extends JobAttributesData = JobAttributesData> 
   /**
    * The job details.
    */
-  data: T;
+  data: T | any;
 
   unique?: any;
   uniqueOpts?: {
