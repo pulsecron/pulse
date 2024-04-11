@@ -1,0 +1,99 @@
+{
+  "name": "pulse",
+  "version": "0.1.0",
+  "description": "The modern MongoDB-powered scheduling library for Node.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "release": "npm run build && semantic-release",
+    "prepublishOnly": "npm run build",
+    "dry-run": "npm publish --dry-run",
+    "build": "tsc",
+    "test": "npm run mocha",
+    "lint": "eslint src",
+    "lint-fix": "eslint src --fix",
+    "mocha": "mocha --reporter spec -b",
+    "mocha-coverage": "nyc mocha --reporter spec -b",
+    "mocha-debug": "DEBUG=pulse:**,-pulse:internal:** mocha --reporter spec -b",
+    "mocha-debug-internal": "DEBUG=pulse:internal:** mocha --reporter spec -b",
+    "mocha-debug-all": "DEBUG=pulse:** mocha --reporter spec -b",
+    "test:local": "ts-node examples/concurrency.ts"
+  },
+  "config": {
+    "blanket": {
+      "pattern": "lib",
+      "data-cover-never": "node_modules"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/pulsecron/pulse.git"
+  },
+  "keywords": [
+    "job",
+    "jobs",
+    "cron",
+    "cronjob",
+    "mongodb",
+    "scheduling",
+    "mongodb",
+    "mongodb-scheduler",
+    "queue",
+    "delayed",
+    "scheduler",
+    "pulse",
+    "bull",
+    "bee",
+    "kue"
+  ],
+  "author": "code-xhyun <shh6155@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pulsecron/pulse/issues"
+  },
+  "dependencies": {
+    "cron-parser": "^4.9.0",
+    "date.js": "~0.3.3",
+    "debug": "~4.3.4",
+    "human-interval": "~2.0.1",
+    "moment-timezone": "^0.5.45",
+    "mongodb": "^6.5.0"
+  },
+  "devDependencies": {
+    "@istanbuljs/nyc-config-typescript": "^1.0.2",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/commit-analyzer": "^12.0.0",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^10.0.3",
+    "@semantic-release/npm": "^12.0.0",
+    "@semantic-release/release-notes-generator": "^13.0.0",
+    "@types/chai": "^4.3.14",
+    "@types/debug": "^4.1.12",
+    "@types/human-interval": "^1.0.2",
+    "@types/luxon": "^3.4.2",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "^20.12.6",
+    "@types/sinon": "^17.0.3",
+    "@typescript-eslint/eslint-plugin": "^7.6.0",
+    "@typescript-eslint/parser": "^7.6.0",
+    "chai": "^5.1.0",
+    "delay": "6.0.0",
+    "eslint": "^8.56.0",
+    "mocha": "10.4.0",
+    "mongodb-memory-server": "^9.1.8",
+    "nyc": "^15.1.0",
+    "prettier": "^3.2.5",
+    "semantic-release": "^23.0.7",
+    "sinon": "17.0.1",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.7.2",
+    "typedoc": "^0.25.13",
+    "typescript": "^5.4.4"
+  }
+}

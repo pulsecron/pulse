@@ -1,0 +1,24 @@
+.editorconfig
+.idea
+.jsdoc.json
+.travis.yml
+pulse.svg
+docs
+.nyc_output
+coverage
+History.md
+Makefile
+renovate.json
+test
+.vscode/*
+src
+example
+.github
+
+
+# OS
+.DS_Store
+
+# compiled output
+/dist
+/node_modules
