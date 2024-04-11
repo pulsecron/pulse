@@ -29,4 +29,4 @@ jobs:
       - run: npx semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }} # npm에 업로드 하시지 않으실 경우 작성하지 않아도 됩니다.
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
