@@ -5,6 +5,14 @@ import { hasMongoProtocol } from './has-mongo-protocol';
 
 const debug = createDebugger('pulse:database');
 
+export type DatabaseMethod = (
+  this: Pulse,
+  url: string,
+  collection?: string,
+  options?: MongoClientOptions,
+  cb?: (error: AnyError | undefined, collection: Collection<any> | null) => void
+) => Promise<Pulse | void>;
+
 /**
  * Connect to the spec'd MongoDB server and database.
  *
@@ -21,13 +29,7 @@ const debug = createDebugger('pulse:database');
  * @param [options] options for connecting
  * @param [cb] callback of MongoDB connection
  */
-export const database = async function (
-  this: Pulse,
-  url: string,
-  collection?: string,
-  options: MongoClientOptions = {},
-  cb?: (error: AnyError | undefined, collection: Collection<any> | null) => void
-): Promise<Pulse | void> {
+export const database: DatabaseMethod = async function (this: Pulse, url, collection?, options = {}, cb?) {
   if (!hasMongoProtocol(url)) {
     url = 'mongodb://' + url;
   }

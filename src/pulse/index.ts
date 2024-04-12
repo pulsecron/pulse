@@ -5,7 +5,7 @@ import { Job } from '../job';
 import { cancel } from './cancel';
 import { close } from './close';
 import { create } from './create';
-import { database } from './database';
+import { DatabaseMethod, database } from './database';
 import { dbInit } from './db-init';
 import { defaultConcurrency } from './default-concurrency';
 import { defaultLockLifetime } from './default-lock-lifetime';
@@ -98,7 +98,6 @@ class Pulse extends EventEmitter {
   _nextScanAt: any;
   _processInterval: any;
 
-  database = database;
   processEvery = processEvery;
   cancel = cancel;
   close = close;
@@ -164,6 +163,22 @@ class Pulse extends EventEmitter {
       this.once('ready', resolve);
     });
 
+    this.init(config, cb);
+  }
+
+  get database(): DatabaseMethod {
+    return this.bindMethod('database', database);
+  }
+
+  get define(): DefineMethod {
+    return this.bindMethod('define', define);
+  }
+
+  get every(): EveryMethod {
+    return this.bindMethod('every', every);
+  }
+
+  private init(config: PulseConfig, cb?: (error: AnyError | undefined, collection: Collection<any> | null) => void) {
     if (config.mongo) {
       this.mongo(config.mongo, config.db ? config.db.collection : undefined, cb); // @ts-expect-error // the documentation shows it should be correct: http://mongodb.github.io/node-mongodb-native/3.6/api/Db.html
       if (config.mongo.s && config.mongo.topology && config.mongo.topology.s) {
@@ -182,14 +197,6 @@ class Pulse extends EventEmitter {
       this._lazyBindings[methodName] = fn.bind(this);
     }
     return this._lazyBindings[methodName] as T;
-  }
-
-  get define(): DefineMethod {
-    return this.bindMethod('define', define);
-  }
-
-  get every(): EveryMethod {
-    return this.bindMethod('every', every);
   }
 }
 
