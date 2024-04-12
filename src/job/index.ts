@@ -2,22 +2,22 @@ import * as mongodb from 'mongodb';
 import { Pulse } from '../pulse';
 import { JobPriority } from '../pulse/define';
 import { parsePriority } from '../utils';
-import { computeNextRunAt } from './compute-next-run-at';
-import { disable } from './disable';
-import { enable } from './enable';
-import { fail } from './fail';
-import { isRunning } from './is-running';
-import { priority } from './priority';
-import { remove } from './remove';
-import { repeatAt } from './repeat-at';
-import { repeatEvery } from './repeat-every';
-import { run } from './run';
-import { save } from './save';
-import { schedule } from './schedule';
-import { setShouldSaveResult } from './set-shouldsaveresult';
-import { toJson } from './to-json';
-import { touch } from './touch';
-import { unique } from './unique';
+import { ComputeNextRunAtMethod, computeNextRunAt } from './compute-next-run-at';
+import { DisableMethod, disable } from './disable';
+import { EnableMethod, enable } from './enable';
+import { FailMethod, fail } from './fail';
+import { IsRunningMethod, isRunning } from './is-running';
+import { PriorityMethod, priority } from './priority';
+import { RemoveMethod, remove } from './remove';
+import { RepeatAtMethod, repeatAt } from './repeat-at';
+import { RepeatEveryMethod, repeatEvery } from './repeat-every';
+import { RunMethod, run } from './run';
+import { SaveMethod, save } from './save';
+import { ScheduleMethod, schedule } from './schedule';
+import { SetShouldSaveResultMethod, setShouldSaveResult } from './set-shouldsaveresult';
+import { ToJsonMethod, toJson } from './to-json';
+import { TouchMethod, touch } from './touch';
+import { UniqueMethod, unique } from './unique';
 
 type Modify<T, R> = Omit<T, keyof R> & R;
 
@@ -136,6 +136,8 @@ export interface JobAttributes<T extends JobAttributesData = JobAttributesData> 
  * @property {Object} attrs
  */
 class Job<T extends JobAttributesData = JobAttributesData> {
+  private _lazyBindings: Record<string, any> = {};
+
   /**
    * The pulse that created the job.
    */
@@ -145,23 +147,6 @@ class Job<T extends JobAttributesData = JobAttributesData> {
    * The database record associated with the job.
    */
   attrs: JobAttributes<T>;
-
-  toJSON = toJson;
-  computeNextRunAt = computeNextRunAt;
-  repeatEvery = repeatEvery;
-  repeatAt = repeatAt;
-  disable = disable;
-  enable = enable;
-  unique = unique;
-  schedule = schedule;
-  priority = priority;
-  fail = fail;
-  run = run;
-  isRunning = isRunning;
-  save = save;
-  remove = remove;
-  touch = touch;
-  setShouldSaveResult = setShouldSaveResult;
 
   constructor(options: Modify<JobAttributes<T>, { _id?: mongodb.ObjectId }>) {
     const { pulse, type, nextRunAt, ...args } = options ?? {};
@@ -193,6 +178,89 @@ class Job<T extends JobAttributesData = JobAttributesData> {
       type: type || 'once',
       nextRunAt: nextRunAt || new Date(),
     };
+  }
+
+  /**
+   ***************************************
+   * Public methods
+   * *************************************
+   */
+
+  get toJSON(): ToJsonMethod {
+    return this.bindMethod('toJSON', toJson);
+  }
+
+  get computeNextRunAt(): ComputeNextRunAtMethod {
+    return this.bindMethod('computeNextRunAt', computeNextRunAt);
+  }
+
+  get repeatEvery(): RepeatEveryMethod {
+    return this.bindMethod('repeatEvery', repeatEvery);
+  }
+
+  get repeatAt(): RepeatAtMethod {
+    return this.bindMethod('repeatAt', repeatAt);
+  }
+
+  get disable(): DisableMethod {
+    return this.bindMethod('disable', disable);
+  }
+
+  get enable(): EnableMethod {
+    return this.bindMethod('enable', enable);
+  }
+
+  get unique(): UniqueMethod {
+    return this.bindMethod('unique', unique);
+  }
+
+  get schedule(): ScheduleMethod {
+    return this.bindMethod('schedule', schedule);
+  }
+
+  get priority(): PriorityMethod {
+    return this.bindMethod('priority', priority);
+  }
+
+  get fail(): FailMethod {
+    return this.bindMethod('fail', fail);
+  }
+
+  get run(): RunMethod {
+    return this.bindMethod('run', run);
+  }
+
+  get isRunning(): IsRunningMethod {
+    return this.bindMethod('isRunning', isRunning);
+  }
+
+  get save(): SaveMethod {
+    return this.bindMethod('save', save);
+  }
+
+  get remove(): RemoveMethod {
+    return this.bindMethod('remove', remove);
+  }
+
+  get touch(): TouchMethod {
+    return this.bindMethod('touch', touch);
+  }
+
+  get setShouldSaveResult(): SetShouldSaveResultMethod {
+    return this.bindMethod('setShouldSaveResult', setShouldSaveResult);
+  }
+
+  /**
+   ***************************************
+   * Private methods
+   * *************************************
+   */
+
+  private bindMethod<T extends Function>(methodName: string, fn: T): T {
+    if (!this._lazyBindings[methodName]) {
+      this._lazyBindings[methodName] = fn.bind(this);
+    }
+    return this._lazyBindings[methodName] as T;
   }
 }
 

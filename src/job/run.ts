@@ -3,12 +3,13 @@ import { Job } from '.';
 
 const debug = createDebugger('pulse:job');
 
+export type RunMethod = () => Promise<Job>;
 /**
  * Internal method (RUN)
  * @name Job#run
  * @function
  */
-export const run = async function (this: Job): Promise<Job> {
+export const run: RunMethod = async function (this: Job) {
   const { pulse } = this;
   const definition = pulse._definitions[this.attrs.name];
 
