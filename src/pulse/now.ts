@@ -4,6 +4,7 @@ import { Job, JobAttributesData } from '../job';
 
 const debug = createDebugger('pulse:now');
 
+export type NowMethod = <T extends JobAttributesData>(name: string, data: T) => Promise<Job>;
 /**
  * Create a job for this exact moment
  * @name Pulse#now
@@ -11,7 +12,7 @@ const debug = createDebugger('pulse:now');
  * @param name name of job to schedule
  * @param data data to pass to job
  */
-export const now = async function <T extends JobAttributesData>(this: Pulse, name: string, data: T): Promise<Job> {
+export const now: NowMethod = async function (this: Pulse, name, data) {
   debug('Pulse.now(%s, [Object])', name);
   try {
     const job = this.create(name, data);

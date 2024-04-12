@@ -3,6 +3,7 @@ import { Filter } from 'mongodb';
 import { Pulse } from '.';
 const debug = createDebugger('pulse:enable');
 
+export type EnableMethod = (query?: Filter<unknown>) => Promise<number>;
 /**
  * Enables any jobs matching the passed MongoDB query by setting the `disabled` flag to `false`
  * @name Pulse#enable
@@ -11,7 +12,7 @@ const debug = createDebugger('pulse:enable');
  * @caller client code, Pulse.purge(), Job.remove()
  * @returns {Promise<Number>} A promise that contains the number of removed documents when fulfilled.
  */
-export const enable = async function (this: Pulse, query: Filter<unknown> = {}): Promise<number> {
+export const enable: EnableMethod = async function (this: Pulse, query = {}) {
   debug('attempting to enable all jobs matching query', query);
   try {
     const { modifiedCount } = await this._collection.updateMany(query, {

@@ -6,6 +6,7 @@ import { processJobs } from '../utils';
 
 const debug = createDebugger('pulse:saveJob');
 
+export type ProcessDbResultMethod = (job: Job, result: any) => Promise<Job>;
 /**
  * Given a result for findOneAndUpdate() or insert() above, determine whether to process
  * the job immediately or to let the processJobs() interval pick it up later
@@ -13,7 +14,7 @@ const debug = createDebugger('pulse:saveJob');
  * @param result the data returned from the findOneAndUpdate() call or insertOne() call
  * @access private
  */
-const processDbResult = async function (this: Pulse, job: Job, result: any) {
+const processDbResult: ProcessDbResultMethod = async function (this: Pulse, job, result) {
   debug('processDbResult() called with success, checking whether to process job immediately or not');
 
   // We have a result from the above calls
@@ -61,6 +62,7 @@ const processDbResult = async function (this: Pulse, job: Job, result: any) {
   return job;
 };
 
+export type SaveJobMethod = (job: Job) => Promise<Job>;
 /**
  * Save the properties on a job to MongoDB
  * @name Pulse#saveJob
@@ -68,7 +70,7 @@ const processDbResult = async function (this: Pulse, job: Job, result: any) {
  * @param job job to save into MongoDB
  * @returns resolves when job is saved or errors
  */
-export const saveJob = async function (this: Pulse, job: Job): Promise<Job> {
+export const saveJob: SaveJobMethod = async function (this: Pulse, job) {
   try {
     debug('attempting to save a job into Pulse instance');
 

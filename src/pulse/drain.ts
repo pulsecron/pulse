@@ -3,13 +3,14 @@ import { Pulse } from '.';
 
 const debug = createDebugger('pulse:drain');
 
+export type DrainMethod = () => Promise<void>;
 /**
  * Clear the interval that processes the jobs
  * @name Pulse#drain
  * @function
  * @returns resolves when all running jobs completes
  */
-export const drain = async function (this: Pulse): Promise<void> {
+export const drain: DrainMethod = async function (this: Pulse) {
   return new Promise((resolve) => {
     debug('Pulse.drain called, clearing interval for processJobs()');
     clearInterval(this._processInterval);

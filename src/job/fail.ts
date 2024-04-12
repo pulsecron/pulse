@@ -3,13 +3,14 @@ import { Job } from '.';
 
 const debug = createDebugger('pulse:job');
 
+export type FailMethod = (reason: string | Error) => Job;
 /**
  * Fails the job with a reason (error) specified
  * @name Job#fail
  * @function
  * @param reason reason job failed
  */
-export const fail = function (this: Job, reason: string | Error): Job {
+export const fail: FailMethod = function (this: Job, reason) {
   if (reason instanceof Error) {
     reason = reason.message;
   }

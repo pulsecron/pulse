@@ -1,12 +1,13 @@
-import { Job, JobAttributes } from ".";
+import { Job, JobAttributes } from '.';
 
+export type ToJsonMethod = () => Partial<JobAttributes>;
 /**
  * Given a job, turn it into an object we can store in Mongo
  * @name Job#toJSON
  * @function
  * @returns json object from Job
  */
-export const toJson = function (this: Job): Partial<JobAttributes> {
+export const toJson: ToJsonMethod = function (this: Job) {
   const attrs = this.attrs || {};
   const result = {};
 
@@ -17,13 +18,7 @@ export const toJson = function (this: Job): Partial<JobAttributes> {
     }
   }
 
-  const dates = [
-    "lastRunAt",
-    "lastFinishedAt",
-    "nextRunAt",
-    "failedAt",
-    "lockedAt",
-  ];
+  const dates = ['lastRunAt', 'lastFinishedAt', 'nextRunAt', 'failedAt', 'lockedAt'];
   dates.forEach((d) => {
     // @ts-expect-error index signature missing
     if (result[d]) {

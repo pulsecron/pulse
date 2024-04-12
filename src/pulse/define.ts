@@ -43,6 +43,12 @@ export interface DefineOptions {
 
 export type Processor<T extends JobAttributes> = (job: Job<T>, done?: () => void) => void;
 
+export type DefineMethod = <T extends JobAttributes>(
+  name: string,
+  processor: Processor<T>,
+  options?: DefineOptions
+) => void;
+
 /**
  * Setup definition for job
  * Method is used by consumers of lib to setup their functions
@@ -52,15 +58,10 @@ export type Processor<T extends JobAttributes> = (job: Job<T>, done?: () => void
  * @param [processor] function to be called to run actual job
  * @param options options for job to run
  */
-export const define = function <T extends JobAttributes>(
-  this: Pulse,
-  name: string,
-  processor: Processor<T>,
-  options?: DefineOptions
-): void {
+export const define: DefineMethod = function (this: Pulse, name, processor, options?) {
   this._definitions[name] = {
     fn: processor,
-    concurrency: (options as DefineOptions)?.concurrency || this._defaultConcurrency, // `null` is per interface definition of DefineOptions not valid
+    concurrency: (options as DefineOptions)?.concurrency || this._defaultConcurrency,
     lockLimit: (options as DefineOptions)?.lockLimit || this._defaultLockLimit,
     priority: (options as DefineOptions)?.priority || JobPriority.normal,
     lockLifetime: (options as DefineOptions)?.lockLifetime || this._defaultLockLifetime,
@@ -68,5 +69,6 @@ export const define = function <T extends JobAttributes>(
     locked: 0,
     shouldSaveResult: (options as DefineOptions)?.shouldSaveResult || false,
   };
+
   debug('job [%s] defined with following options: \n%O', name, this._definitions[name]);
 };

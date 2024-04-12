@@ -1,5 +1,6 @@
-import { Job } from ".";
+import { Job } from '.';
 
+export type IsRunningMethod = () => boolean;
 /**
  * A job is running if:
  * (lastRunAt exists AND lastFinishedAt does not exist)
@@ -9,7 +10,7 @@ import { Job } from ".";
  * @function
  * @returns Whether or not job is running at the moment (true for running)
  */
-export const isRunning = function (this: Job): boolean {
+export const isRunning: IsRunningMethod = function (this: Job) {
   if (!this.attrs.lastRunAt) {
     return false;
   }
@@ -18,10 +19,7 @@ export const isRunning = function (this: Job): boolean {
     return true;
   }
 
-  if (
-    this.attrs.lockedAt &&
-    this.attrs.lastRunAt.getTime() > this.attrs.lastFinishedAt.getTime()
-  ) {
+  if (this.attrs.lockedAt && this.attrs.lastRunAt.getTime() > this.attrs.lastFinishedAt.getTime()) {
     return true;
   }
 

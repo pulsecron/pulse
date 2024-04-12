@@ -9,12 +9,13 @@ import { Job } from '../job';
 
 const debug = createDebugger('pulse:job');
 
+export type ComputeNextRunAtMethod = () => Job;
 /**
  * Internal method used to compute next time a job should run and sets the proper values
  * @name Job#computeNextRunAt
  * @function
  */
-export const computeNextRunAt = function (this: Job): Job {
+export const computeNextRunAt: ComputeNextRunAtMethod = function (this: Job) {
   const interval = this.attrs.repeatInterval;
   const timezone = this.attrs.repeatTimezone;
   const { repeatAt } = this.attrs;

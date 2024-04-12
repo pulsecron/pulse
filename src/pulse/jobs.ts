@@ -3,6 +3,7 @@ import { Pulse } from '.';
 import { Job } from '../job';
 import { createJob } from '../utils';
 
+export type JobsMethod = (query?: Filter<any>, sort?: any, limit?: number, skip?: number) => Promise<Job[]>;
 /**
  * Finds all jobs matching 'query'
  * @name Pulse#jobs
@@ -13,19 +14,8 @@ import { createJob } from '../utils';
  * @param [number] of documents to skip in MongoDB
  * @returns resolves when fails or passes
  */
-export const jobs = async function (
-  this: Pulse,
-  query: Filter<any> = {},
-  sort = {},
-  limit = 0,
-  skip = 0
-): Promise<Job[]> {
-  const result = await this._collection
-    .find(query) // eslint-disable-line
-    .sort(sort)
-    .limit(limit)
-    .skip(skip)
-    .toArray();
+export const jobs: JobsMethod = async function (this: Pulse, query = {}, sort = {}, limit = 0, skip = 0) {
+  const result = await this._collection.find(query).sort(sort).limit(limit).skip(skip).toArray();
 
   return result.map((job: any) => createJob(this, job));
 };

@@ -4,6 +4,7 @@ import { Pulse } from '.';
 
 const debug = createDebugger('pulse:cancel');
 
+export type CancelMethod = (query: Filter<Document>) => Promise<number | undefined>;
 /**
  * Cancels any jobs matching the passed MongoDB query, and removes them from the database.
  * @name Pulse#cancel
@@ -12,7 +13,7 @@ const debug = createDebugger('pulse:cancel');
  * @caller client code, Pulse.purge(), Job.remove()
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const cancel = async function (this: Pulse, query: Filter<Document>): Promise<number | undefined> {
+export const cancel: CancelMethod = async function (this: Pulse, query) {
   debug('attempting to cancel all Pulse jobs', query);
   try {
     const { deletedCount } = await this._collection.deleteMany(query);
