@@ -5,6 +5,13 @@ import { JobOptions } from '../job/repeat-every';
 
 const debug = createDebugger('pulse:every');
 
+export type EveryMethod = <T extends JobAttributesData>(
+  interval: string,
+  names: string | string[],
+  data?: T,
+  options?: JobOptions
+) => Promise<any>;
+
 /**
  * Creates a scheduled job with given interval and name/names of the job to run
  * @name Pulse#every
@@ -15,13 +22,7 @@ const debug = createDebugger('pulse:every');
  * @param options - options to run job for
  * @returns Job/s created. Resolves when schedule fails or passes
  */
-export const every = async function <T extends JobAttributesData>(
-  this: Pulse,
-  interval: string,
-  names: string | string[],
-  data?: T,
-  options?: JobOptions
-): Promise<any> {
+export const every: EveryMethod = async function (this: Pulse, interval, names, data?, options?): Promise<any> {
   /**
    * Internal method to setup job that gets run every interval
    * @param interval run every X interval
@@ -51,7 +52,7 @@ export const every = async function <T extends JobAttributesData>(
    * @param [options] options to run job for
    * @return array of jobs created
    */
-  const createJobs = async (
+  const createJobs = async <T extends JobAttributesData>(
     interval: string,
     names: string[],
     data?: T,

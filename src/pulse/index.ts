@@ -10,11 +10,11 @@ import { dbInit } from './db-init';
 import { defaultConcurrency } from './default-concurrency';
 import { defaultLockLifetime } from './default-lock-lifetime';
 import { defaultLockLimit } from './default-lock-limit';
-import { define } from './define';
+import { DefineMethod, define } from './define';
 import { disable } from './disable';
 import { drain } from './drain';
 import { enable } from './enable';
-import { every } from './every';
+import { EveryMethod, every } from './every';
 import { findAndLockNextJob } from './find-and-lock-next-job';
 import { JobProcessingQueue } from './job-processing-queue';
 import { jobs } from './jobs';
@@ -71,6 +71,7 @@ export interface PulseConfig {
  * @property {Array} _jobsToLock
  */
 class Pulse extends EventEmitter {
+  private _lazyBindings: Record<string, any> = {};
   _defaultConcurrency: any;
   _defaultLockLifetime: any;
   _defaultLockLimit: any;
@@ -98,7 +99,6 @@ class Pulse extends EventEmitter {
   _processInterval: any;
 
   database = database;
-  define = define;
   processEvery = processEvery;
   cancel = cancel;
   close = close;
@@ -109,7 +109,7 @@ class Pulse extends EventEmitter {
   defaultLockLimit = defaultLockLimit;
   disable = disable;
   enable = enable;
-  every = every;
+
   jobs = jobs;
   lockLimit = lockLimit;
   maxConcurrency = maxConcurrency;
@@ -175,6 +175,21 @@ class Pulse extends EventEmitter {
     } else if (config.db) {
       this.database(config.db.address, config.db.collection, config.db.options, cb);
     }
+  }
+
+  private bindMethod<T extends Function>(methodName: string, fn: T): T {
+    if (!this._lazyBindings[methodName]) {
+      this._lazyBindings[methodName] = fn.bind(this);
+    }
+    return this._lazyBindings[methodName] as T;
+  }
+
+  get define(): DefineMethod {
+    return this.bindMethod('define', define);
+  }
+
+  get every(): EveryMethod {
+    return this.bindMethod('every', every);
   }
 }
 
