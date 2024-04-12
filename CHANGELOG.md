@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## [1.1.1](https://github.com/pulsecron/pulse/compare/v1.1.0...v1.1.1) (2024-04-12)
+
+
+### ♻️ REFACTOR
+
+* all functions in Pulse class and Job class ([#9](https://github.com/pulsecron/pulse/issues/9)) ([4fef6dc](https://github.com/pulsecron/pulse/commit/4fef6dc2dbf6c695d3cc722a7a8fb0ab48db3cd1))
+
 ## [1.1.0](https://github.com/pulsecron/pulse/compare/v1.0.2...v1.1.0) (2024-04-11)
 
 
