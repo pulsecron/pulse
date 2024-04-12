@@ -4,6 +4,11 @@ import { Pulse } from '.';
 
 const debug = createDebugger('pulse:db_init');
 
+export type DbInitMethod = (
+  collection?: string,
+  cb?: (error: AnyError | undefined, collection: Collection<any> | null) => void
+) => void;
+
 /**
  * Setup and initialize the collection used to manage Jobs.
  * @name Pulse#dbInit
@@ -11,11 +16,7 @@ const debug = createDebugger('pulse:db_init');
  * @param collection name or undefined for default 'pulseJobs'
  * @param [cb] called when the db is initialized
  */
-export const dbInit = function (
-  this: Pulse,
-  collection = 'pulseJobs',
-  cb?: (error: AnyError | undefined, collection: Collection<any> | null) => void
-): void {
+export const dbInit: DbInitMethod = function (this: Pulse, collection = 'pulseJobs', cb?) {
   debug('init database collection using name [%s]', collection);
   this._collection = this._mdb.collection(collection);
   if (this._disableAutoIndex) {

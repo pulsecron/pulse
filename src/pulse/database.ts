@@ -51,6 +51,6 @@ export const database: DatabaseMethod = async function (this: Pulse, url, collec
 
   this._db = client;
   this._mdb = client.db();
-  this.db_init(collection, cb);
+  this.dbInit(collection, cb);
   return this;
 };

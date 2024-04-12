@@ -2,34 +2,34 @@ import { EventEmitter } from 'events';
 import humanInterval from 'human-interval';
 import { AnyError, Collection, MongoClient, MongoClientOptions, Db as MongoDb } from 'mongodb';
 import { Job } from '../job';
-import { cancel } from './cancel';
-import { close } from './close';
-import { create } from './create';
+import { CancelMethod, cancel } from './cancel';
+import { CloseMethod, close } from './close';
+import { CreateMethod, create } from './create';
 import { DatabaseMethod, database } from './database';
-import { dbInit } from './db-init';
-import { defaultConcurrency } from './default-concurrency';
-import { defaultLockLifetime } from './default-lock-lifetime';
-import { defaultLockLimit } from './default-lock-limit';
+import { DbInitMethod, dbInit } from './db-init';
+import { DefaultConcurrencyMethod, defaultConcurrency } from './default-concurrency';
+import { DefaultLockLifetimeMethod, defaultLockLifetime } from './default-lock-lifetime';
+import { DefaultLockLimitMethod, defaultLockLimit } from './default-lock-limit';
 import { DefineMethod, define } from './define';
-import { disable } from './disable';
-import { drain } from './drain';
-import { enable } from './enable';
+import { DisableMethod, disable } from './disable';
+import { DrainMethod, drain } from './drain';
+import { EnableMethod, enable } from './enable';
 import { EveryMethod, every } from './every';
 import { findAndLockNextJob } from './find-and-lock-next-job';
 import { JobProcessingQueue } from './job-processing-queue';
-import { jobs } from './jobs';
-import { lockLimit } from './lock-limit';
-import { maxConcurrency } from './max-concurrency';
-import { mongo } from './mongo';
-import { name } from './name';
-import { now } from './now';
-import { processEvery } from './process-every';
-import { purge } from './purge';
-import { saveJob } from './save-job';
-import { schedule } from './schedule';
-import { sort } from './sort';
-import { start } from './start';
-import { stop } from './stop';
+import { JobsMethod, jobs } from './jobs';
+import { LockLimitMethod, lockLimit } from './lock-limit';
+import { MaxConcurrencyMethod, maxConcurrency } from './max-concurrency';
+import { MongoMethod, mongo } from './mongo';
+import { NameMethod, name } from './name';
+import { NowMethod, now } from './now';
+import { ProcessEveryMethod, processEvery } from './process-every';
+import { PurgeMethod, purge } from './purge';
+import { SaveJobMethod, saveJob } from './save-job';
+import { ScheduleMethod, schedule } from './schedule';
+import { SortMethod, sort } from './sort';
+import { StartMethod, start } from './start';
+import { StopMethod, stop } from './stop';
 
 export interface PulseConfig {
   name?: string;
@@ -98,31 +98,6 @@ class Pulse extends EventEmitter {
   _nextScanAt: any;
   _processInterval: any;
 
-  processEvery = processEvery;
-  cancel = cancel;
-  close = close;
-  create = create;
-  db_init = dbInit;
-  defaultConcurrency = defaultConcurrency;
-  defaultLockLifetime = defaultLockLifetime;
-  defaultLockLimit = defaultLockLimit;
-  disable = disable;
-  enable = enable;
-
-  jobs = jobs;
-  lockLimit = lockLimit;
-  maxConcurrency = maxConcurrency;
-  mongo = mongo;
-  name = name;
-  now = now;
-  purge = purge;
-  saveJob = saveJob;
-  schedule = schedule;
-  sort = sort;
-  start = start;
-  stop = stop;
-  drain = drain;
-
   /**
    * Constructs a new Pulse object.
    * @param config Optional configuration to initialize the Pulse.
@@ -166,9 +141,11 @@ class Pulse extends EventEmitter {
     this.init(config, cb);
   }
 
-  get database(): DatabaseMethod {
-    return this.bindMethod('database', database);
-  }
+  /**
+   ***************************************
+   * Public methods
+   * *************************************
+   */
 
   get define(): DefineMethod {
     return this.bindMethod('define', define);
@@ -176,6 +153,108 @@ class Pulse extends EventEmitter {
 
   get every(): EveryMethod {
     return this.bindMethod('every', every);
+  }
+
+  get processEvery(): ProcessEveryMethod {
+    return this.bindMethod('processEvery', processEvery);
+  }
+
+  get cancel(): CancelMethod {
+    return this.bindMethod('cancel', cancel);
+  }
+
+  get close(): CloseMethod {
+    return this.bindMethod('close', close);
+  }
+
+  get create(): CreateMethod {
+    return this.bindMethod('create', create);
+  }
+
+  get dbInit(): DbInitMethod {
+    return this.bindMethod('dbInit', dbInit);
+  }
+
+  get defaultConcurrency(): DefaultConcurrencyMethod {
+    return this.bindMethod('defaultConcurrency', defaultConcurrency);
+  }
+
+  get defaultLockLifetime(): DefaultLockLifetimeMethod {
+    return this.bindMethod('defaultLockLifetime', defaultLockLifetime);
+  }
+
+  get defaultLockLimit(): DefaultLockLimitMethod {
+    return this.bindMethod('defaultLockLimit', defaultLockLimit);
+  }
+
+  get disable(): DisableMethod {
+    return this.bindMethod('disable', disable);
+  }
+
+  get enable(): EnableMethod {
+    return this.bindMethod('enable', enable);
+  }
+
+  get jobs(): JobsMethod {
+    return this.bindMethod('jobs', jobs);
+  }
+
+  get lockLimit(): LockLimitMethod {
+    return this.bindMethod('lockLimit', lockLimit);
+  }
+
+  get maxConcurrency(): MaxConcurrencyMethod {
+    return this.bindMethod('maxConcurrency', maxConcurrency);
+  }
+
+  get name(): NameMethod {
+    return this.bindMethod('name', name);
+  }
+
+  get now(): NowMethod {
+    return this.bindMethod('now', now);
+  }
+
+  get purge(): PurgeMethod {
+    return this.bindMethod('purge', purge);
+  }
+
+  get saveJob(): SaveJobMethod {
+    return this.bindMethod('saveJob', saveJob);
+  }
+
+  get schedule(): ScheduleMethod {
+    return this.bindMethod('schedule', schedule);
+  }
+
+  get sort(): SortMethod {
+    return this.bindMethod('sort', sort);
+  }
+
+  get start(): StartMethod {
+    return this.bindMethod('start', start);
+  }
+
+  get stop(): StopMethod {
+    return this.bindMethod('stop', stop);
+  }
+
+  get drain(): DrainMethod {
+    return this.bindMethod('drain', drain);
+  }
+
+  /**
+   ***************************************
+   * Private methods
+   * *************************************
+   */
+
+  private get mongo(): MongoMethod {
+    return this.bindMethod('mongo', mongo);
+  }
+
+  private get database(): DatabaseMethod {
+    return this.bindMethod('database', database);
   }
 
   private init(config: PulseConfig, cb?: (error: AnyError | undefined, collection: Collection<any> | null) => void) {

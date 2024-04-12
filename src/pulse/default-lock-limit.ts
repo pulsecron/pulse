@@ -3,6 +3,7 @@ import { Pulse } from '.';
 
 const debug = createDebugger('pulse:defaultLockLimit');
 
+export type DefaultLockLimitMethod = (times: number) => Pulse;
 /**
  * Set default lock limit per job type
  * @name Pulse#defaultLockLimit
@@ -10,7 +11,7 @@ const debug = createDebugger('pulse:defaultLockLimit');
  * @param {Number} num Lock limit per job
  * @returns {Pulse} pulse instance
  */
-export const defaultLockLimit = function (this: Pulse, times: number): Pulse {
+export const defaultLockLimit: DefaultLockLimitMethod = function (this: Pulse, times) {
   debug('Pulse.defaultLockLimit(%d)', times);
   this._defaultLockLimit = times;
   return this;

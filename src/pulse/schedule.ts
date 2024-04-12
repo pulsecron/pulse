@@ -4,6 +4,11 @@ import { Job, JobAttributesData } from '../job';
 
 const debug = createDebugger('pulse:schedule');
 
+export type ScheduleMethod = <T extends JobAttributesData>(
+  when: string | Date,
+  names: string | string[],
+  data: T
+) => Promise<Job | Job[]>;
 /**
  * Schedule a job or jobs at a specific time
  * @name Pulse#schedule
@@ -13,24 +18,7 @@ const debug = createDebugger('pulse:schedule');
  * @param data data to send to job
  * @returns job or jobs created
  */
-export function schedule<T extends JobAttributesData>(
-  this: Pulse,
-  when: string | Date,
-  names: string,
-  data: T
-): Promise<Job>;
-export function schedule<T extends JobAttributesData>(
-  this: Pulse,
-  when: string | Date,
-  names: string[],
-  data: T
-): Promise<Job[]>;
-export function schedule<T extends JobAttributesData>(
-  this: Pulse,
-  when: string | Date,
-  names: string | string[],
-  data: T
-): Promise<Job | Job[]> {
+export const schedule: ScheduleMethod = function schedule(this: Pulse, when, names, data) {
   /**
    * Internal method that creates a job with given date
    * @param when when the job gets run
@@ -76,4 +64,4 @@ export function schedule<T extends JobAttributesData>(
   }
 
   throw new TypeError('Name must be string or array of strings');
-}
+};

@@ -3,13 +3,14 @@ import { Pulse } from '.';
 
 const debug = createDebugger('pulse:stop');
 
+export type StopMethod = () => Promise<void>;
 /**
  * Clear the interval that processes the jobs
  * @name Pulse#stop
  * @function
  * @returns resolves when job unlocking fails or passes
  */
-export const stop = async function (this: Pulse): Promise<void> {
+export const stop: StopMethod = async function (this: Pulse) {
   /**
    * Internal method to unlock jobs so that they can be re-run
    * NOTE: May need to update what properties get set here, since job unlocking seems to fail

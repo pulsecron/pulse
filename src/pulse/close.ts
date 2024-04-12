@@ -3,6 +3,8 @@ import { Pulse } from '.';
 
 const debug = createDebugger('pulse:close');
 
+export type CloseMethod = (option?: { force: boolean }) => Promise<Pulse>;
+
 /** Close the db and it's underlying connections
  * Only works if pulse was instantiated without preconfigured mongoDb instance.
  * If the mongoDb instance was supplied during instantiation or via pulse.mongo, this function will do nothing and return pulse anyway.
@@ -15,7 +17,7 @@ const debug = createDebugger('pulse:close');
  *
  * @link https://mongodb.github.io/node-mongodb-native/2.0/api/Db.html#close
  */
-export const close = async function (this: Pulse, option?: { force: boolean }): Promise<Pulse> {
+export const close: CloseMethod = async function (this: Pulse, option?) {
   debug('close db connection for this pulse instance');
   const closeOptions = {
     force: false,
