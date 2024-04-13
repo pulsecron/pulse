@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## [1.1.2](https://github.com/pulsecron/pulse/compare/v1.1.1...v1.1.2) (2024-04-13)
+
+
+### 🐛 BUG FIXES
+
+* update package.json and index.ts files ([37f15ae](https://github.com/pulsecron/pulse/commit/37f15aee08613fc9d1cd92c3542e9bee6ca55ebf))
+
 ## [1.1.1](https://github.com/pulsecron/pulse/compare/v1.1.0...v1.1.1) (2024-04-12)
 
 
