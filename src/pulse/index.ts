@@ -243,15 +243,15 @@ class Pulse extends EventEmitter {
     return this.bindMethod('drain', drain);
   }
 
+  get mongo(): MongoMethod {
+    return this.bindMethod('mongo', mongo);
+  }
+
   /**
    ***************************************
    * Private methods
    * *************************************
    */
-
-  private get mongo(): MongoMethod {
-    return this.bindMethod('mongo', mongo);
-  }
 
   private get database(): DatabaseMethod {
     return this.bindMethod('database', database);
