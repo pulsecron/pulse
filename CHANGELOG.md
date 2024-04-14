@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## [1.1.3](https://github.com/pulsecron/pulse/compare/v1.1.2...v1.1.3) (2024-04-14)
+
+
+### 🐛 BUG FIXES
+
+* update unique property name to uniqueQuery ([8e44261](https://github.com/pulsecron/pulse/commit/8e44261792dd489927a8528861304c1515b8538d))
+
 ## [1.1.2](https://github.com/pulsecron/pulse/compare/v1.1.1...v1.1.2) (2024-04-13)
 
 
