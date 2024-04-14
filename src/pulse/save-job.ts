@@ -77,12 +77,12 @@ export const saveJob: SaveJobMethod = async function (this: Pulse, job) {
     // Grab information needed to save job but that we don't want to persist in MongoDB
     const id = job.attrs._id;
 
-    const { unique, uniqueOpts } = job.attrs;
+    const { uniqueQuery: unique, uniqueOpts } = job.attrs;
 
     // Store job as JSON and remove props we don't want to store from object
     const props = job.toJSON();
     delete props._id;
-    delete props.unique;
+    delete props.uniqueQuery;
     delete props.uniqueOpts;
 
     // Store name of pulse queue as last modifier in job data
@@ -143,7 +143,7 @@ export const saveJob: SaveJobMethod = async function (this: Pulse, job) {
 
     if (unique) {
       // If we want the job to be unique, then we can upsert based on the 'unique' query object that was passed in
-      const query = job.attrs.unique;
+      const query = job.attrs.uniqueQuery;
       query.name = props.name;
       if (uniqueOpts?.insertOnly) {
         // @ts-expect-error

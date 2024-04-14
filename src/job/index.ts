@@ -67,7 +67,7 @@ export interface JobAttributes<T extends JobAttributesData = JobAttributesData> 
    */
   data: T | any;
 
-  unique?: any;
+  uniqueQuery?: any;
   uniqueOpts?: {
     insertOnly: boolean;
   };
