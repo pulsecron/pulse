@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## [1.1.5](https://github.com/pulsecron/pulse/compare/v1.1.4...v1.1.5) (2024-04-15)
+
+
+### 🐛 BUG FIXES
+
+* add new release configuration for API, job, and pulse scopes ([29ab228](https://github.com/pulsecron/pulse/commit/29ab2289d2adaffad03708be0443b1e057941ff1))
+
 ## [1.1.4](https://github.com/pulsecron/pulse/compare/v1.1.3...v1.1.4) (2024-04-15)
 
 
