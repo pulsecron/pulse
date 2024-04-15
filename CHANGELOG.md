@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## [1.1.4](https://github.com/pulsecron/pulse/compare/v1.1.3...v1.1.4) (2024-04-15)
+
+
+### ♻️ REFACTOR
+
+*  refactor JobAttributes interface to use 'any' type for the 'data' property in index.ts ([40ded49](https://github.com/pulsecron/pulse/commit/40ded49ca9dc640a57a04227c4e79608da6d413c))
+
 ## [1.1.3](https://github.com/pulsecron/pulse/compare/v1.1.2...v1.1.3) (2024-04-14)
 
 
