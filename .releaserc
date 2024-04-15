@@ -17,6 +17,25 @@
             "release": false
           },
           {
+            "type": "feat",
+            "scope": "api",
+            "release": "minor"
+          },
+          {
+            "type": "feat",
+            "scope": "job",
+            "release": "minor"
+          },
+          {
+            "type": "feat",
+            "scope": "pulse",
+            "release": "minor"
+          },
+          {
+            "scope": "docs",
+            "release": "patch"
+          },
+          {
             "type": "build",
             "release": false
           },
