@@ -1,10 +1,10 @@
 import createDebugger from 'debug';
 import { Pulse } from '.';
-import { Job, JobAttributesData } from '../job';
+import { Job } from '../job';
 
 const debug = createDebugger('pulse:create');
 
-export type CreateMethod = <T extends JobAttributesData>(name: string, data: T) => Job;
+export type CreateMethod = <T extends any>(name: string, data: T) => Job;
 /**
  * Given a name and some data, create a new job
  * @name Pulse#create
