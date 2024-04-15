@@ -24,6 +24,7 @@
   <summary>Table of Contents</summary><br>
 
 - [Overview](#overview)
+    - [Related Projects](#related-projects)
 - [Features](#features)
 - [Repository Structure](#repository-structure)
 - [Modules](#modules)
@@ -41,12 +42,16 @@
 
 Pulse is a new fork of the [Agenda](https://github.com/agenda/agenda) project, created as the original project is no longer actively maintained. Positioned as a vital solution in the Node.js ecosystem for job scheduling, the hiatus of Agenda prompted the creation of Pulse. Utilizing MongoDB, Pulse introduces advanced functionalities, improved scalability, and contemporary features to address today’s complex scheduling challenges.
 
+<br/>
+
+#### Related Projects
+- [pulsecron](https://www.pulsecron.com) - Event-driven task scheduling management infrastructure
+- [nestjs-pulse](https://github.com/pulsecron/nestjs-pulse) - official NestJS module for Pulse.
+
 ---
+
 <br/>
 <br/>
-
-
-
 
 
 ##  Features
