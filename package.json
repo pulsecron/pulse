@@ -98,7 +98,7 @@
     "typedoc": "^0.25.13",
     "typescript": "^5.4.4"
   },
-  "homepage": "https://github.com/pulsecron/pulse#readme",
+  "homepage": "https://pulsecron.com",
   "directories": {
     "doc": "docs",
     "example": "examples"
