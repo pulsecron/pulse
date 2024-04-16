@@ -247,15 +247,15 @@ class Pulse extends EventEmitter {
     return this.bindMethod('mongo', mongo);
   }
 
+  get database(): DatabaseMethod {
+    return this.bindMethod('database', database);
+  }
+
   /**
    ***************************************
    * Private methods
    * *************************************
    */
-
-  private get database(): DatabaseMethod {
-    return this.bindMethod('database', database);
-  }
 
   private init(config: PulseConfig, cb?: (error: AnyError | undefined, collection: Collection<any> | null) => void) {
     if (config.mongo) {
