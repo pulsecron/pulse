@@ -19,7 +19,9 @@
 
 <br><!-- TABLE OF CONTENTS -->
 
-
+<p align="center">
+  <a href="https://docs-pulse.pulsecron.com">Documentation</a> | <a href="https://www.pulsecron.com">Website</a>
+</p>
 <details>
   <summary>Table of Contents</summary><br>
 
@@ -170,8 +172,7 @@ Pulse is a new fork of the [Agenda](https://github.com/agenda/agenda) project, c
 <br/>
 
 ##  Getting Started
-
-
+| Take a look at our [Quick Start](https://docs-pulse.pulsecron.com/quick-start) guide.
 
 ####  Installation
 
