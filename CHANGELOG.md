@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## [1.1.7](https://github.com/pulsecron/pulse/compare/v1.1.6...v1.1.7) (2024-04-16)
+
+
+### 🐛 BUG FIXES
+
+* update return type of every method in pulse/every.ts & update database method in Pulse class to be public ([#11](https://github.com/pulsecron/pulse/issues/11)) ([27d660c](https://github.com/pulsecron/pulse/commit/27d660c586364a5b7cdf79577c984fe191bbf6a3))
+
 ## [1.1.6](https://github.com/pulsecron/pulse/compare/v1.1.5...v1.1.6) (2024-04-16)
 
 
