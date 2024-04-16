@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## [1.1.6](https://github.com/pulsecron/pulse/compare/v1.1.5...v1.1.6) (2024-04-16)
+
+
+### 🐛 BUG FIXES
+
+* update type job creation methods in pulse/every.ts, pulse/now.ts, and pulse/schedule.ts ([696e4d0](https://github.com/pulsecron/pulse/commit/696e4d0e967acdbf9c6d4a4fc0fe26eb0e078820))
+
 ## [1.1.5](https://github.com/pulsecron/pulse/compare/v1.1.4...v1.1.5) (2024-04-15)
 
 
