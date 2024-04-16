@@ -1,13 +1,13 @@
 import createDebugger from 'debug';
 import { Pulse } from '.';
-import { Job, JobAttributesData } from '../job';
+import { Job } from '../job';
 
 const debug = createDebugger('pulse:schedule');
 
-export type ScheduleMethod = <T extends JobAttributesData>(
+export type ScheduleMethod = <T extends any>(
   when: string | Date,
   names: string | string[],
-  data: T
+  data?: T
 ) => Promise<Job | Job[]>;
 /**
  * Schedule a job or jobs at a specific time

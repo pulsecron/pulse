@@ -1,10 +1,10 @@
 import createDebugger from 'debug';
 import { Pulse } from '.';
-import { Job, JobAttributesData } from '../job';
+import { Job } from '../job';
 
 const debug = createDebugger('pulse:now');
 
-export type NowMethod = <T extends JobAttributesData>(name: string, data: T) => Promise<Job>;
+export type NowMethod = <T extends any>(name: string, data?: T) => Promise<Job>;
 /**
  * Create a job for this exact moment
  * @name Pulse#now
