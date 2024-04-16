@@ -10,7 +10,7 @@ export type EveryMethod = <T extends any>(
   names: string | string[],
   data?: T,
   options?: JobOptions
-) => Promise<any>;
+) => Promise<Job | Job[] | undefined>;
 
 /**
  * Creates a scheduled job with given interval and name/names of the job to run
@@ -22,7 +22,7 @@ export type EveryMethod = <T extends any>(
  * @param options - options to run job for
  * @returns Job/s created. Resolves when schedule fails or passes
  */
-export const every: EveryMethod = async function (this: Pulse, interval, names, data?, options?): Promise<any> {
+export const every: EveryMethod = async function (this: Pulse, interval, names, data?, options?) {
   /**
    * Internal method to setup job that gets run every interval
    * @param interval run every X interval
