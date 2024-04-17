@@ -28,4 +28,4 @@
   * [Cancel](docs/managing-jobs/cancel.md)
   * [Disable](docs/managing-jobs/disable.md)
   * [Enable](docs/managing-jobs/enable.md)
-  * [Purge](docs/managing-jobs/purge.md)
+  * [Purge](docs/managing-jobs/purge.md)
