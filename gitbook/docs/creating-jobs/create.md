@@ -13,7 +13,7 @@ _This does **NOT** save the job in the database._
 ### Example Usage
 
 ```typescript
-cconst pulse = new Pulse();
+const pulse = new Pulse();
 
 // Create a new job for data analysis
 const analysisJob = pulse.create('dataAnalysis', { datasetId: 101 });

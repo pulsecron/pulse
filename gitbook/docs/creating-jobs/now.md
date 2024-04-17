@@ -11,7 +11,7 @@ The `now` method schedules a job to be executed immediately. It creates a job in
 ### Example Usage
 
 ```typescript
-cconst pulse = new Pulse();
+const pulse = new Pulse();
 
 // Schedule a job to run immediately to handle a high priority update
 pulse.now('urgentUpdate', { updateDetails: 'Fix critical security issue' })

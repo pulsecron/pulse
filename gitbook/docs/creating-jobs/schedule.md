@@ -11,7 +11,7 @@ The `schedule` method allows you to set a specific time for a job or multiple jo
 ### Example Usage
 
 ```typescript
-cconst pulse = new Pulse();
+const pulse = new Pulse();
 
 // Schedule a single job to run next Monday at 9 AM
 const nextMonday = new Date();
