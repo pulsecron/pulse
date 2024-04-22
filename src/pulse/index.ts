@@ -31,6 +31,7 @@ import { SortMethod, sort } from './sort';
 import { StartMethod, start } from './start';
 import { StopMethod, stop } from './stop';
 
+export type PulseOnEventType = 'ready' | 'start' | 'success' | 'fail' | 'complete' | 'error';
 export interface PulseConfig {
   name?: string;
   processEvery?: string;
@@ -249,6 +250,17 @@ class Pulse extends EventEmitter {
 
   get database(): DatabaseMethod {
     return this.bindMethod('database', database);
+  }
+
+  /**
+   *
+   ***************************************
+   * Overridden methods
+   * *************************************
+   */
+
+  on(event: PulseOnEventType, listener: (...arg: any[]) => void): this {
+    return super.on(event, listener);
   }
 
   /**

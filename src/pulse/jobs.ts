@@ -1,9 +1,9 @@
-import { Filter } from 'mongodb';
+import { Filter, Sort } from 'mongodb';
 import { Pulse } from '.';
 import { Job } from '../job';
 import { createJob } from '../utils';
 
-export type JobsMethod = (query?: Filter<any>, sort?: any, limit?: number, skip?: number) => Promise<Job[]>;
+export type JobsMethod = (query?: Filter<any>, sort?: Sort | string, limit?: number, skip?: number) => Promise<Job[]>;
 /**
  * Finds all jobs matching 'query'
  * @name Pulse#jobs
