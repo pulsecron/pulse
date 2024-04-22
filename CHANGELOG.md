@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## [1.1.8](https://github.com/pulsecron/pulse/compare/v1.1.7...v1.1.8) (2024-04-22)
+
+
+### 🐛 BUG FIXES
+
+* add PulseOnEventType and override on method in Pulse class ([#12](https://github.com/pulsecron/pulse/issues/12)) ([c8849b0](https://github.com/pulsecron/pulse/commit/c8849b0b34e9ca9d0d2c3e00ccbd8222530e09c4))
+
 ## [1.1.7](https://github.com/pulsecron/pulse/compare/v1.1.6...v1.1.7) (2024-04-16)
 
 
