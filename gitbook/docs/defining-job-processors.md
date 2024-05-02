@@ -26,7 +26,7 @@ pulse.define('sendEmail', async (job, done) => {
     
   } catch (error) {
     console.error('Failed to send email:', error);
-   done(error);
+    done(error);
   }
 }, {
   concurrency: 5,
