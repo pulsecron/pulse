@@ -236,6 +236,10 @@ class Job<T extends JobAttributesData = JobAttributesData> {
     return this.bindMethod('isRunning', isRunning);
   }
 
+  get isExpired(): IsExpiredMethod {
+    return this.bindMethod('isExpired', isExpired);
+  }
+
   get save(): SaveMethod {
     return this.bindMethod('save', save);
   }
