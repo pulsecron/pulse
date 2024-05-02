@@ -1,10 +1,10 @@
 import createDebugger from 'debug';
 import { Pulse } from '.';
-import { Job } from '../job';
+import { Job, JobAttributesData } from '../job';
 
 const debug = createDebugger('pulse:now');
 
-export type NowMethod = <T extends any>(name: string, data?: T) => Promise<Job>;
+export type NowMethod = <T extends JobAttributesData>(name: string, data?: T) => Promise<Job>;
 /**
  * Create a job for this exact moment
  * @name Pulse#now
@@ -15,7 +15,7 @@ export type NowMethod = <T extends any>(name: string, data?: T) => Promise<Job>;
 export const now: NowMethod = async function (this: Pulse, name, data) {
   debug('Pulse.now(%s, [Object])', name);
   try {
-    const job = this.create(name, data);
+    const job = this.create(name, data || {});
 
     job.schedule(new Date());
     await job.save();
