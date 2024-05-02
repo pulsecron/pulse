@@ -17,7 +17,7 @@ import { EnableMethod, enable } from './enable';
 import { EveryMethod, every } from './every';
 import { findAndLockNextJob } from './find-and-lock-next-job';
 import { JobProcessingQueue } from './job-processing-queue';
-import { JobsMethod, jobs } from './jobs';
+import { JobsMethod, getJobsRepo, jobs } from './jobs';
 import { LockLimitMethod, lockLimit } from './lock-limit';
 import { MaxConcurrencyMethod, maxConcurrency } from './max-concurrency';
 import { MongoMethod, mongo } from './mongo';
@@ -31,7 +31,7 @@ import { SortMethod, sort } from './sort';
 import { StartMethod, start } from './start';
 import { StopMethod, stop } from './stop';
 
-export type PulseOnEventType = 'ready' | 'start' | 'success' | 'fail' | 'complete' | 'error';
+export type PulseOnEventType = 'ready' | 'start' | 'success' | 'fail' | 'complete' | 'cancel' | 'error';
 export interface PulseConfig {
   name?: string;
   processEvery?: string;
@@ -250,6 +250,16 @@ class Pulse extends EventEmitter {
 
   get database(): DatabaseMethod {
     return this.bindMethod('database', database);
+  }
+
+  /**
+   *
+   ***************************************
+   * Repository method
+   * *************************************
+   */
+  get getJobsRepo() {
+    return this.bindMethod('getJobsRepo', getJobsRepo);
   }
 
   /**
