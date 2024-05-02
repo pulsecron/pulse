@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## [1.1.11](https://github.com/pulsecron/pulse/compare/v1.1.10...v1.1.11) (2024-05-02)
+
+
+### 🐛 BUG FIXES
+
+* update Processor type definition in define.ts ([#19](https://github.com/pulsecron/pulse/issues/19)) ([7c384ee](https://github.com/pulsecron/pulse/commit/7c384ee16e91fb49dea5617ba21fce43112678a7))
+
 ## [1.1.10](https://github.com/pulsecron/pulse/compare/v1.1.9...v1.1.10) (2024-05-02)
 
 
