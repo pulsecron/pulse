@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## [1.2.0](https://github.com/pulsecron/pulse/compare/v1.1.12...v1.2.0) (2024-05-02)
+
+
+### 🚀 FEATURES
+
+* add fetchStatus method to Job class ([e5e904e](https://github.com/pulsecron/pulse/commit/e5e904e0769808dc19b38d76623e8f63b17ac110))
+* add getJobsRepo method to Pulse class ([27db921](https://github.com/pulsecron/pulse/commit/27db9210a516b4258e0f89e2d00ba4eb5e42ef30))
+* add isExpired method to Job class ([973d0b8](https://github.com/pulsecron/pulse/commit/973d0b8c448ad6de5cb61c6438d16ff690f9ef2e))
+* emit 'cancel' event with deletedCount in cancel method of Pulse class ([0947655](https://github.com/pulsecron/pulse/commit/0947655ec43179b3a9004a0e4c94a0b19e751c89))
+* update isRunning method in Job class to support fetching real status ([5335524](https://github.com/pulsecron/pulse/commit/533552495393943209c1e533a109e3338a11b155))
+
 ## [1.1.12](https://github.com/pulsecron/pulse/compare/v1.1.11...v1.1.12) (2024-05-02)
 
 
