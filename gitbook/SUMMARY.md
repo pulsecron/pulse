@@ -29,3 +29,5 @@
   * [Disable](docs/managing-jobs/disable.md)
   * [Enable](docs/managing-jobs/enable.md)
   * [Purge](docs/managing-jobs/purge.md)
+  * [isRunning](docs/managing-jobs/isrunning.md)
+  * [isExpired](docs/managing-jobs/isexpired.md)
