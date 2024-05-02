@@ -6,6 +6,8 @@ import { ComputeNextRunAtMethod, computeNextRunAt } from './compute-next-run-at'
 import { DisableMethod, disable } from './disable';
 import { EnableMethod, enable } from './enable';
 import { FailMethod, fail } from './fail';
+import { FetchStatusMethod, fetchStatus } from './fetch-status';
+import { IsExpiredMethod, isExpired } from './is-expired';
 import { IsRunningMethod, isRunning } from './is-running';
 import { PriorityMethod, priority } from './priority';
 import { RemoveMethod, remove } from './remove';
@@ -248,6 +250,10 @@ class Job<T extends JobAttributesData = JobAttributesData> {
 
   get setShouldSaveResult(): SetShouldSaveResultMethod {
     return this.bindMethod('setShouldSaveResult', setShouldSaveResult);
+  }
+
+  get fetchStatus(): FetchStatusMethod {
+    return this.bindMethod('fetchStatus', fetchStatus);
   }
 
   /**
