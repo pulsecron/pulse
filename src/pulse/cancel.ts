@@ -17,6 +17,8 @@ export const cancel: CancelMethod = async function (this: Pulse, query) {
   debug('attempting to cancel all Pulse jobs', query);
   try {
     const { deletedCount } = await this._collection.deleteMany(query);
+    this.emit('cancel', deletedCount);
+
     debug('%s jobs cancelled', deletedCount);
     return deletedCount;
   } catch (error) {
