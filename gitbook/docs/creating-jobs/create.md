@@ -2,7 +2,7 @@
 
 
 
-## `pulse.create(name, data?)`
+## `pulse.create(name, data)`
 
 {% hint style="info" %}
 The `create` method generates a new job instance based on a specified job type and data. It is a preliminary step in the job lifecycle, allowing for the customization of job parameters before the job is scheduled and executed.\
@@ -29,7 +29,7 @@ analysisJob.save()
 
 #### Returns
 
-* **`Job`**: Returns a new `Job` instance configured with the provided name and data.
+* **`Job<T extends JobAttributesData>`**: Returns a new `Job` instance configured with the provided name and data.
 
 \
 
