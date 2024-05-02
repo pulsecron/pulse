@@ -1,6 +1,6 @@
 {
   "name": "@pulsecron/pulse",
-  "version": "1.1.9",
+  "version": "1.1.10",
   "description": "The modern MongoDB-powered scheduling library for Node.js",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

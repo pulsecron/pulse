@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## [1.1.10](https://github.com/pulsecron/pulse/compare/v1.1.9...v1.1.10) (2024-05-02)
+
+
+### 🐛 BUG FIXES
+
+* return resolve pulse.stop() case of success ([#18](https://github.com/pulsecron/pulse/issues/18)) ([df7e6f4](https://github.com/pulsecron/pulse/commit/df7e6f48c9ca545728689e954505088d36ca3081))
+
 ## [1.1.9](https://github.com/pulsecron/pulse/compare/v1.1.8...v1.1.9) (2024-05-02)
 
 
