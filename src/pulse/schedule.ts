@@ -1,10 +1,10 @@
 import createDebugger from 'debug';
 import { Pulse } from '.';
-import { Job } from '../job';
+import { Job, JobAttributesData } from '../job';
 
 const debug = createDebugger('pulse:schedule');
 
-export type ScheduleMethod = <T extends any>(
+export type ScheduleMethod = <T extends JobAttributesData>(
   when: string | Date,
   names: string | string[],
   data?: T
@@ -26,7 +26,7 @@ export const schedule: ScheduleMethod = function schedule(this: Pulse, when, nam
    * @param data data to send to job
    * @returns instance of new job
    */
-  const createJob = async (when: string | Date, name: string, data: any): Promise<Job> => {
+  const createJob = async <T extends JobAttributesData>(when: string | Date, name: string, data: T): Promise<Job> => {
     const job = this.create(name, data);
 
     await job.schedule(when).save();
@@ -41,7 +41,11 @@ export const schedule: ScheduleMethod = function schedule(this: Pulse, when, nam
    * @param data data to send to job
    * @returns jobs that were created
    */
-  const createJobs = async (when: string | Date, names: string[], data: any): Promise<Job[]> => {
+  const createJobs = async <T extends JobAttributesData>(
+    when: string | Date,
+    names: string[],
+    data: T
+  ): Promise<Job[]> => {
     try {
       const createJobList: Array<Promise<Job>> = [];
       names.map((name) => createJobList.push(createJob(when, name, data)));
@@ -55,12 +59,12 @@ export const schedule: ScheduleMethod = function schedule(this: Pulse, when, nam
 
   if (typeof names === 'string') {
     debug('Pulse.schedule(%s, %O, [%O], cb)', when, names);
-    return createJob(when, names, data);
+    return createJob(when, names, data || {});
   }
 
   if (Array.isArray(names)) {
     debug('Pulse.schedule(%s, %O, [%O])', when, names);
-    return createJobs(when, names, data);
+    return createJobs(when, names, data || {});
   }
 
   throw new TypeError('Name must be string or array of strings');

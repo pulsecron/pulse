@@ -1,6 +1,6 @@
 import createDebugger from 'debug';
 import { Pulse } from '.';
-import { Job, JobAttributes } from '../job';
+import { Job, JobAttributesData } from '../job';
 
 const debug = createDebugger('pulse:define');
 
@@ -43,7 +43,7 @@ export interface DefineOptions {
 
 export type Processor<T extends JobAttributes> = (job: Job<T>, done?: () => void) => void;
 
-export type DefineMethod = <T extends JobAttributes>(
+export type DefineMethod = <T extends JobAttributesData>(
   name: string,
   processor: Processor<T>,
   options?: DefineOptions

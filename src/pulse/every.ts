@@ -1,11 +1,11 @@
 import createDebugger from 'debug';
 import { Pulse } from '.';
-import { Job } from '../job';
+import { Job, JobAttributesData } from '../job';
 import { JobOptions } from '../job/repeat-every';
 
 const debug = createDebugger('pulse:every');
 
-export type EveryMethod = <T extends any>(
+export type EveryMethod = <T extends JobAttributesData>(
   interval: string,
   names: string | string[],
   data?: T,
@@ -31,7 +31,7 @@ export const every: EveryMethod = async function (this: Pulse, interval, names, 
    * @param [options] options to run job for
    * @returns instance of job
    */
-  const createJob = async <T extends any>(
+  const createJob = async <T extends JobAttributesData>(
     interval: string,
     name: string,
     data?: T,
@@ -52,7 +52,7 @@ export const every: EveryMethod = async function (this: Pulse, interval, names, 
    * @param [options] options to run job for
    * @return array of jobs created
    */
-  const createJobs = async <T extends any>(
+  const createJobs = async <T extends JobAttributesData>(
     interval: string,
     names: string[],
     data?: T,
