@@ -38,11 +38,11 @@ const pulse = new Pulse(pulseConfig, (error, collection) => {
 * **`config`**
   * **`name`** (`string` - optional): Specifies the name of the job queue. This can be used for identifying and managing different queues within the same application.
   * **`processEvery`** (`string` - optional): Defines how often the job processor should poll for new jobs to process. The string should be a human-readable interval, such as `'5 minutes'`, `'1 hour'`. Defaults to `'5 seconds'` if not specified.
-  * **`maxConcurrency`** (`number` - optional): The maximum number of jobs that can be processed concurrently. Helps in controlling resource utilization.
-  * **`defaultConcurrency`** (`number` - optional): The default concurrency for jobs that do not specify their own concurrency setting.
-  * **`lockLimit`** (`number` - optional): Maximum number of jobs that can be locked at the same time. This prevents a single worker from locking too many jobs.
-  * **`defaultLockLimit`** (`number` - optional): Default limit for the number of jobs each worker can lock simultaneously.
-  * **`defaultLockLifetime`** (`number` - optional): Duration in milliseconds for how long a job can be locked before it is automatically unlocked. Useful for handling job crashes or stalls. Defaults to 600000 ms (10 minutes).
+  * **`maxConcurrency`** (`number` - optional): The maximum number of jobs that can be processed concurrently. Helps in controlling resource utilization. Defaults to `'20'` if not specified.
+  * **`defaultConcurrency`** (`number` - optional): The default concurrency for jobs that do not specify their own concurrency setting. Defaults to `'5'` if not specified.
+  * **`lockLimit`** (`number` - optional): Maximum number of jobs that can be locked at the same time. This prevents a single worker from locking too many jobs. Defaults to `'0'` if not specified.
+  * **`defaultLockLimit`** (`number` - optional): Default limit for the number of jobs each worker can lock simultaneously. Defaults to `'0'` if not specified.
+  * **`defaultLockLifetime`** (`number` - optional): Duration in milliseconds for how long a job can be locked before it is automatically unlocked. Useful for handling job crashes or stalls. Defaults to 600000 ms (10 minutes).Defaults to `'10 minutes'` if not specified.
   * **`sort`** (`any` - optional): Determines the order in which jobs are selected and locked from the database. For example, `{ nextRunAt: 1, priority: -1 }` sorts by `nextRunAt` ascending and `priority` descending.
   * **`mongo`** (`MongoDb` - optional): An existing MongoDB client that can be reused instead of creating a new connection.
   * **`db`** (`object` - optional): Configuration for the MongoDB connection if not using an existing `MongoDb` client. Includes:
