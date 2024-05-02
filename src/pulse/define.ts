@@ -41,7 +41,10 @@ export interface DefineOptions {
   shouldSaveResult?: boolean;
 }
 
-export type Processor<T extends JobAttributesData> = (job: Job<T>, done: () => void) => void | Promise<void>;
+export type Processor<T extends JobAttributesData> = (
+  job: Job<T>,
+  done: (error?: Error, result?: unknown) => void
+) => unknown | Promise<unknown>;
 
 export type DefineMethod = <T extends JobAttributesData>(
   name: string,
