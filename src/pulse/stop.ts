@@ -28,14 +28,20 @@ export const stop: StopMethod = async function (this: Pulse) {
       }
 
       debug('about to unlock jobs with ids: %O', jobIds);
-      this._collection.updateMany({ _id: { $in: jobIds } }, { $set: { lockedAt: null } }).catch((error) => {
-        if (error) {
-          reject(error);
-        }
+      this._collection
+        .updateMany({ _id: { $in: jobIds } }, { $set: { lockedAt: null } })
+        .then(() => {
+          this._lockedJobs = [];
+          return resolve();
+        })
+        .catch((error) => {
+          if (error) {
+            return reject(error);
+          }
 
-        this._lockedJobs = [];
-        resolve();
-      });
+          this._lockedJobs = [];
+          return resolve();
+        });
     });
   };
 
