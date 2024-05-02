@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## [1.1.9](https://github.com/pulsecron/pulse/compare/v1.1.8...v1.1.9) (2024-05-02)
+
+
+### 🐛 BUG FIXES
+
+* jobAttributes interface to use generic type T in data property ([#15](https://github.com/pulsecron/pulse/issues/15)) ([daee70a](https://github.com/pulsecron/pulse/commit/daee70a06acc4bf6679e7592b5f5cde0bb4b74d0))
+
 ## [1.1.8](https://github.com/pulsecron/pulse/compare/v1.1.7...v1.1.8) (2024-04-22)
 
 
