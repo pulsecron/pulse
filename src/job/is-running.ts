@@ -1,6 +1,6 @@
 import { Job } from '.';
 
-export type IsRunningMethod = () => boolean;
+export type IsRunningMethod = (useRealStatus?: boolean) => boolean;
 /**
  * A job is running if:
  * (lastRunAt exists AND lastFinishedAt does not exist)
@@ -10,7 +10,11 @@ export type IsRunningMethod = () => boolean;
  * @function
  * @returns Whether or not job is running at the moment (true for running)
  */
-export const isRunning: IsRunningMethod = function (this: Job) {
+export const isRunning: IsRunningMethod = function (this: Job, useRealStatus = false) {
+  if (useRealStatus) {
+    this.fetchStatus();
+  }
+  ``;
   if (!this.attrs.lastRunAt) {
     return false;
   }
