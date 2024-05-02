@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## [1.1.12](https://github.com/pulsecron/pulse/compare/v1.1.11...v1.1.12) (2024-05-02)
+
+
+### 🐛 BUG FIXES
+
+* Fixed return type of the CreateMethod ([#21](https://github.com/pulsecron/pulse/issues/21)) ([2b79b7b](https://github.com/pulsecron/pulse/commit/2b79b7b16234aa2c8a39395f16c40c5153c1ddbd))
+
 ## [1.1.11](https://github.com/pulsecron/pulse/compare/v1.1.10...v1.1.11) (2024-05-02)
 
 
