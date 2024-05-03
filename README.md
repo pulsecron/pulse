@@ -189,7 +189,13 @@ import Pulse from '@pulsecron/pulse';
 
 const mongoConnectionString = 'mongodb://localhost:27017/pulse';
 
-const pulse = new Pulse({ db: { address: mongoConnectionString } });
+const pulse = new Pulse({
+  db: { address: mongoConnectionString },
+  defaultConcurrency: 4,
+  maxConcurrency: 4,
+  processEvery: '10 seconds',
+  resumeOnRestart: true,
+});
 
 // Or override the default collection name:
 // const pulse = new Pulse({db: {address: mongoConnectionString, collection: 'jobCollectionName'}});

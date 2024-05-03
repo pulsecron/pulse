@@ -48,6 +48,7 @@ export interface PulseConfig {
     options?: MongoClientOptions;
   };
   disableAutoIndex?: boolean;
+  resumeOnRestart?: boolean;
 }
 
 /**
@@ -80,6 +81,7 @@ class Pulse extends EventEmitter {
   _findAndLockNextJob = findAndLockNextJob;
   _indices: any;
   _disableAutoIndex: boolean;
+  _resumeOnRestart: boolean;
   _isLockingOnTheFly: boolean;
   _isJobQueueFilling: Map<string, boolean>;
   _jobQueue: JobProcessingQueue;
@@ -131,6 +133,7 @@ class Pulse extends EventEmitter {
       disabled: 1,
     };
     this._disableAutoIndex = config.disableAutoIndex === true;
+    this._resumeOnRestart = config.resumeOnRestart === true;
 
     this._isLockingOnTheFly = false;
     this._isJobQueueFilling = new Map<string, boolean>();
