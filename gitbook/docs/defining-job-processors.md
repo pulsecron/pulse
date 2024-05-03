@@ -40,7 +40,7 @@ pulse.define('sendEmail', async (job, done) => {
 
 
 
-#### Parameters
+### Parameters
 
 * **`name`** (`string`): The unique name for the job type. This name is used to refer to and manage jobs of this type throughout their lifecycle.
 * **`processor`** (`Processor<T>`): The function that contains the logic to be executed when a job of this type is processed. The function receives a `Job` object and an optional `done` callback that should be called when the job processing completes.
@@ -56,7 +56,7 @@ pulse.define('sendEmail', async (job, done) => {
 \
 
 
-#### Returns
+### Returns
 
 * **`void`**: This method does not return a value.
 

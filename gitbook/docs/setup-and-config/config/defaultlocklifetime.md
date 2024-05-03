@@ -19,12 +19,12 @@ pulse.defaultLockLifetime(300000);
 
 
 
-#### Parameters
+### Parameters
 
 * **`ms`** (`number`): The duration in milliseconds for how long jobs should be locked by default.
   * default: 600,000ms
 
-#### Returns
+### Returns
 
 * **`Pulse`**: Returns the instance of the `Pulse` class, allowing for method chaining.
 

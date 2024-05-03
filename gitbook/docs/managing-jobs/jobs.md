@@ -25,14 +25,14 @@ pulse.jobs({ status: 'completed' }, { createdAt: -1 }, 10, 5)
 
 
 
-#### Parameters
+### Parameters
 
 * **`query`** (`Filter<any>` - optional): A MongoDB filter object used to specify which jobs to retrieve. If no query is provided, all jobs in the database will be considered.
 * **`sort`** (`Sort | string` - optional): A MongoDB sort object that specifies the order in which to return the jobs. If no sort is specified, jobs will be returned in their natural order.
 * **`limit`** (`number` - optional): The maximum number of jobs to return. If not specified, or if specified as `0`, no limit will be applied.
 * **`skip`** (`number` - optional): The number of jobs to skip before starting to return the results. This can be used for pagination.
 
-#### Returns
+### Returns
 
 * **`Promise<Job[]>`**: A promise that resolves to an array of `Job` objects that match the query and adhere to the specified sorting and pagination settings.
 

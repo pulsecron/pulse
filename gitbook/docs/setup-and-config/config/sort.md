@@ -19,11 +19,11 @@ pulse.sort({ createdAt: -1 });
 
 
 
-#### Parameters
+### Parameters
 
 * **`query`** (`object`): A MongoDB sort query object that specifies how to order the jobs. For example, `{ nextRunAt: 1, priority: -1 }` will sort jobs primarily by their next scheduled run time in ascending order and by priority in descending order if there are ties.
 
-#### Returns
+### Returns
 
 * **`Pulse`**: Returns the instance of the `Pulse` class, enabling method chaining.
 

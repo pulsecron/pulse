@@ -26,11 +26,11 @@ pulse.define('test', async (job) => {
 ```
 {% endcode %}
 
-#### Parameters
+### Parameters
 
 *
 
-#### Returns
+### Returns
 
 * **`Promise<Job>`**: A promise that resolves with the updated job instance once the save operation completes successfully. If there is an error during the save operation, the promise will reject with an error.
 

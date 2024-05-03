@@ -23,11 +23,11 @@ pulse.cancel(query)
 
 
 
-#### Parameters
+### Parameters
 
 * **`query`** (`Filter<Document>`): A MongoDB query that specifies which jobs to cancel and delete. This query should conform to MongoDB's query standards and can include various criteria to match specific jobs.
 
-#### Returns
+### Returns
 
 * **`Promise<number | undefined>`**: Returns a promise that resolves with the number of jobs deleted from the database. If no jobs are found that match the query, the promise may resolve to `undefined` or `0`.
 

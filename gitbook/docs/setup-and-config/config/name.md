@@ -15,11 +15,11 @@ const pulse = new Pulse();
 pulse.name('emailProcessingQueue');
 ```
 
-#### Parameters
+### Parameters
 
 * **`name`** (`string`): The name to assign to the Pulse instance's job queue.
 
-#### Returns
+### Returns
 
 * **`Pulse`**: Returns the instance of the `Pulse` class, allowing for method chaining.
 

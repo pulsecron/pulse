@@ -23,11 +23,11 @@ pulse.disable(weekendQuery)
 
 
 
-#### Parameters
+### Parameters
 
 * **`query`** (`Filter<unknown>` - optional): A MongoDB filter query to select the jobs to be disabled. If no query is provided, it defaults to an empty object `{}`, which could potentially disable all jobs if not used cautiously.
 
-#### Returns
+### Returns
 
 * **`Promise<number>`**: A promise that resolves with the number of job records that were modified to a disabled state. This count provides feedback on the impact of the call.
 

@@ -26,11 +26,11 @@ pulse.define('test', async (job) => {
 ```
 {% endcode %}
 
-#### Parameters
+### Parameters
 
 * **`useRealStatus`** (`boolean` - optional): If `true`, the job's current status will be refreshed from the database before checking if the lock is expired. Defaults to `false`.
 
-#### Returns
+### Returns
 
 * **`boolean`**: Returns `true` if the job's lock has expired, otherwise `false`.
 

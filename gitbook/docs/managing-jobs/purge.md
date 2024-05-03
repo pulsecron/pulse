@@ -1,4 +1,4 @@
-# Purge
+# Purge
 
 
 
@@ -29,7 +29,7 @@ pulse.purge()
 
 
 
-#### Returns
+### Returns
 
 * **`Promise<number | undefined>`**: A promise that resolves with the number of jobs that were deleted from the database. If no jobs were deleted, the promise may resolve to `undefined`.
 

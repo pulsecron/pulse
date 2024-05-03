@@ -19,11 +19,11 @@ pulse.processEvery('10 minutes');
 
 
 
-#### Parameters
+### Parameters
 
 * **`interval`** (`string`): The interval at which to process jobs, expressed in a human-readable format, such as '5 minutes', '1 hour', etc.
 
-#### Returns
+### Returns
 
 * **`Pulse`**: Returns the instance of the `Pulse` class, facilitating method chaining.
 

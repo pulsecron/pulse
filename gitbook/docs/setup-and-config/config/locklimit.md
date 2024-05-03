@@ -19,11 +19,11 @@ pulse.lockLimit(5);
 
 
 
-#### Parameters
+### Parameters
 
 * **`limit`** (`number`): The maximum number of jobs that can be locked simultaneously across the system.
 
-#### Returns
+### Returns
 
 * **`Pulse`**: Returns the `Pulse` instance, enabling method chaining.
 

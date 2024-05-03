@@ -19,12 +19,12 @@ pulse.now('urgentUpdate', { updateDetails: 'Fix critical security issue' })
 
 
 
-#### Parameters
+### Parameters
 
 * **`name`** (`string`): The name of the job to be scheduled. This name should correspond to a job type previously defined with the `define` method.
 * **`data`** (`T` - optional): Data to pass to the job for its execution. This can be any type of data that the job requires to perform its tasks.
 
-#### Returns
+### Returns
 
 * **`Promise<Job>`**: A promise that resolves with the created job instance. This job is scheduled to start immediately unless the job queue is currently full or other jobs are already scheduled for the same time.
 

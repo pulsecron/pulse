@@ -19,11 +19,11 @@ pulse.defaultLockLimit(2);
 
 
 
-#### Parameters
+### Parameters
 
 * **`times`** (`number`): The maximum number of times jobs of a specific type can be locked concurrently.
 
-#### Returns
+### Returns
 
 * **`Pulse`**: Returns the instance of the `Pulse` class, allowing for method chaining.
 

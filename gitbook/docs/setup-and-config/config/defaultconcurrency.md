@@ -19,11 +19,11 @@ pulse.defaultConcurrency(3);
 
 
 
-#### Parameters
+### Parameters
 
 * **`concurrency`** (`number`): The default number of concurrent jobs that the system should process. This value sets a baseline for job processing unless explicitly overridden by specific jobs.
 
-#### Returns
+### Returns
 
 * **`Pulse`**: Returns the `Pulse` instance, allowing for chaining of additional method calls.
 

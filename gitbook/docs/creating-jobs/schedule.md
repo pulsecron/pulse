@@ -29,13 +29,13 @@ pulse.schedule('tomorrow at noon', [
 
 
 
-#### Parameters
+### Parameters
 
 * **`when`** (`string | Date`): The specific time when the job should be executed. This can be a string representing a date or a `Date` object.
 * **`names`** (`string | string[]`): The name or array of names of the job(s) to be scheduled. Each name corresponds to a job type previously defined with the `define` method.
 * **`data`** (`T` - optional): Data to pass to the job when it runs. This could be any type of data required by the job for its execution.
 
-#### Returns
+### Returns
 
 * **`Promise<Job | Job[]>`**: A promise that resolves with the created job or jobs. The promise will resolve after the job has been scheduled, or it will reject if there is an error during scheduling.
 

@@ -23,11 +23,11 @@ pulse.enable(maintenanceQuery)
 
 
 
-#### Parameters
+### Parameters
 
 * **`query`** (`Filter<unknown>` - optional): A MongoDB filter query to select the jobs to be enabled. If no query is provided, it defaults to an empty object `{}`, potentially enabling all jobs if not used with caution.
 
-#### Returns
+### Returns
 
 * **`Promise<number>`**: A promise that resolves with the number of job records that were modified to an enabled state. This count provides an indication of how many jobs were affected by the operation.
 

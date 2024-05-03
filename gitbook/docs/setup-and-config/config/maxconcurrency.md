@@ -19,11 +19,11 @@ pulse.maxConcurrency(10);
 
 
 
-#### Parameters
+### Parameters
 
 * **`concurrency`** (`number`): The maximum number of concurrent jobs allowed. This setting applies to all job types handled by the `Pulse` instance.
 
-#### Returns
+### Returns
 
 * **`Pulse`**: Returns the instance of the `Pulse` class, enabling method chaining.
 

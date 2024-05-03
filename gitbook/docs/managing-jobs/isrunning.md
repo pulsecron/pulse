@@ -24,11 +24,11 @@ pulse.define('test', async (job) => {
 
 ```
 
-#### Parameters
+### Parameters
 
 * **`useRealStatus`** (`boolean` - optional): If `true`, the job will query the database to refresh its status before determining if it is running. This ensures the method uses the most current data available. Defaults to `false`, which uses the status as currently loaded in the job object.
 
-#### Returns
+### Returns
 
 * **`boolean`**: Returns `true` if the job is currently running, otherwise `false`.
 

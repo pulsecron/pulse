@@ -19,12 +19,12 @@ await job.save(); // If you want to save it
 ```
 {% endcode %}
 
-#### Parameters
+### Parameters
 
 * **`filter`** (`Filter<TSchema>`): A MongoDB filter object that defines the criteria for job uniqueness. This filter is used to check existing jobs in the database to ensure that no other job with the same attributes exists.
 * **`options`** (`{ insertOnly: boolean }` - optional): Additional options to control the uniqueness check. The `insertOnly` option, if set to `true`, ensures that the uniqueness check is only applied when the job is first created, not on subsequent updates.
 
-#### Returns
+### Returns
 
 * **`Job`**: Returns the job instance with the uniqueness criteria applied. This allows for method chaining.
 
