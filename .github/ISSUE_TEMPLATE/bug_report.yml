@@ -1,6 +1,8 @@
 name: Bug report
 description:  Create a bug report for the Pulse library.
-labels: []
+labels: ['bug']
+assignees:
+  - 'code-xhyun'
 body:
   - type: markdown
     attributes:
