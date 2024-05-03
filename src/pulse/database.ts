@@ -1,6 +1,7 @@
 import createDebugger from 'debug';
 import { AnyError, Collection, MongoClient, MongoClientOptions } from 'mongodb';
 import { Pulse } from '.';
+import { BaseError } from '../utils';
 import { hasMongoProtocol } from './has-mongo-protocol';
 
 const debug = createDebugger('pulse:database');
@@ -46,7 +47,7 @@ export const database: DatabaseMethod = async function (this: Pulse, url, collec
   });
 
   if (!client) {
-    throw new Error('Mongo Client is undefined');
+    throw new BaseError('Mongo Client is undefined');
   }
 
   this._db = client;
