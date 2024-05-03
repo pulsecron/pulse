@@ -1,3 +1,2 @@
 # Config
 
-pulse.name(name)
