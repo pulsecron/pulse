@@ -15,7 +15,7 @@ _This does **NOT** save the job in the database.  you must explicitly declare_ [
 {% code fullWidth="false" %}
 ```typescript
 job.unique({ 'data.type': 'email', 'data.userId': '12345' });
-await job.save();
+await job.save(); // If you want to save it
 ```
 {% endcode %}
 

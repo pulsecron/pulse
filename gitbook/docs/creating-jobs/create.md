@@ -17,7 +17,7 @@ const pulse = new Pulse();
 
 // Create a new job for data analysis
 const analysisJob = pulse.create('dataAnalysis', { datasetId: 101 });
-analysisJob.save() //If you want to save it
+analysisJob.save() // If you want to save it
 ```
 
 
