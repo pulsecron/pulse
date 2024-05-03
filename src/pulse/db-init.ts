@@ -43,7 +43,6 @@ export const dbInit: DbInitMethod = function (this: Pulse, collection = 'pulseJo
       .then((result) => {
         if (result.modifiedCount > 0) {
           debug('resuming unfinished %d jobs(%s)', result.modifiedCount, now.toISOString());
-          console.log('resuming unfinished %d jobs(%s)', result.modifiedCount, now.toISOString());
         }
       });
   }
