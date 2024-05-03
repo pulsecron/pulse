@@ -1,0 +1,25 @@
+name: Bug report
+description:  Create a bug report for the Pulse library.
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This template is to report bugs for the Pulse library.
+  - type: textarea
+    attributes:
+      label: Description
+      description: A detailed description of the bug you are encountering with the Pulse library, and how other people can reproduce it.
+      placeholder: |
+        Reproduction steps...
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Code example
+      description: Provide an example code snippet that has the problem
+  - type: textarea
+    attributes:
+      label: Additional context
+      description: |
+        Any extra information that might help us investigate.(e.g. version of Pulse, MongoDB, Node.js, etc.)
