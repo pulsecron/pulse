@@ -7,7 +7,7 @@
 {% hint style="info" %}
 The `create` method generates a new job instance based on a specified job type and data. It is a preliminary step in the job lifecycle, allowing for the customization of job parameters before the job is scheduled and executed.\
 \
-_This does **NOT** save the job in the database.  you must explicitly declare `save()`if you want to save it_
+_This does **NOT** save the job in the database.  you must explicitly declare_ [_`save()`_](#user-content-fn-1)[^1]_if you want to save it_
 {% endhint %}
 
 ### Example Usage
@@ -36,3 +36,6 @@ analysisJob.save() //If you want to save it
 
 
 
+
+
+[^1]: 

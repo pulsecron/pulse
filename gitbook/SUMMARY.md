@@ -31,3 +31,6 @@
   * [Purge](docs/managing-jobs/purge.md)
   * [isRunning](docs/managing-jobs/isrunning.md)
   * [isExpired](docs/managing-jobs/isexpired.md)
+  * [Manually working](docs/managing-jobs/manually-working/README.md)
+    * [Save](docs/managing-jobs/manually-working/save.md)
+    * [Unique](docs/managing-jobs/manually-working/unique.md)
