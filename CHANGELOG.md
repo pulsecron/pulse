@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## [1.2.1](https://github.com/pulsecron/pulse/compare/v1.2.0...v1.2.1) (2024-05-03)
+
+
+### 🐛 BUG FIXES
+
+* add BaseError and JobError classes to handle custom errors ([b2f7092](https://github.com/pulsecron/pulse/commit/b2f7092adccd154c314bb1e7650cbc02c1862e81))
+
 ## [1.2.0](https://github.com/pulsecron/pulse/compare/v1.1.12...v1.2.0) (2024-05-02)
 
 
