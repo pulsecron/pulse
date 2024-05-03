@@ -7,7 +7,7 @@
 {% hint style="info" %}
 The `unique` method configures a job to be unique according to a specified MongoDB query filter. This method is crucial for avoiding duplicate job entries in scenarios where job uniqueness is determined by specific data attributes.\
 \
-_This does **NOT** save the job in the database.  you must explicitly declare_ [_`save()`_](#user-content-fn-1)[^1]_if you want to save it_
+_This does **NOT** save the job in the database.  you must explicitly declare_ [_`save()`_](save.md)_if you want to save it_
 {% endhint %}
 
 ### Example Usage
@@ -33,6 +33,3 @@ await job.save(); // If you want to save it
 
 
 
-
-
-[^1]: 
