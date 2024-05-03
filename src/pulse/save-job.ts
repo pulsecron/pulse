@@ -2,7 +2,7 @@ import createDebugger from 'debug';
 import { ObjectId } from 'mongodb';
 import { Pulse } from '.';
 import { Job } from '../job';
-import { processJobs } from '../utils';
+import { JobError, processJobs } from '../utils';
 
 const debug = createDebugger('pulse:saveJob');
 
@@ -72,6 +72,10 @@ export type SaveJobMethod = (job: Job) => Promise<Job>;
  */
 export const saveJob: SaveJobMethod = async function (this: Pulse, job) {
   try {
+    if (!this._collection) {
+      throw new JobError('A db must be set up before you can save a job');
+    }
+
     debug('attempting to save a job into Pulse instance');
 
     // Grab information needed to save job but that we don't want to persist in MongoDB

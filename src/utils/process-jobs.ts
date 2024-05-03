@@ -2,6 +2,7 @@ import createDebugger from 'debug';
 import { Job } from '../job';
 import { Pulse } from '../pulse';
 import { createJob } from './create-job';
+import { JobError } from './error';
 
 const debug = createDebugger('pulse:internal:processJobs');
 
@@ -317,7 +318,7 @@ export const processJobs = async function (this: Pulse, extraJob: Job): Promise<
     // Job isn't in running jobs so throw an error
     if (!self._runningJobs.includes(job)) {
       debug('[%s] callback was called, job must have been marked as complete already', job.attrs._id);
-      throw new Error(`callback already called - job ${name} already marked complete`);
+      throw new JobError(`callback already called - job ${name} already marked complete`);
     }
 
     // Remove the job from the running queue

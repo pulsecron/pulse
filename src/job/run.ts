@@ -1,5 +1,6 @@
 import createDebugger from 'debug';
 import { Job } from '.';
+import { JobError } from '../utils';
 
 const debug = createDebugger('pulse:job');
 
@@ -77,7 +78,7 @@ export const run: RunMethod = async function (this: Job) {
       debug('[%s:%s] starting job', this.attrs.name, this.attrs._id);
       if (!definition) {
         debug('[%s:%s] has no definition, can not run', this.attrs.name, this.attrs._id);
-        throw new Error('Undefined job');
+        throw new JobError('Undefined job');
       }
 
       if (definition.fn.length === 2) {
