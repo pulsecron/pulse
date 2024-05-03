@@ -7,7 +7,7 @@
 {% hint style="info" %}
 The `create` method generates a new job instance based on a specified job type and data. It is a preliminary step in the job lifecycle, allowing for the customization of job parameters before the job is scheduled and executed.\
 \
-_This does **NOT** save the job in the database._
+_This does **NOT** save the job in the database.  you must explicitly declare `save()`if you want to save it_
 {% endhint %}
 
 ### Example Usage
@@ -17,7 +17,7 @@ const pulse = new Pulse();
 
 // Create a new job for data analysis
 const analysisJob = pulse.create('dataAnalysis', { datasetId: 101 });
-analysisJob.save()
+analysisJob.save() //If you want to save it
 ```
 
 
