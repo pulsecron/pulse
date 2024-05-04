@@ -3,7 +3,7 @@ import { Pulse } from '.';
 
 const debug = createDebugger('pulse:resumeOnRestart');
 
-export type ResumeOnRestartMethod = (resumeOnRestart?: boolean) => Promise<Pulse>;
+export type ResumeOnRestartMethod = (resumeOnRestart?: boolean) => Pulse;
 
 /**
  * Set the resume on restart flag
@@ -11,7 +11,7 @@ export type ResumeOnRestartMethod = (resumeOnRestart?: boolean) => Promise<Pulse
  * @function
  * @param resume resume on restart
  */
-export const resumeOnRestart: ResumeOnRestartMethod = async function (this: Pulse, resumeOnRestart = true) {
+export const resumeOnRestart: ResumeOnRestartMethod = function (this: Pulse, resumeOnRestart = true) {
   debug('Pulse.resumeOnRestart()');
 
   this._resumeOnRestart = resumeOnRestart;
