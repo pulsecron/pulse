@@ -13,9 +13,9 @@ The `resumeOnRestart` method sets a flag to ensure that jobs are resumed if the 
 ```typescript
 const pulse = new Pulse();
 
-pulse.resumeOnRestart(true)
+pulse.resumeOnRestart(true) // or pulse.resumeOnRestart()
 
-//kor new Pulse({ resumeOnRestart: true });
+//or new Pulse({ resumeOnRestart: true });
 ```
 
 
