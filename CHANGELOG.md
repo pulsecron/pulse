@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## [1.3.0](https://github.com/pulsecron/pulse/compare/v1.2.1...v1.3.0) (2024-05-04)
+
+
+### 🚀 FEATURES
+
+* add resumeOnRestart option to PulseConfig ([#25](https://github.com/pulsecron/pulse/issues/25)) ([0e53e12](https://github.com/pulsecron/pulse/commit/0e53e12f692798d6107afec860893749ed642858))
+
 ## [1.2.1](https://github.com/pulsecron/pulse/compare/v1.2.0...v1.2.1) (2024-05-03)
 
 
