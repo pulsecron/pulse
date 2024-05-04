@@ -25,6 +25,7 @@ import { NameMethod, name } from './name';
 import { NowMethod, now } from './now';
 import { ProcessEveryMethod, processEvery } from './process-every';
 import { PurgeMethod, purge } from './purge';
+import { ResumeOnRestartMethod, resumeOnRestart } from './resume-on-restart';
 import { SaveJobMethod, saveJob } from './save-job';
 import { ScheduleMethod, schedule } from './schedule';
 import { SortMethod, sort } from './sort';
@@ -253,6 +254,10 @@ class Pulse extends EventEmitter {
 
   get database(): DatabaseMethod {
     return this.bindMethod('database', database);
+  }
+
+  get resumeOnRestart(): ResumeOnRestartMethod {
+    return this.bindMethod('resumeOnRestart', resumeOnRestart);
   }
 
   /**
