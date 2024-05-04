@@ -17,6 +17,7 @@
     * [DefaultLockLimit](docs/setup-and-config/config/defaultlocklimit.md)
     * [DefaultLockLifetime](docs/setup-and-config/config/defaultlocklifetime.md)
     * [Sort](docs/setup-and-config/config/sort.md)
+    * [ResumeOnRestart](docs/setup-and-config/config/sort-1.md)
 * [Defining Job Processors](docs/defining-job-processors.md)
 * [Managing Job Processor](docs/managing-job-processor/README.md)
   * [Start](docs/managing-job-processor/start.md)
