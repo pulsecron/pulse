@@ -25,6 +25,7 @@ import { NameMethod, name } from './name';
 import { NowMethod, now } from './now';
 import { ProcessEveryMethod, processEvery } from './process-every';
 import { PurgeMethod, purge } from './purge';
+import { ResumeOnRestartMethod, resumeOnRestart } from './resume-on-restart';
 import { SaveJobMethod, saveJob } from './save-job';
 import { ScheduleMethod, schedule } from './schedule';
 import { SortMethod, sort } from './sort';
@@ -48,6 +49,7 @@ export interface PulseConfig {
     options?: MongoClientOptions;
   };
   disableAutoIndex?: boolean;
+  resumeOnRestart?: boolean;
 }
 
 /**
@@ -80,6 +82,7 @@ class Pulse extends EventEmitter {
   _findAndLockNextJob = findAndLockNextJob;
   _indices: any;
   _disableAutoIndex: boolean;
+  _resumeOnRestart: boolean;
   _isLockingOnTheFly: boolean;
   _isJobQueueFilling: Map<string, boolean>;
   _jobQueue: JobProcessingQueue;
@@ -131,6 +134,7 @@ class Pulse extends EventEmitter {
       disabled: 1,
     };
     this._disableAutoIndex = config.disableAutoIndex === true;
+    this._resumeOnRestart = config.resumeOnRestart !== false;
 
     this._isLockingOnTheFly = false;
     this._isJobQueueFilling = new Map<string, boolean>();
@@ -250,6 +254,10 @@ class Pulse extends EventEmitter {
 
   get database(): DatabaseMethod {
     return this.bindMethod('database', database);
+  }
+
+  get resumeOnRestart(): ResumeOnRestartMethod {
+    return this.bindMethod('resumeOnRestart', resumeOnRestart);
   }
 
   /**

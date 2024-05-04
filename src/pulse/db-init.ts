@@ -19,6 +19,11 @@ export type DbInitMethod = (
 export const dbInit: DbInitMethod = function (this: Pulse, collection = 'pulseJobs', cb?) {
   debug('init database collection using name [%s]', collection);
   this._collection = this._mdb.collection(collection);
+
+  if (this._resumeOnRestart) {
+    this.resumeOnRestart(this._resumeOnRestart);
+  }
+
   if (this._disableAutoIndex) {
     debug('skipping auto index creation');
     this.emit('ready');
