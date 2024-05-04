@@ -37,3 +37,4 @@
   * [Manually working](docs/managing-jobs/manually-working/README.md)
     * [Save](docs/managing-jobs/manually-working/save.md)
     * [Unique](docs/managing-jobs/manually-working/unique.md)
+    * [RepeatEvery](docs/managing-jobs/manually-working/repeatevery.md)

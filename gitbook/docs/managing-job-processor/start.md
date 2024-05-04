@@ -13,12 +13,11 @@ The `start` method activates the job queue, beginning the regular processing of 
 ```typescript
 const pulse = new Pulse();
 
-// Example of canceling all jobs with a specific priority
-const query = { priority: { $lt: 0 } }; // Cancels all jobs with a negative priority
+pulse.processEvery(100);
 
-pulse.cancel(query)
-  .then(deletedCount => console.log(`${deletedCount} low priority jobs cancelled`))
-  .catch(error => console.error('Failed to cancel jobs:', error));
+pulse.start(); // It should be in this position See NOTES section at the page
+
+pulse.every('1 day', 'dailyReport', { reportId: 123 });
 ```
 
 
@@ -32,6 +31,6 @@ pulse.cancel(query)
 
 ### Notes
 
-* **Pre-requisite**: `start` must be called after `processEvery` is set and ideally before scheduling any jobs with methods like `every` or `schedule`.
+* **Pre-requisite**: `start` must be called after [config method](../setup-and-config/config/)(e.g. `processEvery)` is set and ideally before scheduling any jobs with methods like `every` or `schedule`.
 * **Idempotence**: If `start` is called multiple times, subsequent calls will recognize that processing has already been initiated and will not create additional intervals.
 
