@@ -134,7 +134,7 @@ class Pulse extends EventEmitter {
       disabled: 1,
     };
     this._disableAutoIndex = config.disableAutoIndex === true;
-    this._resumeOnRestart = config.resumeOnRestart === true;
+    this._resumeOnRestart = config.resumeOnRestart !== false;
 
     this._isLockingOnTheFly = false;
     this._isJobQueueFilling = new Map<string, boolean>();

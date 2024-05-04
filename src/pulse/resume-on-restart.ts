@@ -3,7 +3,7 @@ import { Pulse } from '.';
 
 const debug = createDebugger('pulse:resumeOnRestart');
 
-export type ResumeOnRestartMethod = (resumeOnRestart?: boolean) => Pulse;
+export type ResumeOnRestartMethod = (resume?: boolean) => Pulse;
 
 /**
  * Set the resume on restart flag
@@ -11,10 +11,10 @@ export type ResumeOnRestartMethod = (resumeOnRestart?: boolean) => Pulse;
  * @function
  * @param resume resume on restart
  */
-export const resumeOnRestart: ResumeOnRestartMethod = function (this: Pulse, resumeOnRestart = true) {
+export const resumeOnRestart: ResumeOnRestartMethod = function (this: Pulse, resume = true) {
   debug('Pulse.resumeOnRestart()');
 
-  this._resumeOnRestart = resumeOnRestart;
+  this._resumeOnRestart = resume;
 
   if (this._collection && this._resumeOnRestart) {
     const now = new Date();
