@@ -39,6 +39,30 @@ export interface DefineOptions {
    * Should the return value of the job be persisted
    */
   shouldSaveResult?: boolean;
+
+  /**
+   * Number of attempts to run the job
+   * @default 0
+   */
+  attempts?: number;
+
+  /**
+   * Backoff options
+   */
+  backoff?: {
+    /**
+     * Type of backoff to use
+     * @default exponential
+     */
+    type: 'exponential' | 'fixed';
+
+    /**
+     * Delay in ms
+     * @default 1000
+     * Math.pow(2, attempts - 1) * delay
+     */
+    delay: number;
+  };
 }
 
 export type Processor<T extends JobAttributesData> = (
@@ -71,6 +95,11 @@ export const define: DefineMethod = function (this: Pulse, name, processor, opti
     running: 0,
     locked: 0,
     shouldSaveResult: (options as DefineOptions)?.shouldSaveResult || false,
+    attempts: (options as DefineOptions)?.attempts || 0,
+    backoff: (options as DefineOptions)?.attempts && {
+      type: (options as DefineOptions)?.backoff?.type || 'exponential',
+      delay: (options as DefineOptions)?.backoff?.delay || 1000,
+    },
   };
 
   debug('job [%s] defined with following options: \n%O', name, this._definitions[name]);
