@@ -27,7 +27,7 @@
 
 - [Overview](#overview)
     - [Related Projects](#related-projects)
-- [Features](#features)
+- [Unique Features in Pulse](#unique-features-in-pulse)
 - [Repository Structure](#repository-structure)
 - [Modules](#modules)
 - [Getting Started](#getting-started)
@@ -56,12 +56,10 @@ Pulse is a new fork of the [Agenda](https://github.com/agenda/agenda) project, c
 <br/>
 
 
-##  Features
+##  Unique Features in Pulse
 
-- **High Scalability**: Designed to efficiently manage large-scale job processing.
-- **Modern Architecture**: Employs the latest Node.js features and best practices for superior performance.
-- **Flexible Scheduling**: Offers support for cron, one-time, and recurring jobs with fine-tuned control.
-- **Seamless Integration**: Easily integrates with existing Node.js applications and MongoDB setups.
+- **Resume Incomplete Tasks After System Restart**: hen the system restarts, Pulse resumes incomplete tasks that were in progress or queued for execution, providing seamless continuation without manual intervention.
+- **Retry Failed Tasks**: Pulse uses an intelligent retry mechanism with configurable attempts and backoff strategies, ensuring failed tasks are retried efficiently.
 - **Extensive Documentation**: Provides detailed guides and examples for a quick and easy start.
 
 ---

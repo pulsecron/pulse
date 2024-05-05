@@ -91,6 +91,11 @@ export interface JobAttributes<T extends JobAttributesData = JobAttributesData> 
    */
   lastRunAt?: Date;
 
+  /*
+   * Count of the number of times the job has run.
+   */
+  runCount?: number;
+
   /**
    * Date/time the job last finished running.
    */
@@ -99,6 +104,11 @@ export interface JobAttributes<T extends JobAttributesData = JobAttributesData> 
   startDate?: Date | number | null;
   endDate?: Date | number | null;
   skipDays?: string | null;
+
+  /**
+   * The number of times the job has finished running.
+   */
+  finishedCount?: number;
 
   /**
    * The reason the job failed.
@@ -124,6 +134,26 @@ export interface JobAttributes<T extends JobAttributesData = JobAttributesData> 
    * Should the return value of the job be persisted.
    */
   shouldSaveResult?: boolean;
+
+  /**
+   * Number of attempts to run the job.
+   */
+  attempts?: number;
+
+  /**
+   * Backoff options.
+   */
+  backoff?: {
+    /**
+     * Type of backoff to use.
+     */
+    type: 'exponential' | 'fixed';
+
+    /**
+     * Delay in ms.
+     */
+    delay: number;
+  };
 
   /**
    * Result of the finished job.

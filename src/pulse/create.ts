@@ -16,7 +16,23 @@ export const create: CreateMethod = function (this: Pulse, name, data) {
   debug('Pulse.create(%s, [Object])', name);
   const priority = this._definitions[name] ? this._definitions[name].priority : 0;
   const shouldSaveResult = this._definitions[name] ? this._definitions[name].shouldSaveResult || false : false;
-  const job = new Job({ name, data, type: 'normal', priority, shouldSaveResult, pulse: this });
+  const attempts = this._definitions[name] ? this._definitions[name].attempts || 0 : 0;
+  const backoff = attempts
+    ? this._definitions[name]
+      ? this._definitions[name].backoff || { type: 'exponential', delay: 1000 }
+      : { type: 'exponential', delay: 1000 }
+    : undefined;
+
+  const job = new Job({
+    name,
+    data,
+    type: 'normal',
+    priority,
+    shouldSaveResult,
+    attempts,
+    backoff,
+    pulse: this,
+  });
 
   return job;
 };

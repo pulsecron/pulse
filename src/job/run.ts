@@ -18,6 +18,7 @@ export const run: RunMethod = async function (this: Job) {
   // eslint-disable-next-line no-async-promise-executor
   return new Promise(async (resolve, reject) => {
     this.attrs.lastRunAt = new Date();
+    this.attrs.runCount = (this.attrs.runCount || 0) + 1;
     debug('[%s:%s] setting lastRunAt to: %s', this.attrs.name, this.attrs._id, this.attrs.lastRunAt.toISOString());
     this.computeNextRunAt();
     await this.save();
@@ -35,6 +36,7 @@ export const run: RunMethod = async function (this: Job) {
         this.fail(error);
       } else {
         this.attrs.lastFinishedAt = new Date();
+        this.attrs.finishedCount = (this.attrs.finishedCount || 0) + 1;
 
         if (this.attrs.shouldSaveResult && result) {
           this.attrs.result = result;
