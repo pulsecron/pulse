@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## [1.4.0](https://github.com/pulsecron/pulse/compare/v1.3.0...v1.4.0) (2024-05-05)
+
+
+### 🚀 FEATURES
+
+* add attempts and backoff options for failling job ([#27](https://github.com/pulsecron/pulse/issues/27)) ([120adf5](https://github.com/pulsecron/pulse/commit/120adf58b2647f107a656fc8168a654d7877e496))
+
 ## [1.3.0](https://github.com/pulsecron/pulse/compare/v1.2.1...v1.3.0) (2024-05-04)
 
 
