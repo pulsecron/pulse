@@ -9,12 +9,13 @@
 * Pulse is an open-source job scheduling tool in the Node.js ecosystem, serving as a fork of the discontinued Agenda project.
 * Utilizes MongoDB for managing job data, which enhances its ability to perform at scale.
 
-## **Core Features**:
+## Unique Features in Pulse
 
-* **High Scalability**: Handles numerous jobs efficiently, suitable for applications that need to manage extensive workloads.
-* **Modern Architecture**: Leverages the latest Node.js features and incorporates best practices for optimal performance.
-* **Flexible Scheduling**: Supports various types of job schedules, including complex cron patterns and one-time executions.
-* **Seamless Integration**: Designed to integrate effortlessly with Node.js applications and existing MongoDB databases.
+* **Latest MongoDB Driver Support**: Pulse is fully compatible with the latest MongoDB driver, ensuring users can take advantage of the most current database features and enhancements.
+* **Resume Incomplete Tasks After System Restart**: Pulse offers retry mechanisms using exponential and fixed backoff strategies with configurable attempts, ensuring efficient retries of failed tasks without overwhelming the system.
+* **Retry Failed Tasks**: Pulse uses an intelligent retry mechanism with configurable attempts and backoff strategies, ensuring failed tasks are retried efficiently.
+* **Continuous Maintenance**: As an open-source project actively used in a production service, Pulse is consistently maintained and improved, providing users with reliable updates and support.
+* **Extensive Documentation**: Provides detailed guides and examples for a quick and easy start.
 
 ## **Related Projects**:
 

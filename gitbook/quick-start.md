@@ -32,7 +32,7 @@ const pulse = new Pulse({ db: { address: mongoConnectionString } });
 pulse.define('delete old users', async (job) => {
   console.log('Deleting old users...');
   return;
-});
+}, { shouldSaveResult: true, attempts: 4, backoff: { type: 'exponential', delay: 1000 } });
 
 /**
  * Example of repeating a job
