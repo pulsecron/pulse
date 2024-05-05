@@ -62,7 +62,7 @@ Pulse is a new fork of the [Agenda](https://github.com/agenda/agenda) project, c
 - **Resume Incomplete Tasks After System Restart**: Pulse offers retry mechanisms using exponential and fixed backoff strategies with configurable attempts, ensuring efficient retries of failed tasks without overwhelming the system.
 - **Retry Failed Tasks**: Pulse uses an intelligent retry mechanism with configurable attempts and backoff strategies, ensuring failed tasks are retried efficiently.
 - **Continuous Maintenance**: As an open-source project actively used in a production service, Pulse is consistently maintained and improved, providing users with reliable updates and support.
-- - **Extensive Documentation**: Provides detailed guides and examples for a quick and easy start.
+- **Extensive Documentation**: Provides detailed guides and examples for a quick and easy start.
 
 ---
 <br/>
