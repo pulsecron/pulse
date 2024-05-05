@@ -6,10 +6,13 @@ const debug = createDebugger('pulse:job');
 export type FailMethod = (reason: string | Error) => Job;
 
 /**
- * Fails the job with a reason (error) specified
+ * Marks the job as failed with a given reason, increments the failure count,
+ * and schedules the next retry if applicable. Additionally logs the failure
+ *
  * @name Job#fail
  * @function
- * @param reason reason job failed
+ * @param {string | Error} reason - Reason why the job failed
+ * @returns {Job} The current job instance for chaining purposes
  */
 export const fail: FailMethod = function (this: Job, reason) {
   const failReason = reason instanceof Error ? reason.message : reason;
@@ -32,8 +35,7 @@ export const fail: FailMethod = function (this: Job, reason) {
     const delayMultiplier = backoff.type === 'fixed' ? 1 : Math.pow(2, retryCount);
     attrs.nextRunAt = new Date(now.getTime() + delayMultiplier * backoff.delay);
 
-    // Log next retry time
-    debug('[%s:%s] setting retry at time [%s]', attrs.name, attrs._id, attrs.nextRunAt);
+    debug('[%s:%s] setting retry at time [%s], retryCount: [%d]', attrs.name, attrs._id, attrs.nextRunAt, retryCount);
   }
 
   return this;
