@@ -58,9 +58,11 @@ Pulse is a new fork of the [Agenda](https://github.com/agenda/agenda) project, c
 
 ##  Unique Features in Pulse
 
-- **Resume Incomplete Tasks After System Restart**: hen the system restarts, Pulse resumes incomplete tasks that were in progress or queued for execution, providing seamless continuation without manual intervention.
+- **Latest MongoDB Driver Support**: Pulse is fully compatible with the latest MongoDB driver, ensuring users can take advantage of the most current database features and enhancements.
+- **Resume Incomplete Tasks After System Restart**: Pulse offers retry mechanisms using exponential and fixed backoff strategies with configurable attempts, ensuring efficient retries of failed tasks without overwhelming the system.
 - **Retry Failed Tasks**: Pulse uses an intelligent retry mechanism with configurable attempts and backoff strategies, ensuring failed tasks are retried efficiently.
-- **Extensive Documentation**: Provides detailed guides and examples for a quick and easy start.
+- **Continuous Maintenance**: As an open-source project actively used in a production service, Pulse is consistently maintained and improved, providing users with reliable updates and support.
+- - **Extensive Documentation**: Provides detailed guides and examples for a quick and easy start.
 
 ---
 <br/>
