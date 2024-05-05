@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## [1.4.1](https://github.com/pulsecron/pulse/compare/v1.4.0...v1.4.1) (2024-05-05)
+
+
+### ♻️ REFACTOR
+
+* fail method improve logging ([81d96f3](https://github.com/pulsecron/pulse/commit/81d96f39fdcb839b35df2b7359cc622591f9fe2d))
+
 ## [1.4.0](https://github.com/pulsecron/pulse/compare/v1.3.0...v1.4.0) (2024-05-05)
 
 
