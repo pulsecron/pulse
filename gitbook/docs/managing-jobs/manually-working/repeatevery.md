@@ -5,7 +5,10 @@
 ## `job.repeatEvery(interval, options?)`
 
 {% hint style="info" %}
-The `repeatEvery` method schedules a job to repeat at a defined interval. It includes options to specify starting and ending dates, skip specific days, and adjust for time zones, providing flexibility in how and when the job recurs.
+The `repeatEvery` method schedules a job to repeat at a defined interval. It includes options to specify starting and ending dates, skip specific days, and adjust for time zones, providing flexibility in how and when the job recurs.\
+
+
+_This does **NOT** save the job in the database.  you must explicitly declare_ [_`save()`_](save.md)_if you want to save it_
 {% endhint %}
 
 ### Example Usage
@@ -14,6 +17,7 @@ The `repeatEvery` method schedules a job to repeat at a defined interval. It inc
 ```typescript
 job.unique({ 'data.type': 'email', 'data.userId': '12345' });
 await job.save(); // If you want to save it
+
 ```
 {% endcode %}
 
