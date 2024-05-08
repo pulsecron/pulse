@@ -14,13 +14,8 @@ The `save` method commits the current state of a job to the MongoDB database. Th
 ```typescript
 const pulse = new Pulse();
 
-pulse.define('test', async (job) => {
-  if (job.isExpired()) {
-    console.log('The job lock has expired.');
-  } else {
-    console.log('The job lock is still valid.');
-  }
-});
+const job = pulse.create('delete old users', { to: 'pulsecron@gmail.com' });
+job.save();
 
 
 ```

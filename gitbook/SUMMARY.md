@@ -39,3 +39,5 @@
     * [Save](docs/managing-jobs/manually-working/save.md)
     * [Unique](docs/managing-jobs/manually-working/unique.md)
     * [RepeatEvery](docs/managing-jobs/manually-working/repeatevery.md)
+    * [Schedule](docs/managing-jobs/manually-working/repeatevery-1.md)
+    * [Remove](docs/managing-jobs/manually-working/repeatevery-2.md)
