@@ -41,3 +41,4 @@
     * [RepeatEvery](docs/managing-jobs/manually-working/repeatevery.md)
     * [Schedule](docs/managing-jobs/manually-working/repeatevery-1.md)
     * [Remove](docs/managing-jobs/manually-working/repeatevery-2.md)
+    * [Priority](docs/managing-jobs/manually-working/repeatevery-3.md)
