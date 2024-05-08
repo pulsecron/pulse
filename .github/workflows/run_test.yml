@@ -17,6 +17,7 @@ jobs:
           npx jest  --detectOpenHandles --forceExit --coverage --coverageReporters json-summary
 
       - name: Jest Coverage Comment
+        id: coverageComment
         uses: MishaKav/jest-coverage-comment@main
         with:
           junitxml-title: Pulse Test Report
