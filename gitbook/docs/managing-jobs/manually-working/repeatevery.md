@@ -28,7 +28,8 @@ await job.save(); // If you want to save it
   * **`timezone`** (`string` - optional): The timezone in which to base the job's timing.
   * **`startDate`** (`Date | number` - optional): A specific start date or timestamp from which the job should start repeating.
   * **`endDate`** (`Date | number` - optional): A specific end date or timestamp after which the job should no longer repeat.
-  * **`skipDays`** (`string` - optional): A string representing days to skip, useful for setting jobs to run only on specific days of the week.
+  * **`skipDays`** (`string` - optional): A string representing days to skip, useful for setting jobs to run only on specific days of the week.\
+    `e.g. ('2 days')`
   * **`skipImmediate`** (`boolean` - optional): If `true`, skips the immediate first execution of the job schedule.
 
 \
