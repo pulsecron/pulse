@@ -20,6 +20,5 @@ jobs:
         id: coverageComment
         uses: MishaKav/jest-coverage-comment@main
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
           junitxml-title: Pulse Test Report
           junitxml-path: ./junit.xml
