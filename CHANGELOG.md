@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## [1.4.3](https://github.com/pulsecron/pulse/compare/v1.4.2...v1.4.3) (2024-05-08)
+
+
+### 🐛 BUG FIXES
+
+* fix import path in pulse/every.ts ([ac45fd0](https://github.com/pulsecron/pulse/commit/ac45fd0e1a022b29a69d00f978aeaea426039d80))
+
 ## [1.4.2](https://github.com/pulsecron/pulse/compare/v1.4.1...v1.4.2) (2024-05-08)
 
 
