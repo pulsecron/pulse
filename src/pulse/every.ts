@@ -1,3 +1,4 @@
+import { PulseError } from '@src/utils';
 import createDebugger from 'debug';
 import { Pulse } from '.';
 import { Job, JobAttributesData } from '../job';
@@ -10,7 +11,7 @@ export type EveryMethod = <T extends JobAttributesData>(
   names: string | string[],
   data?: T,
   options?: JobOptions
-) => Promise<Job | Job[] | undefined>;
+) => Promise<Job | Job[]>;
 
 /**
  * Creates a scheduled job with given interval and name/names of the job to run
@@ -57,7 +58,7 @@ export const every: EveryMethod = async function (this: Pulse, interval, names, 
     names: string[],
     data?: T,
     options?: JobOptions
-  ): Promise<Job[] | undefined> => {
+  ): Promise<Job[]> => {
     try {
       const jobs: Array<Promise<Job>> = [];
       names.map((name) => jobs.push(createJob(interval, name, data, options)));
@@ -66,17 +67,10 @@ export const every: EveryMethod = async function (this: Pulse, interval, names, 
 
       return Promise.all(jobs);
     } catch (error) {
-      // @TODO: catch - ignore :O
       debug('every() -> error creating one or more of the jobs', error);
+      throw new PulseError('Error creating one or more of the jobs');
     }
   };
-
-  if (typeof names === 'string') {
-    debug('Pulse.every(%s, %O, %O)', interval, names, options);
-    const jobs = await createJob(interval, names, data, options);
-
-    return jobs;
-  }
 
   if (Array.isArray(names)) {
     debug('Pulse.every(%s, %s, %O)', interval, names, options);
@@ -84,4 +78,8 @@ export const every: EveryMethod = async function (this: Pulse, interval, names, 
 
     return jobs;
   }
+
+  debug('Pulse.every(%s, %O, %O)', interval, names, options);
+  const jobs = await createJob(interval, names, data, options);
+  return jobs;
 };
