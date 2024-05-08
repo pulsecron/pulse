@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## [1.4.2](https://github.com/pulsecron/pulse/compare/v1.4.1...v1.4.2) (2024-05-08)
+
+
+### ♻️ REFACTOR
+
+* refactor every.ts to improve job creation and error handling ([a860df4](https://github.com/pulsecron/pulse/commit/a860df4f5d18dae8b279528ed18db50d80c61ce2))
+
 ## [1.4.1](https://github.com/pulsecron/pulse/compare/v1.4.0...v1.4.1) (2024-05-05)
 
 
