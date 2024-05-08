@@ -7,15 +7,15 @@ import { Job } from '../../src/job';
 import { hasMongoProtocol } from '../../src/pulse/has-mongo-protocol';
 import { mockMongoDb } from '../helpers/mock.helper';
 
-const jobTimeout = 500;
-const jobProcessor = () => {};
-
-const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-
 describe('Test Pulse', () => {
+  const jobTimeout = 500;
+  const jobProcessor = () => {};
+
   let globalPulseInstance: Pulse;
   let mongoDb: Db;
   let mongoDbConfig: string;
+  let mongoDbDisconnect: () => Promise<void>;
+  const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
   const clearJobs = async (): Promise<void> => {
     if (mongoDb) {
       await mongoDb.collection('pulseJobs').deleteMany({});
@@ -23,12 +23,12 @@ describe('Test Pulse', () => {
   };
 
   beforeEach(async () => {
-    const { mongo, uri } = await mockMongoDb();
+    const { mongo, uri, disconnect } = await mockMongoDb();
     mongoDb = mongo.db();
     mongoDbConfig = uri;
-    mockMongoDb;
+    mongoDbDisconnect = disconnect;
     globalPulseInstance = new Pulse({ mongo: mongoDb });
-    // delay(50);
+    delay(50);
     await clearJobs();
     ['someJob', 'send email', 'some job'].forEach((job) => {
       globalPulseInstance.define(job, jobProcessor);
@@ -36,9 +36,14 @@ describe('Test Pulse', () => {
   });
 
   afterEach(async () => {
-    // delay(50);
     await clearJobs();
     await globalPulseInstance.stop();
+  });
+
+  afterAll((done) => {
+    delay(50);
+    mongoDbDisconnect();
+    done();
   });
 
   test('sets a default processEvery', () => {

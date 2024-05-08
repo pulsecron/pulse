@@ -16,7 +16,7 @@
     "prepublishOnly": "npm run build",
     "dry-run": "npm publish --dry-run",
     "build": "tsc",
-    "test": "jest",
+    "test": "jest --detectOpenHandles --forceExit",
     "test:debug": "DEBUG=pulse:** jest",
     "test:coverage": "jest --coverage",
     "lint": "eslint src",

@@ -2,7 +2,7 @@ name: Test Coverage Comment
 on:
   push:
     branches-ignore:
-      - m먀ㅜ
+      - main
 jobs:
   build:
     runs-on: ubuntu-latest
