@@ -1,0 +1,26 @@
+name: Test Coverage Comment
+on:
+  pull_request:
+    types: [opened, reopened,assigned,edited,review_requested,synchronize]
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: |
+          npx jest  --detectOpenHandles --forceExit --coverage --coverageReporters json-summary
+
+      - name: Jest Coverage Comment
+        id: coverageComment
+        uses: MishaKav/jest-coverage-comment@main
+        with:
+          junitxml-title: Pulse Test Report
+          junitxml-path: ./junit.xml

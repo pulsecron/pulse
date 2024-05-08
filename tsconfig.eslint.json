@@ -4,7 +4,7 @@
 	"src/**/*.js",
 	"src/**/*.ts",
   "test/**/*.js",
-  "test/**/*.ts",
+  "test/**/*.spec.ts",
 	"*.js"
   ],
   "compilerOptions": {

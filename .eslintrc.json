@@ -31,9 +31,9 @@
 	},
   "overrides": [
     {
-      "files": ["*.test.ts"],
+      "files": ["*.spec.ts"],
       "env": {
-        "mocha": true
+        "jest": true
       },
       "rules": {
         "@typescript-eslint/no-unused-expressions": "off",
