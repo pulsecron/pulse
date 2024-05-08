@@ -1,8 +1,8 @@
 name: Test Coverage Comment
 on:
-  pull_request:
-    types: [opened, reopened,assigned,edited,review_requested]
-
+  push:
+    branches-ignore:
+      - m먀ㅜ
 jobs:
   build:
     runs-on: ubuntu-latest
