@@ -21,4 +21,3 @@ jobs:
         with:
           junitxml-title: Pulse Test Report
           junitxml-path: ./junit.xml
-          junitxml-title: JUnit
