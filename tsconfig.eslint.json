@@ -3,8 +3,8 @@
   "include": [
 	"src/**/*.js",
 	"src/**/*.ts",
-  "tests/**/*.js",
-  "tests/**/*.ts",
+  "test/**/*.js",
+  "test/**/*.spec.ts",
 	"*.js"
   ],
   "compilerOptions": {
