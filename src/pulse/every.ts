@@ -1,8 +1,8 @@
-import { PulseError } from '@src/utils';
 import createDebugger from 'debug';
 import { Pulse } from '.';
 import { Job, JobAttributesData } from '../job';
 import { JobOptions } from '../job/repeat-every';
+import { PulseError } from '../utils';
 
 const debug = createDebugger('pulse:every');
 
