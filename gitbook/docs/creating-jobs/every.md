@@ -32,12 +32,12 @@ pulse.every('30 minutes', ['updateCache', 'refreshData'], null, { skipImmediate:
   * **`timezone`** (`string` - optional): The timezone to use for scheduling the job, useful for jobs that depend on specific regional settings.
   * **`startDate`** (`Date | number` - optional): The start date or timestamp from which the job should begin executing. _(_Only available  when _interval format is a cron format)_
   * **`endDate`** (`Date | number` - optional): The end date or timestamp after which the job should no longer execute. _(_Only available  when _interval format is a cron format)_
-  * **`skipDays`** (`string` - optional): A string defining days to skip; used for creating more complex schedules.
+  * **`skipDays`** (`string` - optional): A string defining days to skip; used for creating more complex schedules. `e.g. 2 days`
   * **`skipImmediate`** (`boolean` - optional): If set to true, skips the immediate first execution of the job schedule.
 
 ### Returns
 
-* **`Promise<Job | Job[] | undefined>`**: A promise that resolves with the created job or jobs. The promise will resolve after the jobs have been scheduled, or it will reject if there is an error during scheduling.
+* **`Promise<Job | Job[]>`**: A promise that resolves with the created job or jobs. The promise will resolve after the jobs have been scheduled, or it will reject if there is an error during scheduling.
 
 
 
