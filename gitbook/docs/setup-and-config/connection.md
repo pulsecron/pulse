@@ -42,14 +42,15 @@ const pulse = new Pulse(pulseConfig, (error, collection) => {
   * **`defaultConcurrency`** (`number` - optional): The default concurrency for jobs that do not specify their own concurrency setting. Defaults to `'5'` if not specified.
   * **`lockLimit`** (`number` - optional): Maximum number of jobs that can be locked at the same time. This prevents a single worker from locking too many jobs. Defaults to `'0'` if not specified.
   * **`defaultLockLimit`** (`number` - optional): Default limit for the number of jobs each worker can lock simultaneously. Defaults to `'0'` if not specified.
-  * **`defaultLockLifetime`** (`number` - optional): Duration in milliseconds for how long a job can be locked before it is automatically unlocked. Useful for handling job crashes or stalls. Defaults to 600000 ms (10 minutes).Defaults to `'10 minutes'` if not specified.
+  * **`defaultLockLifetime`** (`number` - optional): Duration in milliseconds for how long a job can be locked before it is automatically unlocked. Useful for handling job crashes or stalls. Defaults to 600000 ms (10 minutes). Defaults to `'10 minutes'` if not specified.
   * **`sort`** (`any` - optional): Determines the order in which jobs are selected and locked from the database. For example, `{ nextRunAt: 1, priority: -1 }` sorts by `nextRunAt` ascending and `priority` descending.
   * **`mongo`** (`MongoDb` - optional): An existing MongoDB client that can be reused instead of creating a new connection.
   * **`db`** (`object` - optional): Configuration for the MongoDB connection if not using an existing `MongoDb` client. Includes:
     * **`address`** (`string`): The MongoDB connection URI.
     * **`collection`** (`string` - optional): Specifies the MongoDB collection to use. Defaults to `pulseJobs`.
     * **`options`** (`MongoClientOptions` - optional): MongoDB client options.
-  * **`disableAutoIndex`** (`boolean` - optional): If set to `true`, automatic indexing of job fields by the `Pulse` system is disabled. Useful for performance tuning in production environments.
+  * **`disableAutoIndex`** (`boolean` - optional): If set to `true`, automatic indexing of job fields by the `Pulse` system is disabled. Useful for performance tuning in production environments. Defaults to `false` if not specified.
+  * **`resumeOnRestart`**(`boolean` - optional) - This config is used to ensure that jobs left unfinished due to an unexpected system shutdown or restart are properly resumed once the system is back online. Defaults to `true` if not specified.
 
 
 

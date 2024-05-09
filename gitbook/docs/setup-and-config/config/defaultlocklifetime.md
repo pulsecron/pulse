@@ -15,6 +15,8 @@ const pulse = new Pulse();
 
 // Set the default lock lifetime to 5 minutes (300000 ms)
 pulse.defaultLockLifetime(300000);
+
+//or new Pulse({ defaultLockLifetime: 300000 });
 ```
 
 

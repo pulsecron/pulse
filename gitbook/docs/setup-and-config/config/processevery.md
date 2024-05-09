@@ -15,6 +15,8 @@ const pulse = new Pulse();
 
 // Configure the job processing interval to every 10 minutes
 pulse.processEvery('10 minutes');
+
+//or new Pulse({ processEvery:'10 minutes' });
 ```
 
 

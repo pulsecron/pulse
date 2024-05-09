@@ -13,6 +13,8 @@ The `name` method of the `Pulse` class allows setting or updating the name of th
 ```typescript
 const pulse = new Pulse();
 pulse.name('emailProcessingQueue');
+
+//or new Pulse({ name:'emailProcessingQueue' });
 ```
 
 ### Parameters

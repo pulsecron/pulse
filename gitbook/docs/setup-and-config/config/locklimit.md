@@ -15,6 +15,9 @@ const pulse = new Pulse();
 
 // Set a global lock limit to prevent too many jobs from being locked at the same time
 pulse.lockLimit(5);
+
+
+//or new Pulse({ lockLimit: 5 });
 ```
 
 

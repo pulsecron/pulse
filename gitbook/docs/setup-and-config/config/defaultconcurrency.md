@@ -15,6 +15,9 @@ const pulse = new Pulse();
 
 // Set the default concurrency for job processing to 3
 pulse.defaultConcurrency(3);
+
+
+//or new Pulse({ defaultConcurrency: 3 });
 ```
 
 

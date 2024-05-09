@@ -15,6 +15,7 @@ _This does **NOT** save the job in the database.  you must explicitly declare_ [
 
 {% code fullWidth="false" %}
 ```typescript
+const job = pulse.create('test', {});
 job.unique({ 'data.type': 'email', 'data.userId': '12345' });
 await job.save(); // If you want to save it
 

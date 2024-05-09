@@ -1,34 +1,38 @@
-# Remove
+# Schedule
 
 
 
-## `job.remove()`
+## `job.schedule(time)`
 
 {% hint style="info" %}
-The `remove` method deletes a specific job from the MongoDB database, ensuring that it is no longer available for processing or querying. This method is crucial for managing job lifecycle and maintaining a clean job queue.
+The `schedule` method sets a job to run at a specific time determined by the input parameter. This method accepts both `Date` objects and date strings, providing flexibility in scheduling jobs.\
+\
 
 
+_This does **NOT** save the job in the database.  you must explicitly declare_ [_`save()`_](save.md)_if you want to save it_
 {% endhint %}
 
 ### Example Usage
 
 {% code fullWidth="false" %}
 ```typescript
-job.remove();
+const job = pulse.create('test', {});
+job.schedule(new Date(2023, 11, 17, 10, 30));  
+await job.save(); // If you want to save it
+
 ```
 {% endcode %}
 
 ### Parameters
+
+* **`time`** (`string | Date`): The time at which the job is scheduled to run. This can be a `Date` object representing the exact time for the job to run.
 
 \
 
 
 ### Returns
 
-* **`Promise<number | undefined>`**: A promise that resolves with the number of documents removed from the database. If no document is found with the specified job ID, it may resolve to `undefined`.
-
-\
-
+* **`Job`**: Returns the job instance with the updated `nextRunAt` attribute, allowing for method chaining.
 
 \
 

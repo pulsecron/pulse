@@ -15,6 +15,8 @@ const pulse = new Pulse();
 
 // Set a custom sort order for job processing
 pulse.sort({ createdAt: -1 });
+
+//or new Pulse({ sort: { createdAt: -1 } });
 ```
 
 

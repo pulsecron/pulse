@@ -1,33 +1,36 @@
-# Touch
+# Priority
 
 
 
-## `job.touch()`
+## `job.priority(priority)`
 
 {% hint style="info" %}
-The `touch` method updates the `lockedAt` timestamp of a job to the current time. This is particularly useful for ensuring that a job remains locked during long-running processes, preventing it from being considered as timed out or available for reprocessing by other workers or job instances.
+The `priority` method assigns a priority level to a job, determining its processing order relative to other jobs in the queue. This method is crucial for managing execution precedence, especially in systems where certain tasks need urgent handling.
 
-
+\
+_This does **NOT** save the job in the database.  you must explicitly declare_ [_`save()`_](save.md)_if you want to save it_
 {% endhint %}
 
 ### Example Usage
 
 {% code fullWidth="false" %}
 ```typescript
-job.touch();
+const job = pulse.create('test', {});
+job.priority('highest');
+job.save(); // If you want to save it
 ```
 {% endcode %}
 
 ### Parameters
 
-
+* **`priority`** (`string` | `number`): A priority label (`'lowest'`, `'low'`, `'normal'`, `'high'`, `'highest'`) or a numeric value that corresponds to a predefined priority level.
 
 \
 
 
 ### Returns
 
-* **`Promise<Job>`**: A promise that resolves with the updated job instance after the `lockedAt` time has been refreshed and the job has been saved.
+* **`Job`**: Returns the job instance, enabling method chaining.
 
 \
 

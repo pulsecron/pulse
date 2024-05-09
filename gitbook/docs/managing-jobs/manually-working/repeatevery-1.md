@@ -1,12 +1,11 @@
-# Schedule
+# RepeatAt
 
 
 
-## `job.schedule(time)`
+## `job.repeatAt(time)`
 
 {% hint style="info" %}
-The `schedule` method sets a job to run at a specific time determined by the input parameter. This method accepts both `Date` objects and date strings, providing flexibility in scheduling jobs.\
-\
+The `repeatAt` method schedules a job to repeat at a specific time that is stated in a [human-readable format](https://github.com/matthewmueller/date#examples) or as a precise time value. This capability is essential for scheduling jobs that must run at regular intervals on specific schedules.\
 
 
 _This does **NOT** save the job in the database.  you must explicitly declare_ [_`save()`_](save.md)_if you want to save it_
@@ -16,7 +15,8 @@ _This does **NOT** save the job in the database.  you must explicitly declare_ [
 
 {% code fullWidth="false" %}
 ```typescript
-job.schedule(new Date(2023, 11, 17, 10, 30));  
+const job = pulse.create('test', {});
+job.repeatAt("17:00");
 await job.save(); // If you want to save it
 
 ```
@@ -24,14 +24,16 @@ await job.save(); // If you want to save it
 
 ### Parameters
 
-* **`time`** (`string | Date`): The time at which the job is scheduled to run. This can be a `Date` object representing the exact time for the job to run.
+
+
+* **`time`** (`string`): The time at which the job should repeat. This can be specified in a human-readable format (e.g., "03:00 PM", "15:00").[ Format docs](https://github.com/matthewmueller/date#examples)
 
 \
 
 
 ### Returns
 
-* **`Job`**: Returns the job instance with the updated `nextRunAt` attribute, allowing for method chaining.
+* **`Job`**: Returns the job instance, allowing for method chaining. This facilitates additional configurations or method calls to be chained after setting the repeat time.
 
 \
 
