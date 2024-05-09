@@ -1,14 +1,13 @@
-# Run
+# Fail
 
 
 
-## `job.run()`
+## `job.fail()`
 
 {% hint style="info" %}
-The `run` method executes the processing logic defined for a specific job, handling lifecycle events and managing job state updates based on execution results. It's designed to be an internal method that drives the main execution flow of jobs within the system.
-
+The `fail` method marks a job as failed and updates its attributes accordingly. It records the reason for failure, increments the failure count, and, if the job configuration permits, schedules the job for a retry based on the specified backoff strategy.\
 \
-**Normally you never need to call this manually.**
+_This does **NOT** save the job in the database.  you must explicitly declare_ [_`save()`_](save.md)_if you want to save it_
 {% endhint %}
 
 ### Example Usage
@@ -16,22 +15,21 @@ The `run` method executes the processing logic defined for a specific job, handl
 {% code fullWidth="false" %}
 ```typescript
 const job = pulse.create('test', {});
-job.run()
-  .then(() => console.log('Job execution completed.'))
-  .catch(error => console.error('Job execution failed:', error));
+job.fail(new Error('Unable to connect to database'));
+job.save(); // If you want to save it
 ```
 {% endcode %}
 
 ### Parameters
 
-
+* **`reason`** (`string | Error`): The reason for the job's failure, which can be provided as either a string or an Error object. If an Error object is provided, its message is used as the failure reason.
 
 \
 
 
 ### Returns
 
-* **`Promise<Job>`**: A promise that resolves with the job instance after execution, whether successful or not. This method handles both successful completion and errors internally, ensuring the job's state is updated accordingly.
+* **`Job`**: Returns the job instance, allowing for method chaining.
 
 \
 

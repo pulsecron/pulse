@@ -1,11 +1,11 @@
-# Enable
+# Disable
 
 
 
-## `job.enable()`
+## `job.disable()`
 
 {% hint style="info" %}
-The `enable` method sets a job's status to active, allowing it to be run by the job processing system. This is useful for resuming the execution of a job that was previously halted without removing it from the job queue.
+The `disable` method sets a job's status to disabled, preventing it from being run by the job processing system. This is useful for temporarily halting a job's execution without permanently removing it from the job queue.
 
 \
 _This does **NOT** save the job in the database.  you must explicitly declare_ [_`save()`_](save.md)_if you want to save it_
@@ -16,7 +16,7 @@ _This does **NOT** save the job in the database.  you must explicitly declare_ [
 {% code fullWidth="false" %}
 ```typescript
 const job = pulse.create('test', {});
-job.enable();
+job.disable();
 job.save(); // If you want to save it
 ```
 {% endcode %}
@@ -30,7 +30,7 @@ job.save(); // If you want to save it
 
 ### Returns
 
-* **`Job`**: Returns the job instance, enabling method chaining. This allows for further modifications to the job or chaining additional method calls.
+* **`Job`**: Returns the job instance, allowing for method chaining. This facilitates further modifications to the job or chaining additional method calls.
 
 \
 
