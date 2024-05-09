@@ -46,18 +46,7 @@ describe('Test Pulse', () => {
     done();
   });
 
-  test('sets a default processEvery', () => {
-    expect(globalPulseInstance._processEvery).toEqual(5000);
-  });
-
-  describe('Test configuration methods', () => {
-    test('sets the _db directly when passed as an option', () => {
-      const pulseDb = new Pulse({ mongo: mongoDb });
-      expect(pulseDb._mdb).not.toBeUndefined();
-    });
-  });
-
-  describe('Test configuration methods', () => {
+  describe('Test config', () => {
     describe('Test mongo connection tester', () => {
       test('passing a valid server connection string', () => {
         expect(hasMongoProtocol(mongoDbConfig)).toEqual(true);
@@ -72,6 +61,11 @@ describe('Test Pulse', () => {
       });
     });
     describe('Test mongo', () => {
+      test('sets the _db directly when passed as an option', () => {
+        const pulseDb = new Pulse({ mongo: mongoDb });
+        expect(pulseDb._mdb).not.toBeUndefined();
+      });
+
       test('sets the _db directly', () => {
         const pulse = new Pulse();
         pulse.mongo(mongoDb);
@@ -84,6 +78,19 @@ describe('Test Pulse', () => {
       });
     });
 
+    describe('Test processEvery', () => {
+      test('sets the default processEvery', () => {
+        expect(globalPulseInstance._processEvery).toEqual(5000);
+      });
+      test('sets the custom processEvery', () => {
+        const pulse = new Pulse({ processEvery: '3 minutes' });
+        expect(pulse._processEvery).toEqual(180000);
+      });
+      test('returns itself', () => {
+        expect(globalPulseInstance.processEvery('3 minutes')).toEqual(globalPulseInstance);
+      });
+    });
+
     describe('Test name', () => {
       test('sets the pulse name', () => {
         globalPulseInstance.name('test queue');
@@ -93,17 +100,13 @@ describe('Test Pulse', () => {
         expect(globalPulseInstance.name('test queue')).toEqual(globalPulseInstance);
       });
     });
-    describe('Test processEvery', () => {
-      test('sets the processEvery time', () => {
-        globalPulseInstance.processEvery('3 minutes');
-        expect(globalPulseInstance._processEvery).toEqual(180000);
-      });
-      test('returns itself', () => {
-        expect(globalPulseInstance.processEvery('3 minutes')).toEqual(globalPulseInstance);
-      });
-    });
+
     describe('Test maxConcurrency', () => {
-      test('sets the maxConcurrency', () => {
+      test('sets the default maxConcurrency', () => {
+        expect(globalPulseInstance._maxConcurrency).toEqual(20);
+      });
+
+      test('sets the custom maxConcurrency', () => {
         globalPulseInstance.maxConcurrency(10);
         expect(globalPulseInstance._maxConcurrency).toEqual(10);
       });
@@ -111,17 +114,33 @@ describe('Test Pulse', () => {
         expect(globalPulseInstance.maxConcurrency(10)).toEqual(globalPulseInstance);
       });
     });
-    describe('Test defaultConcurrency', () => {
+
+    describe('Test default defaultConcurrency', () => {
       test('sets the defaultConcurrency', () => {
+        expect(globalPulseInstance._defaultConcurrency).toEqual(5);
+      });
+
+      test('sets the custom defaultConcurrency', () => {
         globalPulseInstance.defaultConcurrency(1);
         expect(globalPulseInstance._defaultConcurrency).toEqual(1);
       });
       test('returns itself', () => {
-        expect(globalPulseInstance.defaultConcurrency(5)).toEqual(globalPulseInstance);
+        expect(globalPulseInstance.defaultConcurrency(1)).toEqual(globalPulseInstance);
+      });
+
+      test('is inherited by jobs', () => {
+        globalPulseInstance.defaultConcurrency(10);
+        globalPulseInstance.define('testDefaultConcurrency', () => {});
+        expect(globalPulseInstance._definitions.testDefaultConcurrency.concurrency).toEqual(10);
       });
     });
+
     describe('Test lockLimit', () => {
-      test('sets the lockLimit', () => {
+      test('sets the default lockLimit', () => {
+        expect(globalPulseInstance._lockLimit).toEqual(0);
+      });
+
+      test('sets the custom lockLimit', () => {
         globalPulseInstance.lockLimit(10);
         expect(globalPulseInstance._lockLimit).toEqual(10);
       });
@@ -129,42 +148,81 @@ describe('Test Pulse', () => {
         expect(globalPulseInstance.lockLimit(10)).toEqual(globalPulseInstance);
       });
     });
+
     describe('Test defaultLockLimit', () => {
-      test('sets the defaultLockLimit', () => {
+      test('sets the default defaultLockLimit', () => {
+        expect(globalPulseInstance._defaultLockLimit).toEqual(0);
+      });
+
+      test('sets the custom defaultLockLimit', () => {
         globalPulseInstance.defaultLockLimit(1);
         expect(globalPulseInstance._defaultLockLimit).toEqual(1);
       });
       test('returns itself', () => {
         expect(globalPulseInstance.defaultLockLimit(5)).toEqual(globalPulseInstance);
       });
-    });
-    describe('Test defaultLockLifetime', () => {
-      test('returns itself', () => {
-        expect(globalPulseInstance.defaultLockLifetime(1000)).toEqual(globalPulseInstance);
+
+      test('is inherited by jobs', () => {
+        globalPulseInstance.defaultLockLimit(10);
+        globalPulseInstance.define('testDefaultLockLimit', () => {});
+        expect(globalPulseInstance._definitions.testDefaultLockLimit.lockLimit).toEqual(10);
       });
-      test('sets the default lock lifetime', () => {
+    });
+
+    describe('Test defaultLockLifetime', () => {
+      test('sets the default defaultLockLifetime', () => {
+        expect(globalPulseInstance._defaultLockLifetime).toEqual(600000);
+      });
+
+      test('sets the custom defaultLockLifetime', () => {
         globalPulseInstance.defaultLockLifetime(9999);
         expect(globalPulseInstance._defaultLockLifetime).toEqual(9999);
       });
+
+      test('returns itself', () => {
+        expect(globalPulseInstance.defaultLockLifetime(1000)).toEqual(globalPulseInstance);
+      });
+
       test('is inherited by jobs', () => {
         globalPulseInstance.defaultLockLifetime(7777);
         globalPulseInstance.define('testDefaultLockLifetime', () => {});
         expect(globalPulseInstance._definitions.testDefaultLockLifetime.lockLifetime).toEqual(7777);
       });
     });
+
     describe('Test sort', () => {
-      test('returns itself', () => {
-        expect(globalPulseInstance.sort({ nextRunAt: 1, priority: -1 })).toEqual(globalPulseInstance);
+      test('sets the default sort', () => {
+        expect(globalPulseInstance._sort).toEqual({ nextRunAt: 1, priority: -1 });
       });
-      test('sets the default sort option', () => {
+
+      test('sets the custom sort', () => {
         globalPulseInstance.sort({ nextRunAt: -1 });
         expect(globalPulseInstance._sort).toEqual({ nextRunAt: -1 });
+      });
+
+      test('returns itself', () => {
+        expect(globalPulseInstance.sort({ nextRunAt: 1, priority: 1 })).toEqual(globalPulseInstance);
+      });
+    });
+
+    describe('Test resumeOnRestart', () => {
+      test('sets the default resumeOnRestart', () => {
+        expect(globalPulseInstance._resumeOnRestart).toBeTruthy();
+      });
+
+      test('sets the custom resumeOnRestart', () => {
+        globalPulseInstance.resumeOnRestart(false);
+        expect(globalPulseInstance._resumeOnRestart).toBeFalsy();
+      });
+
+      test('returns itself', () => {
+        expect(globalPulseInstance.resumeOnRestart(false)).toEqual(globalPulseInstance);
       });
     });
   });
 
   describe('Test job methods', () => {
-    describe('Test create', () => {
+    describe('Test create method', () => {
       let job: any;
       beforeEach(() => {
         job = globalPulseInstance.create('sendEmail', { to: 'some guy' });
@@ -183,16 +241,15 @@ describe('Test Pulse', () => {
         expect(job.pulse).toEqual(globalPulseInstance);
       });
       test('sets the data', () => {
-        //expect(job._data).to.have.property('to', 'some guy');
         expect(job.attrs.data.to).toBe('some guy');
       });
     });
 
-    describe('Test define', () => {
+    describe('Test define method', () => {
       test('stores the definition for the job', () => {
         expect(globalPulseInstance._definitions.someJob.fn).toBe(jobProcessor);
       });
-      describe("Test 'default' options", () => {
+      describe('Test default options', () => {
         test('sets the default concurrency for the job', () => {
           expect(globalPulseInstance._definitions.someJob.concurrency).toBe(5);
         });
@@ -212,18 +269,19 @@ describe('Test Pulse', () => {
           expect(globalPulseInstance._definitions.someJob.attempts).toBe(0);
         });
       });
+
       describe('Test setting options', () => {
-        test('takes concurrency option for the job', () => {
+        test('sets the priority option for the job', () => {
           globalPulseInstance.define('highPriority', jobProcessor, { priority: 'high' });
           expect(globalPulseInstance._definitions.highPriority.priority).toBe('high');
         });
 
-        test('takes shouldSaveResult option for the job', () => {
+        test('sets shouldSaveResult option for the job', () => {
           globalPulseInstance.define('shouldSaveResultTrue', jobProcessor, { shouldSaveResult: true });
           expect(globalPulseInstance._definitions.shouldSaveResultTrue.shouldSaveResult).toBeTruthy();
         });
 
-        test('takes attempts and backoff option for the job', () => {
+        test('sets attempts and backoff option for the job', () => {
           globalPulseInstance.define('attemptsAndBackoff', jobProcessor, {
             attempts: 5,
             backoff: { type: 'fixed', delay: 1000 },
@@ -234,7 +292,7 @@ describe('Test Pulse', () => {
       });
     });
 
-    describe('Test every', () => {
+    describe('Test every method', () => {
       describe('Test with a job name specified', () => {
         test('returns a job', async () => {
           expect(await globalPulseInstance.every('5 minutes', 'send email')).toBeInstanceOf(Job);
