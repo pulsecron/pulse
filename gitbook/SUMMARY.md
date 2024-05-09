@@ -46,6 +46,6 @@
     * [Touch](docs/managing-jobs/manually-working/repeatevery-5.md)
     * [SetShouldSaveResult](docs/managing-jobs/manually-working/repeatevery-6.md)
     * [Fail](docs/managing-jobs/manually-working/repeatevery-7.md)
-    * [Run](docs/managing-jobs/manually-working/repeatevery-8.md)
+    * [Run](docs/managing-jobs/manually-working/repeatevery-8.md)
     * [Disable](docs/managing-jobs/manually-working/repeatevery-9.md)
     * [Enable](docs/managing-jobs/manually-working/repeatevery-10.md)
