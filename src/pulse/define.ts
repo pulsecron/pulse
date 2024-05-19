@@ -88,17 +88,17 @@ export type DefineMethod = <T extends JobAttributesData>(
 export const define: DefineMethod = function (this: Pulse, name, processor, options?) {
   this._definitions[name] = {
     fn: processor,
-    concurrency: (options as DefineOptions)?.concurrency || this._defaultConcurrency,
-    lockLimit: (options as DefineOptions)?.lockLimit || this._defaultLockLimit,
-    priority: (options as DefineOptions)?.priority || JobPriority.normal,
-    lockLifetime: (options as DefineOptions)?.lockLifetime || this._defaultLockLifetime,
+    concurrency: options?.concurrency || this._defaultConcurrency,
+    lockLimit: options?.lockLimit || this._defaultLockLimit,
+    priority: options?.priority || JobPriority.normal,
+    lockLifetime: options?.lockLifetime || this._defaultLockLifetime,
     running: 0,
     locked: 0,
-    shouldSaveResult: (options as DefineOptions)?.shouldSaveResult || false,
-    attempts: (options as DefineOptions)?.attempts || 0,
-    backoff: (options as DefineOptions)?.attempts && {
-      type: (options as DefineOptions)?.backoff?.type || 'exponential',
-      delay: (options as DefineOptions)?.backoff?.delay || 1000,
+    shouldSaveResult: options?.shouldSaveResult || false,
+    attempts: options?.attempts || 0,
+    backoff: options?.attempts && {
+      type: options?.backoff?.type || 'exponential',
+      delay: options?.backoff?.delay || 1000,
     },
   };
 

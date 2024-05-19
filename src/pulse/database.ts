@@ -42,7 +42,7 @@ export const database: DatabaseMethod = async function (this: Pulse, url, collec
     if (cb) {
       cb(error, null);
     } else {
-      throw error;
+      throw new BaseError(error);
     }
   });
 
