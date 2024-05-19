@@ -14,8 +14,6 @@ export const run: RunMethod = async function (this: Job) {
   const { pulse } = this;
   const definition = pulse._definitions[this.attrs.name];
 
-  // @TODO: this lint issue should be looked into: https://eslint.org/docs/rules/no-async-promise-executor
-  // eslint-disable-next-line no-async-promise-executor
   return new Promise(async (resolve, reject) => {
     this.attrs.lastRunAt = new Date();
     this.attrs.runCount = (this.attrs.runCount || 0) + 1;
