@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## [1.4.4](https://github.com/pulsecron/pulse/compare/v1.4.3...v1.4.4) (2024-05-19)
+
+
+### ♻️ REFACTOR
+
+* code to improve readability and maintainability ([#34](https://github.com/pulsecron/pulse/issues/34)) ([7e9070c](https://github.com/pulsecron/pulse/commit/7e9070c82ee470b73ba5640b350663b7ad44d39d))
+
 ## [1.4.3](https://github.com/pulsecron/pulse/compare/v1.4.2...v1.4.3) (2024-05-08)
 
 
