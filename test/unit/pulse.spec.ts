@@ -339,5 +339,42 @@ describe('Test Pulse', () => {
         });
       });
     });
+
+    describe('Test countJobs', () => {
+      test('returns zero when there are no jobs', async () => {
+        const count = await globalPulseInstance.countJobs();
+        expect(count).toBe(0);
+      });
+
+      test('counts jobs correctly', async () => {
+        const job1 = globalPulseInstance.create('testJob1', {});
+        const job2 = globalPulseInstance.create('testJob2', {});
+        await job1.save();
+        await job2.save();
+
+        const count = await globalPulseInstance.countJobs();
+        expect(count).toBe(2);
+      });
+
+      test('counts jobs with query', async () => {
+        const job1 = globalPulseInstance.create('testJob1', { type: 'email' });
+        const job2 = globalPulseInstance.create('testJob2', { type: 'sms' });
+        await job1.save();
+        await job2.save();
+
+        const count = await globalPulseInstance.countJobs({ 'data.type': 'email' });
+        expect(count).toBe(1);
+      });
+
+      test('counts jobs with options', async () => {
+        const job1 = globalPulseInstance.create('testJob1', { type: 'email' });
+        const job2 = globalPulseInstance.create('testJob2', { type: 'sms' });
+        await job1.save();
+        await job2.save();
+
+        const count = await globalPulseInstance.countJobs({}, { limit: 1 });
+        expect(count).toBe(1);
+      });
+    });
   });
 });
