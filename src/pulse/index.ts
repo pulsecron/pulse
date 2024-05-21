@@ -4,6 +4,7 @@ import { AnyError, Collection, MongoClient, MongoClientOptions, Db as MongoDb } 
 import { Job } from '../job';
 import { CancelMethod, cancel } from './cancel';
 import { CloseMethod, close } from './close';
+import { CountJobsMethod, countJobs } from './count-jobs';
 import { CreateMethod, create } from './create';
 import { DatabaseMethod, database } from './database';
 import { DbInitMethod, dbInit } from './db-init';
@@ -202,6 +203,10 @@ class Pulse extends EventEmitter {
 
   get jobs(): JobsMethod {
     return this.bindMethod('jobs', jobs);
+  }
+
+  get countJobs(): CountJobsMethod {
+    return this.bindMethod('countJobs', countJobs);
   }
 
   get lockLimit(): LockLimitMethod {
