@@ -285,10 +285,10 @@ function time() {
 ##  Project Roadmap
 
 - [X] **Add Support for Latest Mongoose Version(8.x.x)**: Upgrade Pulse to be fully compatible with the latest version of Mongoose. This will enable Pulse to leverage the newest features and improvements in Mongoose, ensuring better performance, stability, and security for applications that rely on MongoDB through Mongoose.
-- [ ] **Refactoring to Modern TypeScript Syntax**: Undertake a comprehensive refactor of the codebase to utilize modern TypeScript features and syntax. This refactoring will improve code readability, maintainability, and make it easier for new contributors to understand and contribute to the project.
-- [ ] **Resolving Issues in Existing Agenda Projects**: Actively address and resolve outstanding issues within the original Agenda project. This initiative not only aids the community by improving the legacy codebase but also informs the development of Pulse by identifying and addressing past challenges.
+- [X] **Refactoring to Modern TypeScript Syntax**: Undertake a comprehensive refactor of the codebase to utilize modern TypeScript features and syntax. This refactoring will improve code readability, maintainability, and make it easier for new contributors to understand and contribute to the project.
+- [X] **Resolving Issues in Existing Agenda Projects**: Actively address and resolve outstanding issues within the original Agenda project. This initiative not only aids the community by improving the legacy codebase but also informs the development of Pulse by identifying and addressing past challenges.
 - [ ] **Rewrite Test Code**: Revamp our testing suite to increase coverage and ensure tests are up-to-date with modern testing practices. This rewrite aims to enhance test reliability and efficiency, facilitating smoother development and deployment cycles.
-- [ ] **Rewrite Documentation**: Completely revise and update the documentation to reflect all new changes and features, ensure clarity of information, and improve navigation and readability for developers. This effort will include new getting started guides, API documentation, and use case examples to facilitate easier adoption and implementation by users.
+- [X] **Rewrite Documentation**: Completely revise and update the documentation to reflect all new changes and features, ensure clarity of information, and improve navigation and readability for developers. This effort will include new getting started guides, API documentation, and use case examples to facilitate easier adoption and implementation by users.
 ---
 <br/>
 <br/>
