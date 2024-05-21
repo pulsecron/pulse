@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## [1.5.0](https://github.com/pulsecron/pulse/compare/v1.4.4...v1.5.0) (2024-05-21)
+
+
+### 🚀 FEATURES
+
+* add countJobs method to Pulse class ([fdd000e](https://github.com/pulsecron/pulse/commit/fdd000ec94c2c07ff8ee68f8e5d0e0d50787d2c3))
+
 ## [1.4.4](https://github.com/pulsecron/pulse/compare/v1.4.3...v1.4.4) (2024-05-19)
 
 
