@@ -5,7 +5,7 @@
     <h1 align="center">PULSE</h1>
 </p>
 <p align="center">
-    <em>The modern MongoDB-powered scheduling library for Node.js</em>
+    <em>The modern MongoDB-powered job scheduler library for Node.js</em>
 </p>
 <p align="center">
 	<img src="https://img.shields.io/github/license/pulsecron/pulse?style=default&logo=opensourceinitiative&logoColor=white&color=24E0A4" alt="license">
