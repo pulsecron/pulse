@@ -4,11 +4,6 @@ import { Job, JobAttributesData } from '../job';
 
 const debug = createDebugger('pulse:schedule');
 
-export type ScheduleMethod = <T extends JobAttributesData>(
-  when: string | Date,
-  names: string | string[],
-  data?: T
-) => Promise<Job | Job[]>;
 /**
  * Schedule a job or jobs at a specific time
  * @name Pulse#schedule
@@ -18,7 +13,12 @@ export type ScheduleMethod = <T extends JobAttributesData>(
  * @param data data to send to job
  * @returns job or jobs created
  */
-export const schedule: ScheduleMethod = function schedule(this: Pulse, when, names, data) {
+export const schedule = function schedule<T extends JobAttributesData>(
+  this: Pulse,
+  when: string | Date,
+  names: string | string[],
+  data?: T,
+) {
   /**
    * Internal method that creates a job with given date
    * @param when when the job gets run
@@ -26,7 +26,7 @@ export const schedule: ScheduleMethod = function schedule(this: Pulse, when, nam
    * @param data data to send to job
    * @returns instance of new job
    */
-  const createJob = async <T extends JobAttributesData>(when: string | Date, name: string, data: T): Promise<Job> => {
+  const createJob = async <T extends JobAttributesData>(when: string | Date, name: string, data: T): Promise<Job<T>> => {
     const job = this.create(name, data);
 
     await job.schedule(when).save();
@@ -45,9 +45,9 @@ export const schedule: ScheduleMethod = function schedule(this: Pulse, when, nam
     when: string | Date,
     names: string[],
     data: T
-  ): Promise<Job[]> => {
+  ): Promise<Job<T>[]> => {
     try {
-      const createJobList: Array<Promise<Job>> = [];
+      const createJobList: Array<Promise<Job<T>>> = [];
       names.map((name) => createJobList.push(createJob(when, name, data)));
       debug('Pulse.schedule()::createJobs() -> all jobs created successfully');
       return Promise.all(createJobList);
@@ -59,7 +59,7 @@ export const schedule: ScheduleMethod = function schedule(this: Pulse, when, nam
 
   if (typeof names === 'string') {
     debug('Pulse.schedule(%s, %O, [%O], cb)', when, names);
-    return createJob(when, names, data || {});
+    return createJob(when, names, data || {} as T);
   }
 
   if (Array.isArray(names)) {
@@ -69,3 +69,5 @@ export const schedule: ScheduleMethod = function schedule(this: Pulse, when, nam
 
   throw new TypeError('Name must be string or array of strings');
 };
+
+export type ScheduleMethod = typeof schedule;
