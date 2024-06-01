@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## [1.5.1](https://github.com/pulsecron/pulse/compare/v1.5.0...v1.5.1) (2024-06-01)
+
+
+### 🐛 BUG FIXES
+
+* Added missing template types for returned s in the  method. ([8011bd3](https://github.com/pulsecron/pulse/commit/8011bd3d7449876a60a5df5b26db7f907098a2fe))
+
 ## [1.5.0](https://github.com/pulsecron/pulse/compare/v1.4.4...v1.5.0) (2024-05-21)
 
 
