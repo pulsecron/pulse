@@ -17,7 +17,7 @@ export const schedule = function schedule<T extends JobAttributesData>(
   this: Pulse,
   when: string | Date,
   names: string | string[],
-  data?: T,
+  data?: T
 ) {
   /**
    * Internal method that creates a job with given date
@@ -26,7 +26,11 @@ export const schedule = function schedule<T extends JobAttributesData>(
    * @param data data to send to job
    * @returns instance of new job
    */
-  const createJob = async <T extends JobAttributesData>(when: string | Date, name: string, data: T): Promise<Job<T>> => {
+  const createJob = async <T extends JobAttributesData>(
+    when: string | Date,
+    name: string,
+    data: T
+  ): Promise<Job<T>> => {
     const job = this.create(name, data);
 
     await job.schedule(when).save();
@@ -59,7 +63,7 @@ export const schedule = function schedule<T extends JobAttributesData>(
 
   if (typeof names === 'string') {
     debug('Pulse.schedule(%s, %O, [%O], cb)', when, names);
-    return createJob(when, names, data || {} as T);
+    return createJob(when, names, data || ({} as T));
   }
 
   if (Array.isArray(names)) {

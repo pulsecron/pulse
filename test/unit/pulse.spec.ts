@@ -376,5 +376,26 @@ describe('Test Pulse', () => {
         expect(count).toBe(1);
       });
     });
+
+    describe('Test schedule method', () => {
+      test('creates and schedules a job', async () => {
+        await globalPulseInstance.schedule('2024-06-03T10:00:00Z', 'sendEmail', { to: 'some guy' });
+        const jobs = await globalPulseInstance.jobs({ name: 'sendEmail' });
+        expect(jobs.length).toBe(1);
+      });
+
+      test('creates and schedules multiple jobs', async () => {
+        await globalPulseInstance.schedule('2024-06-03T10:00:00Z', ['sendEmail', 'some job'], { to: 'some guy' });
+        const jobs = await globalPulseInstance.jobs();
+        expect(jobs.length).toBe(2);
+      });
+
+      test('checks if job is scheduled correctly', async () => {
+        await globalPulseInstance.schedule('2024-06-03T10:00:00Z', 'sendEmail', { to: 'some guy' });
+        const jobs = await globalPulseInstance.jobs({ name: 'sendEmail' });
+        const job = jobs[0];
+        expect(job.attrs.nextRunAt).toEqual(new Date('2024-06-03T10:00:00Z'));
+      });
+    });
   });
 });
