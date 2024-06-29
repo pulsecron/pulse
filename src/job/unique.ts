@@ -1,4 +1,4 @@
-import { Filter } from 'mongodb';
+import { Document, Filter } from 'mongodb';
 import { Job } from '.';
 
 export type UniqueMethod<TSchema extends Document = Document> = (
