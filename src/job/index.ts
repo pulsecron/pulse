@@ -50,6 +50,11 @@ export interface JobAttributes<T extends JobAttributesData = JobAttributesData> 
   disabled?: boolean;
 
   /**
+   * Job's progress state (0 to 100)
+   */
+  progress?: number;
+
+  /**
    * Date/time the job will run next.
    */
   nextRunAt?: Date | null;
