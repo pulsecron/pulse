@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## [1.6.0](https://github.com/pulsecron/pulse/compare/v1.5.2...v1.6.0) (2024-07-15)
+
+
+### 🚀 FEATURES
+
+*  progress value to touch functio ([761d584](https://github.com/pulsecron/pulse/commit/761d58451aaf72a7234eb8e0872ccef63a3f2360))
+
 ## [1.5.2](https://github.com/pulsecron/pulse/compare/v1.5.1...v1.5.2) (2024-06-29)
 
 
