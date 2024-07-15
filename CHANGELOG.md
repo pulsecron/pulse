@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## [1.6.1](https://github.com/pulsecron/pulse/compare/v1.6.0...v1.6.1) (2024-07-15)
+
+
+### 🐛 BUG FIXES
+
+* import path for JobError in touch.ts ([a7efab5](https://github.com/pulsecron/pulse/commit/a7efab5455833dc4d7cc9601ed9e62fa90f08d92))
+
 ## [1.6.0](https://github.com/pulsecron/pulse/compare/v1.5.2...v1.6.0) (2024-07-15)
 
 
