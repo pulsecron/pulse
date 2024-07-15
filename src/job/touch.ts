@@ -1,5 +1,5 @@
-import { JobError } from 'src/utils';
 import { Job } from '.';
+import { JobError } from '../utils';
 
 export type TouchMethod = (progress?: number) => Promise<Job>;
 /**
