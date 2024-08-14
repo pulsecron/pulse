@@ -22,7 +22,14 @@ export const resumeOnRestart: ResumeOnRestartMethod = function (this: Pulse, res
       .updateMany(
         {
           $or: [
-            { lockedAt: { $exists: true }, lastFinishedAt: { $exists: false } },
+            {
+              lockedAt: { $exists: true },
+              $expr: { $eq: ['$runCount', '$finishedCount'] },
+            },
+            {
+              lockedAt: { $exists: true },
+              lastFinishedAt: { $exists: false },
+            },
             {
               $and: [
                 { lockedAt: { $exists: false } },

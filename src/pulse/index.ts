@@ -102,6 +102,7 @@ class Pulse extends EventEmitter {
   _collection!: Collection;
   _nextScanAt: any;
   _processInterval: any;
+  _readyAt: Date;
 
   /**
    * Constructs a new Pulse object.
@@ -143,6 +144,7 @@ class Pulse extends EventEmitter {
     this._ready = new Promise((resolve) => {
       this.once('ready', resolve);
     });
+    this._readyAt = new Date();
 
     this.init(config, cb);
   }
