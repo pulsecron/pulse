@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## [1.6.2](https://github.com/pulsecron/pulse/compare/v1.6.1...v1.6.2) (2024-08-15)
+
+
+### 🐛 BUG FIXES
+
+* prevent job on restart when resumeOnRestart is false ([#48](https://github.com/pulsecron/pulse/issues/48)) ([e7e1002](https://github.com/pulsecron/pulse/commit/e7e1002e4cb5324a1d6c63df1b7f3263f41210d7))
+
 ## [1.6.1](https://github.com/pulsecron/pulse/compare/v1.6.0...v1.6.1) (2024-07-15)
 
 
