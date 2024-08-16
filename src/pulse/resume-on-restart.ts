@@ -24,18 +24,13 @@ export const resumeOnRestart: ResumeOnRestartMethod = function (this: Pulse, res
           $or: [
             {
               lockedAt: { $exists: true },
-              $expr: { $eq: ['$runCount', '$finishedCount'] },
+              nextRunAt: { $ne: null },
+              $or: [{ $expr: { $eq: ['$runCount', '$finishedCount'] } }, { lastFinishedAt: { $exists: false } }],
             },
             {
-              lockedAt: { $exists: true },
+              lockedAt: { $exists: false },
               lastFinishedAt: { $exists: false },
-            },
-            {
-              $and: [
-                { lockedAt: { $exists: false } },
-                { lastFinishedAt: { $exists: false } },
-                { nextRunAt: { $lte: now } },
-              ],
+              nextRunAt: { $lte: now, $ne: null },
             },
           ],
         },
