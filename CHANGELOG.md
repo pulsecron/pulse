@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## [1.6.3](https://github.com/pulsecron/pulse/compare/v1.6.2...v1.6.3) (2024-08-16)
+
+
+### 🐛 BUG FIXES
+
+* modified it to exclude already run that should not be executed ([#51](https://github.com/pulsecron/pulse/issues/51)) ([f066867](https://github.com/pulsecron/pulse/commit/f0668678313ab181e3e209029bde95689cc899b5))
+
 ## [1.6.2](https://github.com/pulsecron/pulse/compare/v1.6.1...v1.6.2) (2024-08-15)
 
 
