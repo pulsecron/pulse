@@ -85,7 +85,13 @@ export const run: RunMethod = async function (this: Job) {
         throw new JobError('Undefined job');
       }
 
-      if (!this.pulse._resumeOnRestart && previousRunAt && this.pulse._readyAt >= previousRunAt) {
+      // on restart, skip the job if it's not time to run
+      if (
+        !this.pulse._resumeOnRestart &&
+        previousRunAt &&
+        this.pulse._readyAt >= previousRunAt &&
+        this.attrs.nextRunAt
+      ) {
         debug('[%s:%s] job resumeOnRestart skipped', this.attrs.name, this.attrs._id);
         resumeOnRestartSkipped = true;
         await jobCallback(undefined, 'skipped');
