@@ -213,7 +213,7 @@ class Job<T extends JobAttributesData = JobAttributesData> {
       name: attrs.name || '',
       priority: attrs.priority,
       type: type || 'once',
-      nextRunAt: nextRunAt || new Date(),
+      nextRunAt: nextRunAt,
     };
   }
 
