@@ -206,17 +206,51 @@ describe('Test Pulse', () => {
     });
 
     describe('Test resumeOnRestart', () => {
-      test('sets the default resumeOnRestart', () => {
+      test('should enable resumeOnRestart by default', () => {
         expect(globalPulseInstance._resumeOnRestart).toBeTruthy();
       });
 
-      test('sets the custom resumeOnRestart', () => {
+      test('should disable resumeOnRestart when set to false', () => {
         globalPulseInstance.resumeOnRestart(false);
         expect(globalPulseInstance._resumeOnRestart).toBeFalsy();
       });
 
-      test('returns itself', () => {
-        expect(globalPulseInstance.resumeOnRestart(false)).toEqual(globalPulseInstance);
+      test('should resume non-recurring jobs on restart', async () => {
+        const job = globalPulseInstance.create('sendEmail', { to: 'user@example.com' });
+        job.attrs.nextRunAt = new Date(Date.now() - 1000); // Set nextRunAt in the past
+        await job.save();
+
+        await globalPulseInstance.resumeOnRestart();
+
+        const updatedJob = (await globalPulseInstance.jobs({ name: 'sendEmail' }))[0];
+        const now = Date.now();
+        expect(updatedJob.attrs.nextRunAt?.getTime()).toBeGreaterThan(now - 100); // Allow a 100ms buffer
+      });
+
+      test('should resume recurring jobs on restart', async () => {
+        const job = globalPulseInstance.create('sendEmail', { to: 'user@example.com' });
+        job.attrs.repeatInterval = '5 minutes';
+        job.attrs.nextRunAt = null;
+        await job.save();
+
+        await globalPulseInstance.resumeOnRestart();
+
+        const updatedJob = (await globalPulseInstance.jobs({ name: 'sendEmail' }))[0];
+        const now = Date.now();
+        expect(updatedJob.attrs.nextRunAt).not.toBeNull();
+        expect(updatedJob.attrs.nextRunAt?.getTime()).toBeGreaterThan(now - 100); // Allow a 100ms buffer
+      });
+
+      test('should not modify jobs with existing nextRunAt', async () => {
+        const futureDate = new Date(Date.now() + 60 * 60 * 1000);
+        const job = globalPulseInstance.create('sendEmail', { to: 'user@example.com' });
+        job.attrs.nextRunAt = futureDate;
+        await job.save();
+
+        await globalPulseInstance.resumeOnRestart();
+
+        const updatedJob = (await globalPulseInstance.jobs({ name: 'sendEmail' }))[0];
+        expect(updatedJob.attrs.nextRunAt?.getTime()).toEqual(futureDate.getTime());
       });
     });
   });
