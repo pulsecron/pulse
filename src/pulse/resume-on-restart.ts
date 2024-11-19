@@ -24,19 +24,25 @@ export const resumeOnRestart: ResumeOnRestartMethod = function (this: Pulse, res
     this._collection
       .updateMany(
         {
-          $or: [
+          $and: [
+            { repeatInterval: { $exists: false } },
+            { repeatAt: { $exists: false } },
             {
-              lockedAt: { $exists: true },
-              nextRunAt: { $ne: null },
               $or: [
-                { $expr: { $eq: ['$runCount', '$finishedCount'] } },
-                { $or: [{ lastFinishedAt: { $exists: false } }, { lastFinishedAt: null }] },
+                {
+                  lockedAt: { $exists: true },
+                  nextRunAt: { $ne: null },
+                  $or: [
+                    { $expr: { $eq: ['$runCount', '$finishedCount'] } },
+                    { $or: [{ lastFinishedAt: { $exists: false } }, { lastFinishedAt: null }] },
+                  ],
+                },
+                {
+                  lockedAt: { $exists: false },
+                  $or: [{ lastFinishedAt: { $exists: false } }, { lastFinishedAt: null }],
+                  nextRunAt: { $lte: now, $ne: null },
+                },
               ],
-            },
-            {
-              lockedAt: { $exists: false },
-              $or: [{ lastFinishedAt: { $exists: false } }, { lastFinishedAt: null }],
-              nextRunAt: { $lte: now, $ne: null },
             },
           ],
         },
