@@ -31,7 +31,11 @@ export const resumeOnRestart: ResumeOnRestartMethod = function (this: Pulse, res
               $or: [
                 {
                   lockedAt: { $exists: true },
-                  nextRunAt: { $ne: null },
+                  $or: [
+                    { nextRunAt: { $lte: now, $ne: null } },
+                    { nextRunAt: { $exists: false } },
+                    { nextRunAt: null },
+                  ],
                   $or: [
                     { $expr: { $eq: ['$runCount', '$finishedCount'] } },
                     { $or: [{ lastFinishedAt: { $exists: false } }, { lastFinishedAt: null }] },
@@ -40,7 +44,11 @@ export const resumeOnRestart: ResumeOnRestartMethod = function (this: Pulse, res
                 {
                   lockedAt: { $exists: false },
                   $or: [{ lastFinishedAt: { $exists: false } }, { lastFinishedAt: null }],
-                  nextRunAt: { $lte: now, $ne: null },
+                  $or: [
+                    { nextRunAt: { $lte: now, $ne: null } },
+                    { nextRunAt: { $exists: false } },
+                    { nextRunAt: null },
+                  ],
                 },
               ],
             },
