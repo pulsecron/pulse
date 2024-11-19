@@ -233,7 +233,7 @@ describe('Test Pulse', () => {
 
       test('should resume non-recurring jobs on restart', async () => {
         const job = globalPulseInstance.create('sendEmail', { to: 'user@example.com' });
-        job.attrs.nextRunAt = new Date(Date.now() - 1000);
+        job.attrs.nextRunAt = new Date(Date.now() - 2000);
         await job.save();
 
         await globalPulseInstance.resumeOnRestart();
