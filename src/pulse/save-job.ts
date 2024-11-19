@@ -113,7 +113,6 @@ export const saveJob: SaveJobMethod = async function (this: Pulse, job) {
 
     if (props.type === 'single') {
       // Job type set to 'single' so...
-      // NOTE: Again, not sure about difference between 'single' here and 'once' in job.js
       debug('job with type of "single" found');
 
       // If the nextRunAt time is older than the current time, "protect" that property, meaning, don't change

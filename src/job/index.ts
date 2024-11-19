@@ -209,14 +209,12 @@ class Job<T extends JobAttributesData = JobAttributesData> {
     // Set defaults if undefined
     this.attrs = {
       ...attrs,
-      // NOTE: What is the difference between 'once' here and 'single' in pulse/index.js?
       name: attrs.name || '',
       priority: attrs.priority,
-      type: type || 'once',
+      type: type || 'single',
       // if a job that's non-recurring has a lastFinishedAt (finished the job), do not default nextRunAt to now
       // only if it will be defaulted either by explicitly setting it or by computing it computeNextRunAt
-      nextRunAt:
-        repeatAt || repeatInterval ? nextRunAt || new Date() : !lastFinishedAt ? nextRunAt || new Date() : nextRunAt,
+      nextRunAt: nextRunAt || new Date(),
     };
   }
 
