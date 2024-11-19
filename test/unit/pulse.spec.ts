@@ -254,6 +254,30 @@ describe('Test Pulse', () => {
         expect(updatedJob.attrs.nextRunAt).not.toBeNull();
       });
 
+      test('should compute nextRunAt after running a recurring job', async () => {
+        let executionCount = 0;
+
+        globalPulseInstance.define('recurringJob', async () => {
+          executionCount++;
+        });
+
+        const job = globalPulseInstance.create('recurringJob', { key: 'value' });
+        job.attrs.repeatInterval = '5 minutes';
+        await job.save();
+
+        globalPulseInstance.processEvery('1 second');
+        await globalPulseInstance.start();
+
+        await new Promise((resolve) => setTimeout(resolve, 4000));
+
+        const updatedJob = (await globalPulseInstance.jobs({ name: 'recurringJob' }))[0];
+
+        expect(executionCount).toBeGreaterThan(0);
+        expect(updatedJob.attrs.lastRunAt).not.toBeNull();
+        expect(updatedJob.attrs.nextRunAt).not.toBeNull();
+        expect(updatedJob.attrs.nextRunAt?.getTime()).toBeGreaterThan(Date.now() - 100);
+      });
+
       test('should resume recurring jobs on restart - cron', async () => {
         const job = globalPulseInstance.create('sendEmail', { to: 'user@example.com' });
         job.attrs.repeatInterval = '*/5 * * * *';
@@ -456,6 +480,17 @@ describe('Test Pulse', () => {
           const nextRunAt = job.attrs.nextRunAt?.getTime() as number;
           const now = new Date().getTime();
           expect(nextRunAt - now <= 0).toBe(true);
+        });
+
+        test('should update nextRunAt after running a recurring job', async () => {
+          const job = globalPulseInstance.create('recurringJob', { data: 'test' });
+          job.attrs.repeatInterval = '*/5 * * * *';
+          await job.save();
+
+          await job.run();
+
+          expect(job.attrs.nextRunAt).not.toBeNull();
+          expect(job.attrs.nextRunAt?.getTime()).toBeGreaterThan(Date.now());
         });
       });
       describe('Test with array of names specified', () => {
