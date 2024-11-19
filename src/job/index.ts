@@ -186,7 +186,7 @@ class Job<T extends JobAttributesData = JobAttributesData> {
   attrs: JobAttributes<T>;
 
   constructor(options: Modify<JobAttributes<T>, { _id?: mongodb.ObjectId }>) {
-    const { pulse, type, nextRunAt, repeatAt, repeatInterval, lastFinishedAt, ...args } = options ?? {};
+    const { pulse, type, nextRunAt, ...args } = options ?? {};
 
     // Save Pulse instance
     this.pulse = pulse;
@@ -211,7 +211,7 @@ class Job<T extends JobAttributesData = JobAttributesData> {
       ...attrs,
       name: attrs.name || '',
       priority: attrs.priority,
-      type: type || 'single',
+      type: type || 'once',
       // if a job that's non-recurring has a lastFinishedAt (finished the job), do not default nextRunAt to now
       // only if it will be defaulted either by explicitly setting it or by computing it computeNextRunAt
       nextRunAt: nextRunAt || new Date(),
