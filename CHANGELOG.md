@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## [1.6.6](https://github.com/pulsecron/pulse/compare/v1.6.5...v1.6.6) (2024-11-19)
+
+
+### 🐛 BUG FIXES
+
+* revert changes to match 1.6.3, apart of resume on restart ([78ba2c1](https://github.com/pulsecron/pulse/commit/78ba2c1fb46e969e25de456308aca60472732e51))
+
 ## [1.6.5](https://github.com/pulsecron/pulse/compare/v1.6.4...v1.6.5) (2024-11-19)
 
 
