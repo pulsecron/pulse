@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## [1.6.5](https://github.com/pulsecron/pulse/compare/v1.6.4...v1.6.5) (2024-11-19)
+
+
+### 🐛 BUG FIXES
+
+* add check for nextRunAt on non-recurrent jobs ([f80b330](https://github.com/pulsecron/pulse/commit/f80b3305a7a98222ec3265b02f550cf69fac4631))
+* add comments on each case for job search + add more strong checks to not leave any job out ([95312f4](https://github.com/pulsecron/pulse/commit/95312f4bae351e9769ea3e8a2f14edaeb3a89bf0))
+* revert to 1.6.3 nextRunAt default ([364ae9a](https://github.com/pulsecron/pulse/commit/364ae9a7db332919abe3bba00eca0912aa3919e4))
+
 ## [1.6.4](https://github.com/pulsecron/pulse/compare/v1.6.3...v1.6.4) (2024-11-19)
 
 
