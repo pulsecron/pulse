@@ -51,7 +51,7 @@ export const resumeOnRestart: ResumeOnRestartMethod = function (this: Pulse, res
         }
       });
 
-    // Handling for recurring jobs using repeatInterval or repeatAt
+    // Recurring jobs
     this._collection
       .find({
         $and: [
