@@ -206,13 +206,17 @@ describe('Test Pulse', () => {
     });
 
     describe('Test resumeOnRestart', () => {
-      test('should enable resumeOnRestart by default', () => {
+      test('sets the default resumeOnRestart', () => {
         expect(globalPulseInstance._resumeOnRestart).toBeTruthy();
       });
 
-      test('should disable resumeOnRestart when set to false', () => {
+      test('sets the custom resumeOnRestart', () => {
         globalPulseInstance.resumeOnRestart(false);
         expect(globalPulseInstance._resumeOnRestart).toBeFalsy();
+      });
+
+      test('returns itself', () => {
+        expect(globalPulseInstance.resumeOnRestart(false)).toEqual(globalPulseInstance);
       });
 
       test('should not reschedule successfully finished non-recurring jobs', async () => {
@@ -305,14 +309,14 @@ describe('Test Pulse', () => {
         const job = globalPulseInstance.create('processData', { data: 'sample' });
         job.attrs.repeatInterval = '10 minutes';
         job.attrs.lockedAt = new Date();
-        job.attrs.nextRunAt = new Date(Date.now() + 10000); // Next run in 10 seconds
+        job.attrs.nextRunAt = new Date(Date.now() + 10000);
         await job.save();
 
         await globalPulseInstance.resumeOnRestart();
 
         const updatedJob = (await globalPulseInstance.jobs({ name: 'processData' }))[0];
-        expect(updatedJob.attrs.lockedAt).not.toBeNull(); // Job remains locked
-        expect(updatedJob.attrs.nextRunAt).not.toBeNull(); // Scheduling intact
+        expect(updatedJob.attrs.lockedAt).not.toBeNull();
+        expect(updatedJob.attrs.nextRunAt).not.toBeNull();
       });
 
       test('should handle interrupted recurring jobs after server recovery', async () => {
@@ -331,14 +335,14 @@ describe('Test Pulse', () => {
 
       test('should not modify non-recurring jobs with lastFinishedAt in the past', async () => {
         const job = globalPulseInstance.create('sendEmail', { to: 'user@example.com' });
-        job.attrs.lastFinishedAt = new Date(Date.now() - 10000); // Finished 10 seconds ago
+        job.attrs.lastFinishedAt = new Date(Date.now() - 10000);
         job.attrs.nextRunAt = null;
         await job.save();
 
         await globalPulseInstance.resumeOnRestart();
 
         const updatedJob = (await globalPulseInstance.jobs({ name: 'sendEmail' }))[0];
-        expect(updatedJob.attrs.nextRunAt).toBeNull(); // Job remains finished
+        expect(updatedJob.attrs.nextRunAt).toBeNull();
       });
     });
   });
