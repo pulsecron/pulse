@@ -25,29 +25,39 @@ export const resumeOnRestart: ResumeOnRestartMethod = function (this: Pulse, res
       .updateMany(
         {
           $and: [
-            { repeatInterval: { $exists: false } },
-            { repeatAt: { $exists: false } },
+            { repeatInterval: { $exists: false } }, // Ensure the job is not recurring (no repeatInterval)
+            { repeatAt: { $exists: false } }, // Ensure the job is not recurring (no repeatAt)
             {
               $or: [
                 {
-                  lockedAt: { $exists: true },
-                  $or: [
-                    { nextRunAt: { $lte: now, $ne: null } },
-                    { nextRunAt: { $exists: false } },
-                    { nextRunAt: null },
-                  ],
-                  $or: [
-                    { $expr: { $eq: ['$runCount', '$finishedCount'] } },
-                    { $or: [{ lastFinishedAt: { $exists: false } }, { lastFinishedAt: null }] },
+                  lockedAt: { $exists: true }, // Locked jobs (interrupted or in-progress)
+                  $and: [
+                    {
+                      $or: [
+                        { nextRunAt: { $lte: now, $ne: null } }, // Overdue jobs
+                        { nextRunAt: { $exists: false } }, // Jobs missing nextRunAt
+                        { nextRunAt: null }, // Jobs explicitly set to null
+                      ],
+                    },
+                    {
+                      $or: [
+                        { $expr: { $eq: ['$runCount', '$finishedCount'] } }, // Jobs finished but stuck due to locking
+                        { $or: [{ lastFinishedAt: { $exists: false } }, { lastFinishedAt: null }] }, // Jobs that were not finished
+                      ],
+                    },
                   ],
                 },
                 {
-                  lockedAt: { $exists: false },
-                  $or: [{ lastFinishedAt: { $exists: false } }, { lastFinishedAt: null }],
-                  $or: [
-                    { nextRunAt: { $lte: now, $ne: null } },
-                    { nextRunAt: { $exists: false } },
-                    { nextRunAt: null },
+                  lockedAt: { $exists: false }, // Unlocked jobs (not in-progress)
+                  $and: [
+                    {
+                      $or: [
+                        { nextRunAt: { $lte: now, $ne: null } }, // Overdue jobs
+                        { nextRunAt: { $exists: false } }, // Jobs missing nextRunAt
+                        { nextRunAt: null }, // Jobs explicitly set to null
+                      ],
+                    },
+                    { $or: [{ lastFinishedAt: { $exists: false } }, { lastFinishedAt: null }] }, // Jobs not finished
                   ],
                 },
               ],
@@ -69,8 +79,21 @@ export const resumeOnRestart: ResumeOnRestartMethod = function (this: Pulse, res
     this._collection
       .find({
         $and: [
-          { $or: [{ repeatInterval: { $exists: true } }, { repeatAt: { $exists: true } }] },
-          { $or: [{ nextRunAt: { $lte: now } }, { nextRunAt: { $exists: false } }, { nextRunAt: null }] },
+          { $or: [{ repeatInterval: { $exists: true } }, { repeatAt: { $exists: true } }] }, // Recurring jobs
+          {
+            $or: [
+              { nextRunAt: { $lte: now } }, // Overdue jobs
+              { nextRunAt: { $exists: false } }, // Jobs missing nextRunAt
+              { nextRunAt: null }, // Jobs explicitly set to null
+            ],
+          },
+          {
+            $or: [
+              { lastFinishedAt: { $exists: false } }, // Jobs never run
+              { lastFinishedAt: { $lte: now } }, // Jobs finished in the past
+              { lastFinishedAt: null }, // Jobs explicitly set to null
+            ],
+          },
         ],
       })
       .toArray()
