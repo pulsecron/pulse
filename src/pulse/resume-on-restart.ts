@@ -28,11 +28,14 @@ export const resumeOnRestart: ResumeOnRestartMethod = function (this: Pulse, res
             {
               lockedAt: { $exists: true },
               nextRunAt: { $ne: null },
-              $or: [{ $expr: { $eq: ['$runCount', '$finishedCount'] } }, { lastFinishedAt: { $exists: false } }],
+              $or: [
+                { $expr: { $eq: ['$runCount', '$finishedCount'] } },
+                { $or: [{ lastFinishedAt: { $exists: false } }, { lastFinishedAt: null }] },
+              ],
             },
             {
               lockedAt: { $exists: false },
-              lastFinishedAt: { $exists: false },
+              $or: [{ lastFinishedAt: { $exists: false } }, { lastFinishedAt: null }],
               nextRunAt: { $lte: now, $ne: null },
             },
           ],
@@ -51,8 +54,10 @@ export const resumeOnRestart: ResumeOnRestartMethod = function (this: Pulse, res
     // Handling for recurring jobs using repeatInterval or repeatAt
     this._collection
       .find({
-        $or: [{ repeatInterval: { $exists: true } }, { repeatAt: { $exists: true } }],
-        nextRunAt: { $exists: false },
+        $and: [
+          { $or: [{ repeatInterval: { $exists: true } }, { repeatAt: { $exists: true } }] },
+          { $or: [{ nextRunAt: { $lte: now } }, { nextRunAt: { $exists: false } }, { nextRunAt: null }] },
+        ],
       })
       .toArray()
       .then((jobs) => {

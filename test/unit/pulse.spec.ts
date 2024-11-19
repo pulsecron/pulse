@@ -215,19 +215,30 @@ describe('Test Pulse', () => {
         expect(globalPulseInstance._resumeOnRestart).toBeFalsy();
       });
 
-      test('should resume non-recurring jobs on restart', async () => {
+      test('should not reschedule successfully finished non-recurring jobs', async () => {
         const job = globalPulseInstance.create('sendEmail', { to: 'user@example.com' });
-        job.attrs.nextRunAt = new Date(Date.now() - 1000); // Set nextRunAt in the past
+        job.attrs.lastFinishedAt = new Date();
+        job.attrs.nextRunAt = null;
         await job.save();
 
         await globalPulseInstance.resumeOnRestart();
 
         const updatedJob = (await globalPulseInstance.jobs({ name: 'sendEmail' }))[0];
-        const now = Date.now();
-        expect(updatedJob.attrs.nextRunAt?.getTime()).toBeGreaterThan(now - 100); // Allow a 100ms buffer
+        expect(updatedJob.attrs.nextRunAt).toBeNull();
       });
 
-      test('should resume recurring jobs on restart', async () => {
+      test('should resume non-recurring jobs on restart', async () => {
+        const job = globalPulseInstance.create('sendEmail', { to: 'user@example.com' });
+        job.attrs.nextRunAt = new Date(Date.now() - 1000);
+        await job.save();
+
+        await globalPulseInstance.resumeOnRestart();
+
+        const updatedJob = (await globalPulseInstance.jobs({ name: 'sendEmail' }))[0];
+        expect(updatedJob.attrs.nextRunAt?.getTime()).toBeGreaterThan(Date.now() - 100);
+      });
+
+      test('should resume recurring jobs on restart - interval', async () => {
         const job = globalPulseInstance.create('sendEmail', { to: 'user@example.com' });
         job.attrs.repeatInterval = '5 minutes';
         job.attrs.nextRunAt = null;
@@ -236,9 +247,31 @@ describe('Test Pulse', () => {
         await globalPulseInstance.resumeOnRestart();
 
         const updatedJob = (await globalPulseInstance.jobs({ name: 'sendEmail' }))[0];
-        const now = Date.now();
         expect(updatedJob.attrs.nextRunAt).not.toBeNull();
-        expect(updatedJob.attrs.nextRunAt?.getTime()).toBeGreaterThan(now - 100); // Allow a 100ms buffer
+      });
+
+      test('should resume recurring jobs on restart - cron', async () => {
+        const job = globalPulseInstance.create('sendEmail', { to: 'user@example.com' });
+        job.attrs.repeatInterval = '*/5 * * * *';
+        job.attrs.nextRunAt = null;
+        await job.save();
+
+        await globalPulseInstance.resumeOnRestart();
+
+        const updatedJob = (await globalPulseInstance.jobs({ name: 'sendEmail' }))[0];
+        expect(updatedJob.attrs.nextRunAt).not.toBeNull();
+      });
+
+      test('should resume recurring jobs on restart - repeatAt', async () => {
+        const job = globalPulseInstance.create('sendEmail', { to: 'user@example.com' });
+        job.attrs.repeatAt = '1:00 am';
+        job.attrs.nextRunAt = null;
+        await job.save();
+
+        await globalPulseInstance.resumeOnRestart();
+
+        const updatedJob = (await globalPulseInstance.jobs({ name: 'sendEmail' }))[0];
+        expect(updatedJob.attrs.nextRunAt).not.toBeNull();
       });
 
       test('should not modify jobs with existing nextRunAt', async () => {
@@ -251,6 +284,61 @@ describe('Test Pulse', () => {
 
         const updatedJob = (await globalPulseInstance.jobs({ name: 'sendEmail' }))[0];
         expect(updatedJob.attrs.nextRunAt?.getTime()).toEqual(futureDate.getTime());
+      });
+
+      test('should handle jobs that started but have not finished (non-recurring)', async () => {
+        const job = globalPulseInstance.create('processData', { data: 'sample' });
+        job.attrs.nextRunAt = null;
+        job.attrs.lockedAt = new Date();
+        await job.save();
+
+        await globalPulseInstance.resumeOnRestart();
+
+        const updatedJob = (await globalPulseInstance.jobs({ name: 'processData' }))[0];
+
+        const now = Date.now();
+        expect(updatedJob.attrs.nextRunAt).not.toBeNull();
+        expect(updatedJob.attrs.nextRunAt?.getTime()).toBeGreaterThan(now - 100);
+      });
+
+      test('should handle recurring jobs that started but have not finished', async () => {
+        const job = globalPulseInstance.create('processData', { data: 'sample' });
+        job.attrs.repeatInterval = '10 minutes';
+        job.attrs.lockedAt = new Date();
+        job.attrs.nextRunAt = new Date(Date.now() + 10000); // Next run in 10 seconds
+        await job.save();
+
+        await globalPulseInstance.resumeOnRestart();
+
+        const updatedJob = (await globalPulseInstance.jobs({ name: 'processData' }))[0];
+        expect(updatedJob.attrs.lockedAt).not.toBeNull(); // Job remains locked
+        expect(updatedJob.attrs.nextRunAt).not.toBeNull(); // Scheduling intact
+      });
+
+      test('should handle interrupted recurring jobs after server recovery', async () => {
+        const job = globalPulseInstance.create('processData', { data: 'sample' });
+        job.attrs.repeatInterval = '5 minutes';
+        job.attrs.lastModifiedBy = 'server_crash';
+        job.attrs.nextRunAt = null;
+        await job.save();
+
+        await globalPulseInstance.resumeOnRestart();
+
+        const updatedJob = (await globalPulseInstance.jobs({ name: 'processData' }))[0];
+        expect(updatedJob.attrs.nextRunAt).not.toBeNull();
+        expect(updatedJob.attrs.lastModifiedBy).not.toEqual('server_crash');
+      });
+
+      test('should not modify non-recurring jobs with lastFinishedAt in the past', async () => {
+        const job = globalPulseInstance.create('sendEmail', { to: 'user@example.com' });
+        job.attrs.lastFinishedAt = new Date(Date.now() - 10000); // Finished 10 seconds ago
+        job.attrs.nextRunAt = null;
+        await job.save();
+
+        await globalPulseInstance.resumeOnRestart();
+
+        const updatedJob = (await globalPulseInstance.jobs({ name: 'sendEmail' }))[0];
+        expect(updatedJob.attrs.nextRunAt).toBeNull(); // Job remains finished
       });
     });
   });
