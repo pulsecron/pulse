@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## [1.6.4](https://github.com/pulsecron/pulse/compare/v1.6.3...v1.6.4) (2024-11-19)
+
+
+### 🐛 BUG FIXES
+
+* Fix the resumeOnRestart function ([ec10759](https://github.com/pulsecron/pulse/commit/ec107598816c7d1ef1690c215c5c5e99b034e38d))
+
 ## [1.6.3](https://github.com/pulsecron/pulse/compare/v1.6.2...v1.6.3) (2024-08-16)
 
 
