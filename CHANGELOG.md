@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## [1.6.7](https://github.com/pulsecron/pulse/compare/v1.6.6...v1.6.7) (2024-11-22)
+
+
+### 🐛 BUG FIXES
+
+* revert 1.6.3 ([545d9d4](https://github.com/pulsecron/pulse/commit/545d9d407dd8fdf6444d7f8f630992f4121a7d51))
+
 ## [1.6.6](https://github.com/pulsecron/pulse/compare/v1.6.5...v1.6.6) (2024-11-19)
 
 
