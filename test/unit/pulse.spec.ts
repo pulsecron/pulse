@@ -369,7 +369,7 @@ describe('Test Pulse', () => {
       // });
 
       test('should not skip queued recurring jobs while starting a new pulse instance in case of resumeOnRestart is disabled', async () => {
-        globalPulseInstance.stop();
+        await globalPulseInstance.stop();
 
         // Create a recurring job that is in queue and wasn't locked by any pulse instance
         const job = globalPulseInstance.create('processData', { data: 'sample' });
