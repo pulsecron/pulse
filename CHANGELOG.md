@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## [1.6.8](https://github.com/pulsecron/pulse/compare/v1.6.7...v1.6.8) (2025-03-12)
+
+
+### 🐛 BUG FIXES
+
+* **gitbook:** correct processEvery description ([c0fa3c1](https://github.com/pulsecron/pulse/commit/c0fa3c10a28f861fe8135771d342c5da892823bd))
+
 ## [1.6.7](https://github.com/pulsecron/pulse/compare/v1.6.6...v1.6.7) (2024-11-22)
 
 
